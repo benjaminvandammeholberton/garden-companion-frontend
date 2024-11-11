@@ -86,7 +86,8 @@ const InputVegetablesInArea: React.FC<InputVegetablesInAreaInterface> = ({
           h-44 w-64
           z-50
           absolute 
-          bg-white 
+          bg-gray-100
+          dark:bg-slate-800 
           top-12 
           ${!isNameFocus && "hidden"}
           `}

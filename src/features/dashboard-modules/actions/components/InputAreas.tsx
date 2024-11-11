@@ -86,7 +86,8 @@ const InputUserAreas: React.FC<InputUserAreasInterface> = ({
           gap-1 
           border
           absolute 
-          bg-white 
+          bg-gray-100
+          dark:bg-slate-800
           w-64 
           h-44 
           top-12
