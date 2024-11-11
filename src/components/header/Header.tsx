@@ -21,10 +21,12 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import axiosInstance from "@/api/axios";
+import { Loader2 } from "lucide-react"
 
 const UpdatePassword = () => {
   const { toast } = useToast();
   const [isWrongPassword, setIsWrongPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   const formSchema = z
     .object({
@@ -83,6 +85,7 @@ const UpdatePassword = () => {
   });
 
   const submitForm = async (values: z.infer<typeof formSchema>) => {
+    setIsLoading(true)
     try {
       const data = {
         current_password: values.password,
@@ -111,6 +114,8 @@ const UpdatePassword = () => {
         });
         console.error("Login failed", err);
       }
+    } finally {
+      setIsLoading(false)
     }
   };
 
@@ -120,7 +125,7 @@ const UpdatePassword = () => {
         <p className="text-red-600">Mot de passe actuel incorrect</p>
       )}
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(submitForm)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(submitForm)} className="space-y-4 ">
           <FormField
             control={form.control}
             name="password"
@@ -163,8 +168,9 @@ const UpdatePassword = () => {
           <Button
             className="mx-auto w-full"
             type="submit"
-            disabled={!form.formState.isValid}
+            disabled={!form.formState.isValid || isLoading}
           >
+            {isLoading &&  <Loader2 className="animate-spin mr-3" />}
             Valider
           </Button>
         </form>
@@ -222,7 +228,8 @@ const Header = () => {
                 <KeyRound size={"20"} />
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="bg-white ml-6">
+            <PopoverContent className="
+          dark:bg-slate-900 ml-6">
               <UpdatePassword />
             </PopoverContent>
           </Popover>

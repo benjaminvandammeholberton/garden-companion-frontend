@@ -127,7 +127,7 @@ const AreaModal: React.FC<AreaModalProps> = ({ isOpen, onClose, area }) => {
                 tableOpen ? "border-b-2 border-black dark:border-stone-50" : ""
               }  px-2 h-full w-full text-center`}
             >
-              Tableau de production
+              Production
             </li>
             <li
               onClick={diaryDisplay}

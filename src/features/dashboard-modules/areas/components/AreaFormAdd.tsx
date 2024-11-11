@@ -154,7 +154,7 @@ const AreaFormAdd: React.FC<AreaFormAddProps> = ({ handleClickAdd }) => {
           </div>
         </div>
       </div>
-      <Button type="submit">Ajouter</Button>
+      <Button type="submit">Sauvegarder</Button>
     </form>
   );
 };

@@ -2,6 +2,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { ToDoInterface } from "../interfaces";
 import { createToDoApi } from "../utils/todosApi";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 interface ToDoListFormAddProps {
   setToDo: React.Dispatch<React.SetStateAction<ToDoInterface[]>>;
@@ -100,12 +101,11 @@ const ToDoListFormAdd: React.FC<ToDoListFormAddProps> = ({
         </div>
       </div>
 
-      <button
-        className="border px-4 w-36 bg-green-300 py-2 rounded-3xl"
+      <Button
         type="submit"
       >
-        Ajouter
-      </button>
+        Sauvegarder
+      </Button>
     </form>
   );
 };

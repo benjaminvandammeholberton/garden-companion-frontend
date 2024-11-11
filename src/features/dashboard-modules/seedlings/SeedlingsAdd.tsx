@@ -99,7 +99,7 @@ const SeedlingsAdd: React.FC<SeedlingsAddProps> = ({
             </FormItem>
           )}
         />
-        <Button type="submit">Ajouter</Button>
+        <Button type="submit">Sauvegarder</Button>
       </form>
     </Form>
   );

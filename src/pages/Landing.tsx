@@ -46,9 +46,6 @@ const Landing = () => {
               >
                 Garden Companion
               </h1>
-              <p className="text-2xl md:text-3xl text-right md:text-center md:ml-96">
-                Cultivons l'abondance
-              </p>
             </div>
             <div className="h-0 border-t border-zinc-900 w-1/3 mx-auto"></div>
             <div className="flex justify-center gap-10 md:gap-10 lg:gap-20">
