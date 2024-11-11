@@ -204,8 +204,11 @@ const Header = () => {
     <div className="w-full fixed top-0 z-50 border-b">
       <div className=" bg-white dark:bg-slate-800 opacity-95 flex items-center justify-between w-full border-b px-10 py-2">
         <div className="flex flex-col items-center">
-          <h1 className="text-xl lg:text-3xl font-thin ">
+          {/* <h1 className="text-xl lg:text-3xl font-thin ">
             Garden Companion <span className="text-sm lg:text-xl ">Beta</span>
+          </h1> */}
+          <h1 className="text-xl lg:text-3xl font-thin ">
+            Garden Companion
           </h1>
           <span className="text-xs font-thin lg:text-lg">
             {today.toLocaleDateString("fr-FR", options)}
