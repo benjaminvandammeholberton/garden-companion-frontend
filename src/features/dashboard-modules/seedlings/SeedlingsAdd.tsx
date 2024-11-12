@@ -23,6 +23,8 @@ import { Input } from "@/components/ui/input";
 // api
 import { createSeedling } from "@/api/api-services/seedlingsApi";
 import { useToast } from "@/components/ui/use-toast";
+import { Loader2 } from "lucide-react";
+import { useState } from "react";
 
 interface SeedlingsAddProps {
   handleClickAdd: () => void;
@@ -33,6 +35,7 @@ const SeedlingsAdd: React.FC<SeedlingsAddProps> = ({
 }) => {
 
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false)
 
   const formSchema = z.object({
     name: z.string().min(2).max(50),
@@ -55,6 +58,7 @@ const SeedlingsAdd: React.FC<SeedlingsAddProps> = ({
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsLoading(true)
     try {
       const newSeedling = await createSeedling(values)
       toast({
@@ -64,6 +68,8 @@ const SeedlingsAdd: React.FC<SeedlingsAddProps> = ({
       handleClickAdd()
     } catch (error)  {
       console.error(error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -99,7 +105,14 @@ const SeedlingsAdd: React.FC<SeedlingsAddProps> = ({
             </FormItem>
           )}
         />
-        <Button type="submit">Sauvegarder</Button>
+          <Button
+            className="mx-auto w-full"
+            type="submit"
+            disabled={!form.formState.isValid || isLoading}
+          >
+            {isLoading &&  <Loader2 className="animate-spin mr-3" />}
+            Valider
+          </Button>
       </form>
     </Form>
   );

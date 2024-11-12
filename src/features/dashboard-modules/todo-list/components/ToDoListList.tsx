@@ -16,8 +16,9 @@ import {
 
 // api
 import { deleteToDoApi, toggleCompleted, updateToDoApi } from "../utils/todosApi";
-import { CircleAlert, Trash2 } from "lucide-react";
+import { CircleAlert, Loader2, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 interface ToDoListListProps {
   sortedBy: string;
@@ -32,12 +33,13 @@ const ToDoListList: React.FC<ToDoListListProps> = ({
   setToDo,
   handleClickEdit,
 }) => {
+  const [isLoading, setIsLoading] = useState(false)
   const toggleStatus = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const todo_id = e.target.dataset.todoId;
     if (todo_id) {
+      setIsLoading(true)
       try {
         const updatedTodo = await toggleCompleted(todo_id);
-        console.log(updatedTodo)
         setToDo((prev) =>
           prev.map((todo) =>
             updatedTodo.uuid === todo.uuid ? updatedTodo : todo
@@ -45,6 +47,8 @@ const ToDoListList: React.FC<ToDoListListProps> = ({
         );
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false)
       }
     }
   };
@@ -114,15 +118,19 @@ const ToDoListList: React.FC<ToDoListListProps> = ({
           >
             <div className="cursor-pointer flex gap-3 items-center">
               <div className="flex items-center gap-2">
-                <input
-                  className="cursor-pointer"
-                  type="checkbox"
-                  checked={todo.completed}
-                  onChange={toggleStatus}
-                  data-todo-id={todo.uuid}
-                />
+                {isLoading ? (
+                  <Loader2 className="animate-spin size-4" />
+                ) : (
+                  <input
+                    className="cursor-pointer"
+                    type="checkbox"
+                    checked={todo.completed}
+                    onChange={toggleStatus}
+                    data-todo-id={todo.uuid}
+                  />
+                )}
               </div>
-              {todo.priority === 'H' && (
+              {todo.priority === "H" && (
                 <CircleAlert color="red" />
                 // <img className="w-5 h-5" src={priorityIcon} alt="" />
               )}

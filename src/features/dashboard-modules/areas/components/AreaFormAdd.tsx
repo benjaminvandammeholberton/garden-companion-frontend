@@ -16,6 +16,7 @@ import { useToast } from "@/components/ui/use-toast";
 
 //contexts
 import AreasContext from "@/contexts/AreasContext";
+import { Loader2 } from "lucide-react";
 
 interface AreaFormAddProps {
   handleClickAdd: () => void;
@@ -29,6 +30,8 @@ interface FormDataInterface {
 
 const AreaFormAdd: React.FC<AreaFormAddProps> = ({ handleClickAdd }) => {
   const areasContext = useContext(AreasContext);
+  const [isLoading, setIsLoading] = useState(false)
+
   if (!areasContext) {
     throw new Error("AreasContext must be used within an AreasProvider");
   }
@@ -51,22 +54,33 @@ const AreaFormAdd: React.FC<AreaFormAddProps> = ({ handleClickAdd }) => {
 
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true)
     const newArea = {
       name: capitalize(formData.name),
       size: formData.size,
       environment: formData.environment,
     };
-    await createArea(newArea);
-    setFormData({
-      name: "",
-      environment: "",
-      size: 0,
-    });
-    toast({
-      title: "Nouvelle zone de culture 👍",
-      description: `${newArea.name}`,
-    });
-    handleClickAdd();
+    try {
+      await createArea(newArea);
+      setFormData({
+        name: "",
+        environment: "",
+        size: 0,
+      });
+      toast({
+        title: "Nouvelle zone de culture 👍",
+        description: `${newArea.name}`,
+      });
+      handleClickAdd();
+    } catch (error) {
+      console.error(error)
+      toast({
+        title: "Une erreur s'est produite 😵",
+        description: "Veuillez réessayer",
+      });
+    } finally {
+      setIsLoading(false)
+    }
   };
 
   return (
@@ -154,7 +168,14 @@ const AreaFormAdd: React.FC<AreaFormAddProps> = ({ handleClickAdd }) => {
           </div>
         </div>
       </div>
-      <Button type="submit">Sauvegarder</Button>
+      <Button
+            className="mx-auto w-full"
+            type="submit"
+            disabled={isLoading}
+          >
+            {isLoading &&  <Loader2 className="animate-spin mr-3" />}
+            Valider
+        </Button>
     </form>
   );
 };

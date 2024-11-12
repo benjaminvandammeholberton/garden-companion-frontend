@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ROOTURL } from "./apiRoutes";
 
 const getToken = () => {
   const token = localStorage.getItem("JWTGP")
@@ -10,7 +11,7 @@ const getToken = () => {
 };
 
 const axiosInstance = axios.create({
-  baseURL: "https://jammin-dev.com/api/v1/",
+  baseURL: ROOTURL,
   headers: {
     common: {
       Authorization: `Bearer ${getToken()}`,
@@ -28,7 +29,7 @@ axiosInstance.interceptors.response.use(function (response) {
 });
 
 export const axiosInstanceFile = axios.create({
-  baseURL: "https://jammin-dev.com/api/v1/",
+  baseURL: ROOTURL,
   headers: {
     common: {
       Authorization: `Bearer ${getToken()}`,

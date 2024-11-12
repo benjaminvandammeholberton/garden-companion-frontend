@@ -27,6 +27,8 @@ import { Filter } from "lucide-react";
 import backendRoutes from "@/api/apiRoutes";
 
 
+const BASEURL = process.env.REACT_APP_BACKEND_URL || "https://jammin-dev.com/"
+
 const SOWING = "SOWING"
 const PLANTING = "PLANTING"
 const REMOVING = "REMOVING"
@@ -175,7 +177,7 @@ const DiaryItemHarvesting = ({ action }) => {
   }
   let file_path;
   if (action.photo) {
-    file_path = "https://jammin-dev.com/" + action.photo;
+    file_path = BASEURL + action.photo;
   }
   return (
     <>
@@ -259,7 +261,7 @@ const DiaryItemWeeding = ({ action }) => {
   }
   let file_path;
   if (action.photo) {
-    file_path = "https://jammin-dev.com/" + action.photo;
+    file_path = BASEURL + action.photo;
   }
   return (
     <>
@@ -338,7 +340,7 @@ const DiaryItemRemoving = ({ action }) => {
   );
   let file_path;
   if (action.photo) {
-    file_path = "https://jammin-dev.com/" + action.photo;
+    file_path = BASEURL + action.photo;
   }
   return (
     <>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import directSowingIcon from "../../../assets/actions-icons/direct-sowing.png";
 import harvestIcon from "../../../assets/actions-icons/harvest.png";
@@ -31,12 +31,27 @@ import WeedForm from "./WeedForm";
 import ObservationForm from "./ObservationForm";
 import RemoveForm from "./RemoveForm";
 import FormHeader from "./components/FormHeader";
+import AreasContext from "@/contexts/AreasContext";
+import { useToast } from "@/components/ui/use-toast";
 interface ActionsModuleProps {}
 
 const ActionsModule: React.FC<ActionsModuleProps> = () => {
   const [openStates, setOpenStates] = useState({});
+  const { toast } = useToast();
+  const areasContext = useContext(AreasContext);
+  if (!areasContext) {
+    throw new Error("AreasContext must be used within an AreasProvider");
+  }
+  const { areas, setAreas } = areasContext;
 
   const handleOpenChange = (index: number, isOpen) => {
+    if (areas.length === 0){
+      toast({
+        title: "Vous n'avez pas encore d'espace de culture",
+        description: "Pour enregistrer une nouvelle action, créez une zone de culture à partir du module \"Zones de culture\"",
+      });
+      return
+    }
     setOpenStates((prevStates) => ({
       ...prevStates,
       [index]: isOpen, // Update only the specific dialog's open state

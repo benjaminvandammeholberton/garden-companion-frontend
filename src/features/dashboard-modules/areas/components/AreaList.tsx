@@ -27,7 +27,7 @@ const AreaList: React.FC<AreaListProps> = ({ sortedBy, openModal }) => {
     throw new Error("AreasContext must be used within an AreasProvider");
   }
   const { areas, isLoading } = areasContext;
-  const environments = ["greenhouse", "outdoor", "indoor"];
+  const environments = ["O", "G", "I"];
 
   // function to get the right area icon based of the environnement
   const getAreaIcon = (env: string) => {
@@ -75,7 +75,7 @@ const AreaList: React.FC<AreaListProps> = ({ sortedBy, openModal }) => {
                 {sortedAreasOfType.map((area) => {
                   return (
                     <AreaListItem
-                      key={area.area_id}
+                      key={area.uuid}
                       area={area}
                       openModal={openModal}
                       areaIcon={getAreaIcon(area.environment)}
@@ -97,6 +97,7 @@ const AreaList: React.FC<AreaListProps> = ({ sortedBy, openModal }) => {
               <Button className="block w-full py-0 h-8" variant="ghost" key={index} onClick={() => openModal(area)}>
                   <AreaListItem
                     key={index}
+                    openModal={openModal}
                     area={area}
                     areaIcon={getAreaIcon(area.environment)}
                   />

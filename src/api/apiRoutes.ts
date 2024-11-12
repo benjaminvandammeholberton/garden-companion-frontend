@@ -1,4 +1,4 @@
-const ROOTURL = "https://jammin-dev.com/api/v1/"
+export const ROOTURL = process.env.REACT_APP_BACKEND_URL || "https://jammin-dev.com" + "api/v1/"
 
 const backendRoutes = {
     register: ROOTURL + "auth/users/",

@@ -44,7 +44,6 @@ export const updateToDoApi = async (id: string, data: UpdateToDoInterface) => {
 export const toggleCompleted = async (id: string) => {
   try {
     const response = await axiosInstance.patch(backendRoutes.todos + id + '/toggle-completed/');
-    console.log(response.data)
     return response.data
   } catch (error){
     throw new Error("Can't toggle completed todo")

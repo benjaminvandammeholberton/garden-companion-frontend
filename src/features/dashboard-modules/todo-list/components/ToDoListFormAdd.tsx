@@ -3,6 +3,8 @@ import { ToDoInterface } from "../interfaces";
 import { createToDoApi } from "../utils/todosApi";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
 
 interface ToDoListFormAddProps {
   setToDo: React.Dispatch<React.SetStateAction<ToDoInterface[]>>;
@@ -23,6 +25,7 @@ const ToDoListFormAdd: React.FC<ToDoListFormAddProps> = ({
     handleSubmit,
     formState: { errors },
   } = useForm<FormDataInterface>();
+  const [isLoading, setIsLoading] = useState(false)
 
   const onSubmit: SubmitHandler<FormDataInterface> = async (data) => {
     const formData = {
@@ -30,11 +33,14 @@ const ToDoListFormAdd: React.FC<ToDoListFormAddProps> = ({
       title: data.title,
     };
     try {
+      setIsLoading(true)
       const newTodo = await createToDoApi(formData);
       setToDo((prev) => [...prev, newTodo]);
       handleClickAdd();
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false)
     }
   };
 
@@ -102,10 +108,13 @@ const ToDoListFormAdd: React.FC<ToDoListFormAddProps> = ({
       </div>
 
       <Button
-        type="submit"
-      >
-        Sauvegarder
-      </Button>
+            className="mx-auto w-full"
+            type="submit"
+            disabled={isLoading}
+          >
+            {isLoading &&  <Loader2 className="animate-spin mr-3" />}
+            Valider
+        </Button>
     </form>
   );
 };
