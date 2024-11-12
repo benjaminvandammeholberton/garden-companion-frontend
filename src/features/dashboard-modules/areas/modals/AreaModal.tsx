@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import { useEffect, useState } from "react";
 
 // assets
-import { greenhouse64, outdoor, indoor64 } from "../../../../assets/assets-path";
+import { greenhouse64, outdoor64, indoor64 } from "../../../../assets/assets-path";
 
 // components
 import Diary from "../../../diary/Diary";
@@ -33,7 +33,7 @@ const getAreaIcon = (env: string) => {
   let areaIcon: string | undefined;
   if (env === "I") areaIcon = indoor64;
   if (env === "G") areaIcon = greenhouse64;
-  if (env === "O") areaIcon = outdoor;
+  if (env === "O") areaIcon = outdoor64;
   return areaIcon;
 };
 

@@ -1,10 +1,11 @@
 // assets
-// import distanceIcon from "@/assets/vegetable-info-icons/distance.png";
-// import frostResistanceIcon from "@/assets/vegetable-info-icons/frost-resistance.png";
-// import germinationIcon from "@/assets/vegetable-info-icons/germination.png";
-// import indoorSowingIcon from "@/assets/vegetable-info-icons/indoor-sowing.png";
-// import wateringIcon from "@/assets/vegetable-info-icons/watering.png";
-// import stopSowingIcon from "@/assets/vegetable-info-icons/stop-sowing.png";
+import distanceIcon from "@/assets/vegetable-info-icons/distance.png";
+import frostResistanceIcon from "@/assets/vegetable-info-icons/frost-resistance.png";
+import germinationIcon from "@/assets/vegetable-info-icons/germination.png";
+import indoorSowingIcon from "@/assets/vegetable-info-icons/indoor-sowing.png";
+import wateringIcon from "@/assets/vegetable-info-icons/watering.png";
+import stopSowingIcon from "@/assets/vegetable-info-icons/stop-sowing.png";
+import outdoorSowing from "@/assets/vegetable-info-icons/outdoor-sowing.png";
 
 import { useEffect, useState } from "react";
 import axiosInstance from "@/api/axios";
@@ -115,7 +116,7 @@ const Recommandations = () => {
               <div className="grid grid-cols-2 mx-auto md:grid-cols-4 gap-2 md:gap-4 py-2 md:py-4">
                 <Card className="gap-2 p-2 text-center text-sm flex flex-col justify-between items-center md:w-32">
                   <span>Espacement entre les plants</span>
-                  {/* <img src={distanceIcon} alt="" className="size-14" /> */}
+                  <img src={distanceIcon} alt="" className="size-10" />
                   <div className="flex flex-col leading-none">
                     <span className="text-md md:text-lg font-bold">
                       {veg.spacing_on_row} cm
@@ -125,7 +126,7 @@ const Recommandations = () => {
                 </Card>
                 <Card className="gap-2 p-2 text-center text-sm flex flex-col justify-between items-center md:w-32">
                   <span>Durée de germination</span>
-                  {/* <img src={germinationIcon} alt="" className="size-14" /> */}
+                  <img src={germinationIcon} alt="" className="size-10" />
                   <div className="flex flex-col leading-none">
                     <span className="text-md md:text-lg font-bold">
                       <span className="font-normal">≈ </span>
@@ -136,7 +137,7 @@ const Recommandations = () => {
                 </Card>
                 <Card className="gap-2 p-2 text-center text-sm flex flex-col justify-between items-center md:w-32">
                   <span className="md:w-12">Besoin en eau</span>
-                  {/* <img src={wateringIcon} alt="" className="size-14" /> */}
+                  <img src={wateringIcon} alt="" className="size-10" />
                   <div className="flex flex-col">
                     <span className="italic leading-6">arrosage</span>
                     <span className="text-md md:text-lg font-bold  leading-none">
@@ -146,7 +147,7 @@ const Recommandations = () => {
                 </Card>
                 <Card className="gap-2 p-2 text-center text-sm flex flex-col justify-between items-center md:w-32">
                   <span>Résistance au gel</span>
-                  {/* <img src={frostResistanceIcon} alt="" className="size-14" /> */}
+                  <img src={frostResistanceIcon} alt="" className="size-10" />
                   <div className="flex flex-col leading-none">
                     <span className="italic leading-6">tolérence</span>
                     <span className="text-md md:text-lg font-bold  leading-none">
@@ -156,9 +157,9 @@ const Recommandations = () => {
                 </Card>
               </div>
               <div className="flex justify-around">
-                <Card className="p-2 text-center gap-2 text-sm flex flex-col justify-between items-center md:w-34">
-                  <span>Semi en intérieur</span>
-                  {/* <img src={indoorSowingIcon} alt="" className="size-14" /> */}
+                <Card className="p-2 w-32 text-center gap-2 text-sm flex flex-col justify-between items-center md:w-34">
+                  <span>Semis intérieur</span>
+                  <img src={indoorSowingIcon} alt="" className="size-10" />
                   <div className="flex flex-col">
                     <span className="italic leading-6">à partir du</span>
                     <span className="text-md md:text-lg font-bold  leading-none">
@@ -166,9 +167,9 @@ const Recommandations = () => {
                     </span>
                   </div>
                 </Card>
-                <Card className="p-2 text-center text-sm flex flex-col justify-between items-center md:w-34">
-                  <span>Semi en extérieur</span>
-                  {/* <img src={germinationIcon} alt="" className="size-14" /> */}
+                <Card className="p-2 w-32  text-center text-sm flex flex-col justify-between items-center md:w-34">
+                  <span>Semis extérieur</span>
+                  <img src={outdoorSowing} alt="" className="size-10" />
                   <div className="flex flex-col">
                     <span className="italic leading-6">à parir du</span>
                     <span className="text-md md:text-lg font-bold  leading-none">
@@ -176,9 +177,9 @@ const Recommandations = () => {
                     </span>
                   </div>
                 </Card>
-                <Card className="p-2 text-center text-sm flex flex-col justify-between items-center md:w-34">
-                  <span className="w-12">Dernier semi</span>
-                  {/* <img src={stopSowingIcon} alt="" className="size-14" /> */}
+                <Card className="p-2 w-32  text-center text-sm flex flex-col justify-between items-center md:w-34">
+                  <span className="w-12">Dernier semis</span>
+                  <img src={stopSowingIcon} alt="" className="size-10" />
                   <div className="flex flex-col">
                     <span className="italic leading-6">jusqu'au</span>
                     <span className="text-md md:text-lg font-bold  leading-none">

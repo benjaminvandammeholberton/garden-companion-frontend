@@ -28,10 +28,10 @@ import spinach from "../assets/vegetables-icons/spinach.png";
 import strawberry from "../assets/vegetables-icons/strawberry.png";
 import tomato from "../assets/vegetables-icons/tomato.png";
 import zucchini from "../assets/vegetables-icons/zucchini.png";
-// import beetroot from "../assets/vegetables-icons/beetroot.png";
-// import greenBeans from "../assets/vegetables-icons/green-beans.png";
-// import turnip from "../assets/vegetables-icons/turnip.png";
-// import rutabaga from "../assets/vegetables-icons/rutabaga.png";
+import beetroot from "../assets/vegetables-icons/beetroot.png";
+import greenBeans from "../assets/vegetables-icons/green-beans.png";
+import turnip from "../assets/vegetables-icons/turnip.png";
+import rutabaga from "../assets/vegetables-icons/rutabaga.png";
 
 const vegetableIconsMaps = [
   {
@@ -155,22 +155,22 @@ const vegetableIconsMaps = [
     name: { en: "zucchini", fr: "courgette" },
     assets: zucchini,
   },
-  // {
-  //   name: { en: "green beans", fr: "haricots" },
-  //   assets: greenBeans,
-  // },
-  // {
-  //   name: { en: "beetroot", fr: "betterave" },
-  //   assets: beetroot,
-  // },
-  // {
-  //   name: { en: "turnip", fr: "navet" },
-  //   assets: turnip,
-  // },
-  // {
-  //   name: { en: "rutabaga", fr: "rutabaga" },
-  //   assets: rutabaga,
-  // },
+  {
+    name: { en: "green beans", fr: "haricots" },
+    assets: greenBeans,
+  },
+  {
+    name: { en: "beetroot", fr: "betterave" },
+    assets: beetroot,
+  },
+  {
+    name: { en: "turnip", fr: "navet" },
+    assets: turnip,
+  },
+  {
+    name: { en: "rutabaga", fr: "rutabaga" },
+    assets: rutabaga,
+  },
 ];
 
 export default vegetableIconsMaps;

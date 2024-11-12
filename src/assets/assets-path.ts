@@ -4,6 +4,7 @@ export { default as greenhouse64 } from "../assets/icons/area-environnements/gre
 export { default as outdoor } from "../assets/icons/area-environnements/outdoor.png";
 export { default as indoor } from "../assets/icons/area-environnements/indoor.png";
 export { default as indoor64 } from "../assets/icons/area-environnements/indoor64px.png";
+export { default as outdoor64 } from "../assets/icons/area-environnements/outdoor64px.png";
 
 // icons user action
 export { default as backIcon } from "../assets/common/back.png";
