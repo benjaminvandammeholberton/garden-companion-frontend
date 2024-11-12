@@ -27,7 +27,7 @@ import { Filter } from "lucide-react";
 import backendRoutes from "@/api/apiRoutes";
 
 
-const BASEURL = process.env.REACT_APP_BACKEND_URL || "https://jammin-dev.com/"
+const BASEURL = import.meta.env.REACT_APP_BACKEND_URL_BASE || "https://jammin-dev.com/"
 
 const SOWING = "SOWING"
 const PLANTING = "PLANTING"

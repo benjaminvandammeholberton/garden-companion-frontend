@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { z } from "zod";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
@@ -43,6 +43,7 @@ import { AreaInterface } from "@/interfaces/interfaces";
 import { Textarea } from "@/components/ui/textarea";
 import axiosInstance, { axiosInstanceFile } from "@/api/axios";
 import backendRoutes from "@/api/apiRoutes";
+import ActionButton from "@/components/ActionButton";
 
 interface PlantingFormInterface {
   onClose: () => void;
@@ -54,6 +55,8 @@ const PlantingForm: React.FC<PlantingFormInterface> = ({
   defaultValues,
 }) => {
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false)
+
 
   const areasContext = useContext(AreasContext);
   if (!areasContext) {
@@ -109,6 +112,7 @@ const PlantingForm: React.FC<PlantingFormInterface> = ({
     }
     
     try {
+      setIsLoading(true)
       const formData = new FormData();
       const jsonData = JSON.stringify(data)
       formData.append("data", jsonData)
@@ -134,7 +138,7 @@ const PlantingForm: React.FC<PlantingFormInterface> = ({
         });
         setAreas(newAreas);
         toast({
-          title: "Nouveau semis 👍",
+          title: "Nouvelle plantation 👍",
           description:
             `${newVegetable?.name} - ` +
             `${newVegetable?.variety} ` +
@@ -146,11 +150,12 @@ const PlantingForm: React.FC<PlantingFormInterface> = ({
     console.error("Error created the operation:", error);
     // Handle this error better
     toast({
-      title: "Le semis n'a pas pu être enregistré 😵",
+      title: "La plantation n'a pas pu être enregistrée 😵",
       description:
         "Vérifier le format de l'image",
     });
   } finally {
+    setIsLoading(false)
       onClose();
   }
     }
@@ -296,7 +301,7 @@ const PlantingForm: React.FC<PlantingFormInterface> = ({
               );
             }}
           />
-          <Button type="submit">Enregistrer</Button>
+          <ActionButton isLoading={isLoading}/>
         </form>
       </Form>
     </div>

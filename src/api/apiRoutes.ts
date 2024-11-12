@@ -1,4 +1,13 @@
-export const ROOTURL = process.env.REACT_APP_BACKEND_URL || "https://jammin-dev.com/" + "api/v1/"
+const getBaseUrl = () => {
+    if (window.location.hostname === "localhost") {
+      return "http://localhost:8000/api/v1/"; // Local development URL
+    } else {
+      return "https://jammin-dev.com/api/v1/"; // Staging environment
+    }
+  };
+  
+export const ROOTURL = getBaseUrl();
+
 
 const backendRoutes = {
     register: ROOTURL + "auth/users/",

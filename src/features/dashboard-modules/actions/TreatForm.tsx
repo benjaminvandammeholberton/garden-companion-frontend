@@ -41,6 +41,7 @@ import axiosInstance, { axiosInstanceFile } from "@/api/axios";
 import FieldVegetablesInArea from "./components/FieldVegetablesInArea";
 import { useState } from "react";
 import backendRoutes from "@/api/apiRoutes";
+import ActionButton from "@/components/ActionButton";
 
 interface TreatFormInterface {
   onClose: () => void;
@@ -49,6 +50,8 @@ interface TreatFormInterface {
 const TreatForm: React.FC<TreatFormInterface> = ({ onClose }) => {
   const [selectedArea, setSelectedArea] = useState("");
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false)
+
 
   const formSchema = z.object({
     vegetable: z.string().max(50).nullable().optional(),
@@ -89,6 +92,7 @@ const TreatForm: React.FC<TreatFormInterface> = ({ onClose }) => {
     };
 
     try  {
+      setIsLoading(true)
       const formData = new FormData();
       const jsonData = JSON.stringify(data)
       formData.append("data", jsonData)
@@ -112,7 +116,8 @@ const TreatForm: React.FC<TreatFormInterface> = ({ onClose }) => {
           "Vérifier le format de l'image",
       });
     } finally {
-        onClose();
+      setIsLoading(false)
+      onClose();
     }
   };
 
@@ -262,7 +267,7 @@ const TreatForm: React.FC<TreatFormInterface> = ({ onClose }) => {
               );
             }}
           />
-          <Button type="submit">Enregistrer</Button>
+          <ActionButton isLoading={isLoading}/>
         </form>
       </Form>
     </div>

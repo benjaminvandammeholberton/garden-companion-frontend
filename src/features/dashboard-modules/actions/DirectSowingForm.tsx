@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { z } from "zod";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
@@ -46,6 +46,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { AreaInterface } from "@/interfaces/interfaces";
 import { Textarea } from "@/components/ui/textarea";
 import axiosInstance, { axiosInstanceFile } from "@/api/axios";
+import ActionButton from "@/components/ActionButton";
 
 interface DirectSowingFormInterface {
   onClose: () => void;
@@ -53,6 +54,7 @@ interface DirectSowingFormInterface {
 
 const DirectSowingForm: React.FC<DirectSowingFormInterface> = ({onClose}) => {
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false)
 
   const areasContext = useContext(AreasContext);
   if (!areasContext) {
@@ -109,6 +111,7 @@ const DirectSowingForm: React.FC<DirectSowingFormInterface> = ({onClose}) => {
     }
     
     try {
+      setIsLoading(true)
       const formData = new FormData();
       const jsonData = JSON.stringify(data)
       formData.append("data", jsonData)
@@ -151,6 +154,7 @@ const DirectSowingForm: React.FC<DirectSowingFormInterface> = ({onClose}) => {
         "Vérifier le format de l'image",
     });
   } finally {
+      setIsLoading(false)
       onClose();
   }
     }
@@ -321,7 +325,7 @@ const DirectSowingForm: React.FC<DirectSowingFormInterface> = ({onClose}) => {
               );
             }}
           />
-          <Button type="submit">Enregistrer</Button>
+          <ActionButton isLoading={isLoading}/>
         </form>
       </Form>
     </div>

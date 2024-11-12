@@ -53,7 +53,6 @@ const SeedlingsAdd: React.FC<SeedlingsAddProps> = ({
     defaultValues: {
       name: "",
       variety: "",
-      quantity: 1,
     },
   });
 
@@ -106,7 +105,7 @@ const SeedlingsAdd: React.FC<SeedlingsAddProps> = ({
           )}
         />
           <Button
-            className="mx-auto w-full"
+            className="mx-auto"
             type="submit"
             disabled={!form.formState.isValid || isLoading}
           >

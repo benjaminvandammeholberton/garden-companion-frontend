@@ -157,7 +157,7 @@ const SeedlingsList: React.FC<SeedlingsListProps> = ({ sortedBy }) => {
                       {capitalize(vegetable.variety)} ({vegetable.quantity})
                     </span>
                   </PopoverTrigger>
-                  <PopoverContent className="bg-white border rounded-lg p-5 w-96">
+                  <PopoverContent className="bg-white dark:bg-slate-900 border rounded-lg pt-2 pb-5 px-5 w-96">
                     <div className="flex justify-between items-end">
                       <Button onClick={() => openPlantingModal(vegetable)}>
                         Planter

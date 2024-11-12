@@ -44,6 +44,7 @@ import axiosInstance, { axiosInstanceFile } from "@/api/axios";
 
 import FieldVegetablesInArea from "./components/FieldVegetablesInArea";
 import backendRoutes from "@/api/apiRoutes";
+import ActionButton from "@/components/ActionButton";
 
 interface RemoveFormInterface {
   onClose: () => void;
@@ -52,6 +53,7 @@ interface RemoveFormInterface {
 const RemoveForm: React.FC<RemoveFormInterface> = ({ onClose }) => {
   const [selectedArea, setSelectedArea] = useState("");
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false)
 
   // const vegetablesContext = useContext(VegetablesContext);
   // if (!vegetablesContext) {
@@ -95,6 +97,7 @@ const RemoveForm: React.FC<RemoveFormInterface> = ({ onClose }) => {
     };
 
     try {
+      setIsLoading(true)
       const formData = new FormData();
       const jsonData = JSON.stringify(data)
       formData.append("data", jsonData)
@@ -138,6 +141,9 @@ const RemoveForm: React.FC<RemoveFormInterface> = ({ onClose }) => {
       onClose();
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false)
+      onClose();
     }
   };
 
@@ -237,7 +243,7 @@ const RemoveForm: React.FC<RemoveFormInterface> = ({ onClose }) => {
               );
             }}
           />
-          <Button type="submit">Enregistrer</Button>
+          <ActionButton isLoading={isLoading}/>
         </form>
       </Form>
     </div>

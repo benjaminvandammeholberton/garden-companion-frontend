@@ -29,6 +29,7 @@ import {
 import { useToast } from "@/components/ui/use-toast";
 import { useNavigate } from "react-router-dom";
 import BarLoader from "react-spinners/BarLoader";
+import { Loader2 } from "lucide-react";
 
 interface RegisterProps {
   toggleAuth?: () => void;
@@ -121,7 +122,6 @@ const Register: React.FC<RegisterProps> = ({ toggleAuth }) => {
     <Card className="px-10 mt-20">
       <CardHeader className="flex flex-row items-center gap-4">
         <CardTitle>Inscription</CardTitle>
-        <BarLoader color="#33ffb3" loading={isLoading} width={75} />
       </CardHeader>
       <CardContent className="w-80">
         <Form {...form}>
@@ -181,9 +181,14 @@ const Register: React.FC<RegisterProps> = ({ toggleAuth }) => {
                 </FormItem>
               )}
             />
-            <Button className="mx-auto w-full" type="submit">
-              S'inscrire
-            </Button>
+            <Button
+            className="mx-auto"
+            type="submit"
+            disabled={isLoading}
+          >
+            {isLoading &&  <Loader2 className="animate-spin mr-3" />}
+            S'inscrire
+        </Button>
           </form>
         </Form>
       </CardContent>

@@ -103,8 +103,8 @@ const UpdatePassword = () => {
           "Vous pouvez vous connecter avec votre nouveau mot de passe",
       });
       setIsWrongPassword(false);
-    } catch (err) {
-      if (err.response.status === 401) {
+    } catch (error) {
+      if (error.response.status === 401) {
         form.reset();
         setIsWrongPassword(true);
       } else {
@@ -112,7 +112,7 @@ const UpdatePassword = () => {
           title: "Votre mot de passe n'a pas pu être changé ❌",
           description: "Veuillez réesayer ultérieurement",
         });
-        console.error("Login failed", err);
+        console.error("Login failed", error);
       }
     } finally {
       setIsLoading(false)
@@ -125,7 +125,7 @@ const UpdatePassword = () => {
         <p className="text-red-600">Mot de passe actuel incorrect</p>
       )}
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(submitForm)} className="space-y-4 ">
+        <form onSubmit={form.handleSubmit(submitForm)} className="flex flex-col gap-4">
           <FormField
             control={form.control}
             name="password"
@@ -166,7 +166,7 @@ const UpdatePassword = () => {
             )}
           />
           <Button
-            className="mx-auto w-full"
+            className="mx-auto"
             type="submit"
             disabled={!form.formState.isValid || isLoading}
           >

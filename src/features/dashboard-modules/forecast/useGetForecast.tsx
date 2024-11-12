@@ -10,8 +10,7 @@ type useGetForecastReturnType = [
   string | null
 ];
 
-const useGetForecast = (): useGetForecastReturnType => {
-  const [user] = useAuth();
+const useGetForecast = (userLocation): useGetForecastReturnType => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [foreacastData, setForecastData] = useState<ForecastDailyInterface[]>(
@@ -39,22 +38,21 @@ const useGetForecast = (): useGetForecastReturnType => {
         setIsLoading(false);
       }
     };
-    if (user) {
-      const forecastLocalStr = localStorage.getItem("forecastData");
-      if (forecastLocalStr) {
-        const foreacastLocal = JSON.parse(forecastLocalStr);
-        const today = new Date().getDate();
-        const forecastLocalDate = new Date(foreacastLocal[0].date).getDate();
-        if (today === forecastLocalDate) {
-          setForecastData(foreacastLocal);
-        } else {
-          fetchForecast();
-        }
+
+    const forecastLocalStr = localStorage.getItem("forecastData");
+    if (forecastLocalStr) {
+      const foreacastLocal = JSON.parse(forecastLocalStr);
+      const today = new Date().getDate();
+      const forecastLocalDate = new Date(foreacastLocal[0].date).getDate();
+      if (today === forecastLocalDate) {
+        setForecastData(foreacastLocal);
       } else {
         fetchForecast();
       }
+    } else {
+      fetchForecast();
     }
-  }, [user]);
+  }, [userLocation]);
 
   return [foreacastData, isLoading, error];
 };

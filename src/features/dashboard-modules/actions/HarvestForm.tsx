@@ -45,6 +45,7 @@ import axiosInstance, { axiosInstanceFile } from "@/api/axios";
 
 import FieldVegetablesInArea from "./components/FieldVegetablesInArea";
 import backendRoutes from "@/api/apiRoutes";
+import ActionButton from "@/components/ActionButton";
 
 interface HarvestFormInterface {
   onClose: () => void;
@@ -54,6 +55,7 @@ const HarvestForm: React.FC<HarvestFormInterface> = ({ onClose }) => {
   const [selectedArea, setSelectedArea] = useState("");
   const [currentQuantityUnit, setCurrentQuantityUnit] = useState("");
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false)
 
   // const vegetablesContext = useContext(VegetablesContext);
   // if (!vegetablesContext) {
@@ -102,9 +104,9 @@ const HarvestForm: React.FC<HarvestFormInterface> = ({ onClose }) => {
       quantity_unit: rest.quantity_unit,
       description: rest.note
     };
-    console.log(data)
 
     try {
+      setIsLoading(true)
       const formData = new FormData();
       const jsonData = JSON.stringify(data)
       formData.append("data", jsonData)
@@ -144,6 +146,7 @@ const HarvestForm: React.FC<HarvestFormInterface> = ({ onClose }) => {
     } catch (error){
       console.error(error)
     } finally {
+      setIsLoading(false)
       onClose();
     }
   };
@@ -287,7 +290,7 @@ const HarvestForm: React.FC<HarvestFormInterface> = ({ onClose }) => {
               );
             }}
           />
-          <Button type="submit">Enregistrer</Button>
+          <ActionButton isLoading={isLoading}/>
         </form>
       </Form>
     </div>

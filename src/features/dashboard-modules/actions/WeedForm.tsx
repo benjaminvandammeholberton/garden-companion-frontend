@@ -40,6 +40,7 @@ import axiosInstance, { axiosInstanceFile } from "@/api/axios";
 
 import FieldVegetablesInArea from "./components/FieldVegetablesInArea";
 import { useState } from "react";
+import ActionButton from "@/components/ActionButton";
 
 interface WeedFormInterface {
   onClose: () => void;
@@ -48,6 +49,8 @@ interface WeedFormInterface {
 const WeedForm: React.FC<WeedFormInterface> = ({ onClose }) => {
   const [selectedArea, setSelectedArea] = useState("");
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false)
+
 
   const formSchema = z.object({
     vegetable: z.string().max(50).nullable().optional(),
@@ -90,14 +93,17 @@ const WeedForm: React.FC<WeedFormInterface> = ({ onClose }) => {
     }
 
     try {
+      setIsLoading(true)
       await axiosInstance.post("/api/v1/action/", data);
       toast({
         title: "Désherbage enregistré 👍",
         description: ``,
       });
-      onClose();
     } catch (error) {
       console.error(error);
+    } finally {
+        setIsLoading(false)
+        onClose();
     }
   };
 
@@ -197,7 +203,7 @@ const WeedForm: React.FC<WeedFormInterface> = ({ onClose }) => {
               );
             }}
           />
-          <Button type="submit">Enregistrer</Button>
+          <ActionButton isLoading={isLoading}/>
         </form>
       </Form>
     </div>

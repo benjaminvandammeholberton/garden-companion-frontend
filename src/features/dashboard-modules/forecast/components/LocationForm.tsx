@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -134,14 +135,15 @@ const LocationForm = ({ setUserLocation }) => {
           )}
         />
         <Button
-          type="submit"
-          disabled={
-            form.getValues()["country"] === "" ||
-            form.getValues()["post_code"] === "" ||
-            form.getValues()["city"] === ""
-          }
-        >
-          Valider
+            className="mx-auto"
+            type="submit"
+            disabled={
+              form.getValues()["country"] === "" ||
+              form.getValues()["post_code"] === "" ||
+              form.getValues()["city"] === ""
+            }
+          >
+            Valider
         </Button>
       </form>
     </Form>

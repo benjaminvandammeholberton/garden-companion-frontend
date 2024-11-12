@@ -169,7 +169,7 @@ const AreaFormAdd: React.FC<AreaFormAddProps> = ({ handleClickAdd }) => {
         </div>
       </div>
       <Button
-            className="mx-auto w-full"
+            className="mx-auto"
             type="submit"
             disabled={isLoading}
           >

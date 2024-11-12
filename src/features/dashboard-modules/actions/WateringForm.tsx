@@ -41,6 +41,7 @@ import axiosInstance, { axiosInstanceFile } from "@/api/axios";
 import FieldVegetablesInArea from "./components/FieldVegetablesInArea";
 import { useState } from "react";
 import backendRoutes from "@/api/apiRoutes";
+import ActionButton from "@/components/ActionButton";
 
 interface WateringFormInterface {
   onClose: () => void;
@@ -49,6 +50,8 @@ interface WateringFormInterface {
 const WateringForm: React.FC<WateringFormInterface> = ({ onClose }) => {
   const [selectedArea, setSelectedArea] = useState("");
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false)
+
 
   const formSchema = z.object({
     vegetable: z.string().max(50).nullable().optional(),
@@ -84,6 +87,7 @@ const WateringForm: React.FC<WateringFormInterface> = ({ onClose }) => {
     };
 
     try  {
+      setIsLoading(true)
       const formData = new FormData();
       const jsonData = JSON.stringify(data)
       formData.append("data", jsonData)
@@ -107,6 +111,7 @@ const WateringForm: React.FC<WateringFormInterface> = ({ onClose }) => {
           "Vérifier le format de l'image",
       });
     } finally {
+      setIsLoading(false)
         onClose();
     }
   };
@@ -240,8 +245,7 @@ const WateringForm: React.FC<WateringFormInterface> = ({ onClose }) => {
               );
             }}
           />
-          <Button type="submit">Enregistrer</Button>
-        </form>
+            <ActionButton isLoading={isLoading}/>        </form>
       </Form>
     </div>
   );

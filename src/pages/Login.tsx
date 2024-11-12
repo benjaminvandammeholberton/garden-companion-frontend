@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import BarLoader from "react-spinners/BarLoader";
+import { Loader2 } from "lucide-react";
 
 interface LoginProps {
   toggleAuth?: () => void;
@@ -95,7 +96,6 @@ const Login: React.FC<LoginProps> = ({ toggleAuth }) => {
     <Card className="relative px-10 mt-20">
       <CardHeader className="flex flex-row items-center gap-4">
         <CardTitle>Connexion</CardTitle>
-        <BarLoader color="#33ffb3" loading={isLoading} width={75} />
       </CardHeader>
       <CardContent className="relative w-80">
         <Form {...form}>
@@ -129,9 +129,14 @@ const Login: React.FC<LoginProps> = ({ toggleAuth }) => {
                 </FormItem>
               )}
             />
-            <Button className="mx-auto w-full" type="submit">
-              Se connecter
-            </Button>
+            <Button
+            className="mx-auto"
+            type="submit"
+            disabled={isLoading}
+          >
+            {isLoading &&  <Loader2 className="animate-spin mr-3" />}
+            Se connecter
+        </Button>
           </form>
         </Form>
       </CardContent>
