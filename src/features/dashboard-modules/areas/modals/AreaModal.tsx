@@ -80,10 +80,10 @@ const AreaModal: React.FC<AreaModalProps> = ({ isOpen, onClose, area }) => {
         md:rounded-sm 
         flex 
         flex-col
-        w-full md:w-5/6 
-        h-full md:h-5/6
+        w-11/12 md:w-5/6 
+        h-5/6 md:h-5/6
         space-y-3
-        dark:border-2 dark:border-stone-50
+        dark:border-2
         "
       >
         <div className="space-y-5 bg-white dark:bg-slate-900 w-full">
@@ -95,16 +95,16 @@ const AreaModal: React.FC<AreaModalProps> = ({ isOpen, onClose, area }) => {
           </div>
           <div className="flex items-center justify-center">
             <img
-              className="w-14 h-14 absolute left-5 top-5"
+              className="w-10 h-10 lg:w-14 lg:h-14 absolute left-5 top-5"
               src={getAreaIcon(currentArea?.environment)}
               alt=""
             />
-              <span className="text-4xl">{currentArea?.name}</span>
+              <span className="text-xl lg:text-4xl">{currentArea?.name}</span>
             <div className="flex items-center gap-2">
               <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
                 <PopoverTrigger asChild>
                   <Button variant={"ghost"} size={"icon"}>
-                    <Settings size={20} />
+                    <Settings size={15} />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent asChild>
