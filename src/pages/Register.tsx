@@ -127,7 +127,7 @@ const Register: React.FC<RegisterProps> = ({ toggleAuth }) => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(submitRegisterForm)}
-            className="space-y-4"
+            className="flex flex-col gap-4"
           >
             <FormField
               control={form.control}

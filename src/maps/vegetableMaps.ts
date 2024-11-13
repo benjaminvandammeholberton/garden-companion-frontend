@@ -32,6 +32,36 @@ import beetroot from "../assets/vegetables-icons/beetroot.png";
 import greenBeans from "../assets/vegetables-icons/green-beans.png";
 import turnip from "../assets/vegetables-icons/turnip.png";
 import rutabaga from "../assets/vegetables-icons/rutabaga.png";
+import hemp from "../assets/vegetables-icons/hemp.png";
+import tulip from "../assets/vegetables-icons/tulip.png";
+import geranium from "../assets/vegetables-icons/geranium.png";
+import chives from "../assets/vegetables-icons/chives.png";
+import squash from "../assets/vegetables-icons/squash.png";
+import wheat from "../assets/vegetables-icons/wheat.png";
+import shallot from "../assets/vegetables-icons/shallot.png";
+
+// Trees
+import appleTree from "../assets/vegetables-icons/apple-tree.png";
+import pearTree from "../assets/vegetables-icons/pear-tree.png";
+import kiwiVine from "../assets/vegetables-icons/kiwi-vine.png";
+import cherryTree from "../assets/vegetables-icons/cherry-tree.png";
+import plumTree from "../assets/vegetables-icons/plum-tree.png";
+import apricotTree from "../assets/vegetables-icons/apricot-tree.png";
+import peachTree from "../assets/vegetables-icons/peach-tree.png";
+import nectarineTree from "../assets/vegetables-icons/nectarine-tree.png";
+import almondTree from "../assets/vegetables-icons/almond-tree.png";
+import oliveTree from "../assets/vegetables-icons/olive-tree.png";
+import figTree from "../assets/vegetables-icons/fig-tree.png";
+import persimmonTree from "../assets/vegetables-icons/persimmon-tree.png";
+import hazelnutTree from "../assets/vegetables-icons/hazelnut-tree.png";
+import chestnutTree from "../assets/vegetables-icons/chestnut-tree.png";
+import lemonTree from "../assets/vegetables-icons/lemon-tree.png";
+import orangeTree from "../assets/vegetables-icons/orange-tree.png";
+import mandarinTree from "../assets/vegetables-icons/mandarin-tree.png";
+import pomegranateTree from "../assets/vegetables-icons/pomegranate-tree.png";
+import mulberryTree from "../assets/vegetables-icons/mulberry-tree.png";
+import grapeVine from "../assets/vegetables-icons/grape-vine.png";
+import walnutTree from "../assets/vegetables-icons/walnut-tree.png";
 
 const vegetableIconsMaps = [
   {
@@ -170,6 +200,118 @@ const vegetableIconsMaps = [
   {
     name: { en: "rutabaga", fr: "rutabaga" },
     assets: rutabaga,
+  },
+  {
+    name: { en: "hemp", fr: "chanvre" },
+    assets: hemp,
+  },
+  {
+    name: { en: "tulip", fr: "tulipe" },
+    assets: tulip,
+  },
+  {
+    name: { en: "apple tree", fr: "pommier" },
+    assets: appleTree,
+  },
+  {
+    name: { en: "pear tree", fr: "poirier" },
+    assets: pearTree,
+  },
+  {
+    name: { en: "geranium", fr: "géranium" },
+    assets: geranium,
+  },
+  {
+    name: { en: "chives", fr: "ciboulette" },
+    assets: chives,
+  },
+  {
+    name: { en: "squash", fr: "courge" },
+    assets: squash,
+  },
+  {
+    name: { en: "wheat", fr: "blé" },
+    assets: wheat,
+  },
+  {
+    name: { en: "shallot", fr: "échalote" },
+    assets: shallot,
+  },
+  {
+    name: { en: "kiwi vine", fr: "arbre à kiwi" },
+    assets: kiwiVine,
+  },
+  {
+    name: { en: "cherry tree", fr: "cerisier" },
+    assets: cherryTree,
+  },
+  {
+    name: { en: "plum tree", fr: "prunier" },
+    assets: plumTree,
+  },
+  {
+    name: { en: "apricot tree", fr: "abricotier" },
+    assets: apricotTree,
+  },
+  {
+    name: { en: "peach tree", fr: "pêcher" },
+    assets: peachTree,
+  },
+  {
+    name: { en: "nectarine tree", fr: "nectarinier" },
+    assets: nectarineTree,
+  },
+  {
+    name: { en: "almond tree", fr: "amandier" },
+    assets: almondTree,
+  },
+  {
+    name: { en: "olive tree", fr: "olivier" },
+    assets: oliveTree,
+  },
+  {
+    name: { en: "fig tree", fr: "figuier" },
+    assets: figTree,
+  },
+  {
+    name: { en: "persimmon tree", fr: "kaki" },
+    assets: persimmonTree,
+  },
+  {
+    name: { en: "hazelnut tree", fr: "noisetier" },
+    assets: hazelnutTree,
+  },
+  {
+    name: { en: "chestnut tree", fr: "châtaignier" },
+    assets: chestnutTree,
+  },
+  {
+    name: { en: "lemon tree", fr: "citronnier" },
+    assets: lemonTree,
+  },
+  {
+    name: { en: "orange tree", fr: "oranger" },
+    assets: orangeTree,
+  },
+  {
+    name: { en: "mandarin tree", fr: "mandarinier" },
+    assets: mandarinTree,
+  },
+  {
+    name: { en: "pomegranate tree", fr: "grenadier" },
+    assets: pomegranateTree,
+  },
+  {
+    name: { en: "mulberry tree", fr: "mûrier" },
+    assets: mulberryTree,
+  },
+  {
+    name: { en: "grape vine", fr: "vigne" },
+    assets: grapeVine,
+  },
+  {
+    name: { en: "walnut tree", fr: "noyer" },
+    assets: walnutTree,
   },
 ];
 

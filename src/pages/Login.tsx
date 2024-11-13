@@ -101,7 +101,7 @@ const Login: React.FC<LoginProps> = ({ toggleAuth }) => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(submitLoginForm)}
-            className="space-y-4"
+            className="flex flex-col gap-4"
           >
             <FormField
               control={form.control}
