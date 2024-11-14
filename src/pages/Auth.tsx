@@ -39,12 +39,9 @@ const Auth = () => {
       gap-5
       items-center
       justify-center
-      bg-green-100
-      dark:bg-slate-600
+    bg-green-50 
+    dark:bg-slate-900
       pb-10
-      bg-[url('@/assets/wallpapers/wallpaper.jpg')]
-      bg-center
-      background-size: cover
       ">
       <HeaderLogin />
       {isRegister ? (

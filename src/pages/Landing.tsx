@@ -35,7 +35,7 @@ const Landing = () => {
   },[])
 
   return (
-    <div className="background text-zinc-900 p-5 md:pt-14 mx-auto">
+    <div className="bg-green-50 text-zinc-900 p-5 md:pt-14 mx-auto">
       <div className="container mx-auto flex flex-col gap-32">
         <div className="flex flex-col gap-5 xl:gap-10">
           <div className="flex flex-col gap-5 ">

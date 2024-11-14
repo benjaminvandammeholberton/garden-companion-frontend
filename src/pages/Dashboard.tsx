@@ -13,28 +13,37 @@ import useGetAreas from "../hooks/useGetAreas";
 // shadcn ui
 import { Card, CardContent } from "@/components/ui/card";
 import { AreasProvider } from "@/contexts/AreasContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 
 const Dashboard = () => {
   const [areas, isLoadingAreas, errorGetAreas, setAreas] = useGetAreas();
-  const navigate = useNavigate()
+  const [showExitAlert, setShowExitAlert] = useState(false);
+  const navigate = useNavigate();
 
+  // Block the previous key on browser
   useEffect(() => {
     window.history.pushState(null, document.title);
+
     const handlePopState = () => {
-      navigate('/me/dashboard');
+      setShowExitAlert(true);
+      navigate("/me/dashboard");
     };
 
-    window.addEventListener('popstate', handlePopState);
+    window.addEventListener("popstate", handlePopState);
 
     return () => {
-      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener("popstate", handlePopState);
     };
   }, [navigate]);
 
+  const backToLogin = () => {
+    navigate("/auth/login")
+  }
+
   return (
+    <>
       <AreasProvider>
         <div>
           <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-5 w-full">
@@ -79,6 +88,21 @@ const Dashboard = () => {
           </div>
         </div>
       </AreasProvider>
+      <AlertDialog open={showExitAlert}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Voulez-vous vraiment quitter Garden Companion ?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Retour à la page de connexion
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setShowExitAlert(false)}>Non</AlertDialogCancel>
+            <AlertDialogAction onClick={backToLogin}>Oui</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 };
 

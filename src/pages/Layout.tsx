@@ -16,7 +16,7 @@ const Layout = () => {
   const toggleChatBotModal = () => setisChatBotModalOpen(!isChatBotModalOpen);
   const closeChatBotModal = () => setisChatBotModalOpen(false);
   return (
-    <div className="flex flex-col justify-between items-center w-full bg-green-100 dark:bg-slate-900 gap-5 lg:min-h-screen">
+    <div className="flex flex-col justify-between items-center w-full bg-green-50 dark:bg-slate-900 gap-5 lg:min-h-screen">
       <Header />
 
       <div className="flex-grow flex items-center justify-center mt-[100px]">
