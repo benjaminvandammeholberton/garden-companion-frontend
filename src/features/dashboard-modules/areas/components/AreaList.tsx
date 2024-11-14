@@ -13,7 +13,7 @@ import AreasContext from "@/contexts/AreasContext";
 
 // ui
 import { Skeleton } from "@/components/ui/skeleton";
-import { CirclePlus } from "lucide-react";
+import { CirclePlus, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface AreaListProps {
@@ -38,28 +38,31 @@ const AreaList: React.FC<AreaListProps> = ({ sortedBy, openModal }) => {
     return areaIcon;
   };
 
-  if (areas.length === 0) {
-    return (
-      <div className="text-lg w-full mx-auto text-center flex items-center mt-5 leading-8">
-        <span>
-          {" "}
-          Pour commencer, créez une zone de culture en cliquant sur{" "}
-          <CirclePlus className="inline" size={"25"} strokeWidth={1.5} />
-        </span>
-      </div>
-    );
-  }
+  // if (areas.length === 0) {
+  //   return (
+  //     <div className="text-lg w-full mx-auto text-center flex items-center mt-5 leading-8">
+  //       <span>
+  //         {" "}
+  //         Pour commencer, créez une zone de culture en cliquant sur{" "}
+  //         <CirclePlus className="inline" size={"25"} strokeWidth={1.5} />
+  //       </span>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="overflow-y-auto overflow-x-hidden h-[280px] px-2 font-thin text-xl scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-slate-400 scrollbar-track-gray-100 dark:scrollbar-thumb-gray-100 dark:scrollbar-track-slate-900">
       {isLoading ? (
         <div className="space-y-2">
-          {Array.from({ length: 8 }).map((_, index) => (
-            <Skeleton
-              key={index}
-              className="w-[290px] h-[25px] rounded-full bg-gradient-to-r from-blue-50 to-blue-100"
-            />
-          ))}
+          <Loader2 className="animate-spin mr-3" />
+        </div>
+      ) : areas.length === 0 ? (
+        <div className="text-lg w-full mx-auto text-center flex items-center mt-5 leading-8">
+          <span>
+            {" "}
+            Pour commencer, créez une zone de culture en cliquant sur{" "}
+            <CirclePlus className="inline" size={"25"} strokeWidth={1.5} />
+          </span>
         </div>
       ) : sortedBy === "environnement" ? (
         <ul className=" space-y-4">
@@ -94,13 +97,18 @@ const AreaList: React.FC<AreaListProps> = ({ sortedBy, openModal }) => {
             .map((area: AreaInterface, index: number) => {
               if (area)
                 return (
-              <Button className="block w-full py-0 h-8" variant="ghost" key={index} onClick={() => openModal(area)}>
-                  <AreaListItem
+                  <Button
+                    className="block w-full py-0 h-8"
+                    variant="ghost"
                     key={index}
-                    openModal={openModal}
-                    area={area}
-                    areaIcon={getAreaIcon(area.environment)}
-                  />
+                    onClick={() => openModal(area)}
+                  >
+                    <AreaListItem
+                      key={index}
+                      openModal={openModal}
+                      area={area}
+                      areaIcon={getAreaIcon(area.environment)}
+                    />
                   </Button>
                 );
             })}

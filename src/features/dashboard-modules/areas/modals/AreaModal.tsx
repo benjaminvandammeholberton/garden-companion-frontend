@@ -80,8 +80,9 @@ const AreaModal: React.FC<AreaModalProps> = ({ isOpen, onClose, area }) => {
         md:rounded-sm 
         flex 
         flex-col
-        w-11/12 md:w-5/6 
-        h-5/6 md:h-5/6
+        h-full w-full overflow-y-auto overflow-x-hidden
+         md:w-5/6 
+         md:h-5/6
         space-y-3
         dark:border-2
         "

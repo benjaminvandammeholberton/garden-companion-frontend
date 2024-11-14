@@ -96,7 +96,7 @@ const Recommandations = () => {
                 </span>
               </Button>
             </DialogTrigger>
-            <DialogContent className="h-5/6 w-11/12 overflow-y-auto overflow-x-hidden flex flex-col items-center gap-10  dark:bg-slate-900">
+            <DialogContent className="h-full w-full overflow-y-auto overflow-x-hidden flex flex-col items-center gap-10  dark:bg-slate-900">
               <DialogHeader>
                 <DialogTitle className="flex flex-col gap-3">
                   <div className="flex items-center gap-2">

@@ -57,13 +57,6 @@ const HarvestForm: React.FC<HarvestFormInterface> = ({ onClose }) => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false)
 
-  // const vegetablesContext = useContext(VegetablesContext);
-  // if (!vegetablesContext) {
-  //   throw new Error(
-  //     "VegetablesContext must be used within an VegetablesProvider"
-  //   );
-  // }
-
   const areasContext = useContext(AreasContext);
   if (!areasContext) {
     throw new Error("AreasContext must be used within an AreasProvider");
@@ -116,15 +109,17 @@ const HarvestForm: React.FC<HarvestFormInterface> = ({ onClose }) => {
       }
       await axiosInstanceFile.post(backendRoutes.operations + "harvesting/", formData);
       const updatedArea = areas.find((area) => area.uuid === data.area);
+      const updatedVegetable = updatedArea?.vegetables.find((veg) => veg.uuid === data.vegetable)
+      updatedVegetable.quantity_harvested = parseFloat(updatedVegetable.quantity_harvested)  + parseFloat(data.quantity)
+      if (!updatedVegetable.harvest_unit) {
+        updatedVegetable.harvest_unit = data.quantity_unit
+      }
+
       const updatedVegetables = updatedArea?.vegetables.map((veg) => {
-        if (veg.vegetable_manager_id !== data.vegetable) {
+        if (veg.uuid !== data.vegetable) {
           return veg;
         } else {
-          return {
-            ...veg,
-            quantity_harvested: data.quantity,
-            quantity_unit: data.quantity_unit,
-          };
+          return updatedVegetable
         }
       });
       setAreas((prev) =>
@@ -141,7 +136,7 @@ const HarvestForm: React.FC<HarvestFormInterface> = ({ onClose }) => {
       );
       toast({
         title: "Récolte enregistrée 👍",
-        description: `${updatedVegetables.name} (${updatedVegetables.variety}) : + ${data.quantity} ${data.quantity_unit}`,
+        description: `${updatedVegetable.name} (${updatedVegetable.variety}) : + ${data.quantity} ${updatedVegetable.harvest_unit}`,
       });
     } catch (error){
       console.error(error)

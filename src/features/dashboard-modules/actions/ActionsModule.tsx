@@ -142,7 +142,7 @@ const ActionsModule: React.FC<ActionsModuleProps> = () => {
               </Button>
             </DialogTrigger>
             <DialogContent aria-describedby={undefined}
-              className="h-5/6 w-11/12 overflow-y-auto overflow-x-hidden flex flex-col items-center gap-10  dark:bg-slate-900"
+              className="h-full w-full overflow-y-auto overflow-x-hidden flex flex-col items-center gap-10  dark:bg-slate-900"
               onOpenAutoFocus={(event) => event.preventDefault()}
             >
               <DialogHeader>
