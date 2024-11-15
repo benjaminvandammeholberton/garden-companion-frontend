@@ -43,8 +43,8 @@ const DialogContent = React.forwardRef<
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="absolute right-4 top-4 ">
-          <CircleX />
+      <DialogPrimitive.Close className="absolute right-6 top-6 ">
+          <CircleX size={25}/>
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>
