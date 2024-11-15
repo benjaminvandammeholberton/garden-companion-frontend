@@ -1,5 +1,5 @@
 // hooks
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 // assets
 import { greenhouse, outdoor, indoor } from "../../../../assets/assets-path";
@@ -53,7 +53,7 @@ const AreaList: React.FC<AreaListProps> = ({ sortedBy, openModal }) => {
   return (
     <div className="overflow-y-auto overflow-x-hidden h-[280px] px-2 font-thin text-xl scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-slate-400 scrollbar-track-gray-100 dark:scrollbar-thumb-gray-100 dark:scrollbar-track-slate-900">
       {isLoading ? (
-        <div className="space-y-2">
+        <div className="w-full h-full flex justify-center mt-5">
           <Loader2 className="animate-spin mr-3" />
         </div>
       ) : areas.length === 0 ? (

@@ -113,8 +113,8 @@ const Recommandations = () => {
                   {veg.description}
                 </DialogDescription>
               </DialogHeader>
-              <div className="grid grid-cols-2 mx-auto md:grid-cols-4 gap-2 md:gap-4 py-2 md:py-4">
-                <Card className="gap-2 p-2 text-center text-sm flex flex-col justify-between items-center md:w-32">
+              <div className="flex justify-around w-full">
+                <Card className="p-2 w-28  text-center text-sm flex flex-col justify-between items-center md:w-34">
                   <span>Espacement entre les plants</span>
                   <img src={distanceIcon} alt="" className="size-10" />
                   <div className="flex flex-col leading-none">
@@ -124,7 +124,7 @@ const Recommandations = () => {
                     <span className="italic">minimum</span>
                   </div>
                 </Card>
-                <Card className="gap-2 p-2 text-center text-sm flex flex-col justify-between items-center md:w-32">
+                <Card className="p-2 w-28  text-center text-sm flex flex-col justify-between items-center md:w-34">
                   <span>Durée de germination</span>
                   <img src={germinationIcon} alt="" className="size-10" />
                   <div className="flex flex-col leading-none">
@@ -135,7 +135,7 @@ const Recommandations = () => {
                     <span className="italic">jours</span>
                   </div>
                 </Card>
-                <Card className="gap-2 p-2 text-center text-sm flex flex-col justify-between items-center md:w-32">
+                <Card className="p-2 w-28  text-center text-sm flex flex-col justify-between items-center md:w-34">
                   <span className="md:w-12">Besoin en eau</span>
                   <img src={wateringIcon} alt="" className="size-10" />
                   <div className="flex flex-col">
@@ -145,19 +145,9 @@ const Recommandations = () => {
                     </span>
                   </div>
                 </Card>
-                <Card className="gap-2 p-2 text-center text-sm flex flex-col justify-between items-center md:w-32">
-                  <span>Résistance au gel</span>
-                  <img src={frostResistanceIcon} alt="" className="size-10" />
-                  <div className="flex flex-col leading-none">
-                    <span className="italic leading-6">tolérence</span>
-                    <span className="text-md md:text-lg font-bold  leading-none">
-                      {getFrostResistanceDisplay(veg.cold_resistance)}
-                    </span>
-                  </div>
-                </Card>
               </div>
-              <div className="flex justify-around">
-                <Card className="p-2 w-32 text-center gap-2 text-sm flex flex-col justify-between items-center md:w-34">
+              <div className="flex justify-around w-full">
+                <Card className="p-2 w-28 text-center gap-2 text-sm flex flex-col justify-between items-center md:w-34">
                   <span>Semis intérieur</span>
                   <img src={indoorSowingIcon} alt="" className="size-10" />
                   <div className="flex flex-col">
@@ -167,7 +157,7 @@ const Recommandations = () => {
                     </span>
                   </div>
                 </Card>
-                <Card className="p-2 w-32  text-center text-sm flex flex-col justify-between items-center md:w-34">
+                <Card className="p-2 w-28  text-center text-sm flex flex-col justify-between items-center md:w-34">
                   <span>Semis extérieur</span>
                   <img src={outdoorSowing} alt="" className="size-10" />
                   <div className="flex flex-col">
@@ -177,7 +167,7 @@ const Recommandations = () => {
                     </span>
                   </div>
                 </Card>
-                <Card className="p-2 w-32  text-center text-sm flex flex-col justify-between items-center md:w-34">
+                <Card className="p-2 w-28  text-center text-sm flex flex-col justify-between items-center md:w-34">
                   <span className="w-12">Dernier semis</span>
                   <img src={stopSowingIcon} alt="" className="size-10" />
                   <div className="flex flex-col">

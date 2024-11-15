@@ -37,9 +37,10 @@ export const deleteAreaApi = async (id: string) => {
   }
 };
 
-export const updateAreaApi = async (id: string, data) => {
+export const updateAreaApi = async (id: string, data, vegetables) => {
   try {
     const response = await axiosInstance.patch(backendRoutes.areas + id + "/", data);
+    response.data.vegetables = vegetables
     return response.data
   } catch (error) {
     console.error(error);

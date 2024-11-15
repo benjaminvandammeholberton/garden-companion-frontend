@@ -55,10 +55,10 @@ export const AreasProvider: React.FC<{ children: ReactNode }> = ({
     setAreas((prevAreas) => prevAreas.filter((area) => area.uuid !== id));
   };
 
-  const updateArea = async (id: string, data: AreaInterface) => {
+  const updateArea = async (id: string, data: AreaInterface, vegetables) => {
     try {
       setIsLoading(true);
-      const updated_area = await updateAreaApi(id, data)
+      const updated_area = await updateAreaApi(id, data, vegetables)
       setAreas((prevAreas) =>
         prevAreas.map((area) => (area.uuid === id ? updated_area : area))
       );

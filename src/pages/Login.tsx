@@ -28,6 +28,7 @@ import {
 import { Input } from "@/components/ui/input";
 import BarLoader from "react-spinners/BarLoader";
 import { Loader2 } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 interface LoginProps {
   toggleAuth?: () => void;
@@ -36,6 +37,7 @@ interface LoginProps {
 const Login: React.FC<LoginProps> = ({ toggleAuth }) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { toast } = useToast();
 
   const formSchema = z.object({
     email: z.string().email({
@@ -87,6 +89,18 @@ const Login: React.FC<LoginProps> = ({ toggleAuth }) => {
       }
     } catch (err) {
       console.error("Login failed", err);
+      if (err.status ===  401) {
+        toast({
+          title: "Connexion refusée ❌",
+          description: "L'email ou le mot de passe est incorrect. Veuillez réessayer.",
+        });
+      } else {
+        toast({
+          title: "Un problème est survenu ❌",
+          description: "Veuillez réessayer ultérieurement.",
+        });
+      }
+
     } finally {
       setIsLoading(false);
     }

@@ -27,7 +27,7 @@ const AreaFormModify = ({ area, onClose, setArea, onModify }) => {
   if (!areasContext) {
     throw new Error("AreasContext must be used within an AreasProvider");
   }
-  const { deleteArea, updateArea } = areasContext;
+  const { deleteArea, updateArea, setAreas } = areasContext;
   const [formData, setFormData] = useState<FormDataInterface>({
     name: area.name,
     environment: area.environment,
@@ -51,13 +51,23 @@ const AreaFormModify = ({ area, onClose, setArea, onModify }) => {
       size: formData.size,
       environment: formData.environment,
     };
-    await updateArea(area.uuid, updatedArea);
+    await updateArea(area.uuid, updatedArea, area.vegetables);
+
     setArea((prev) => ({
       ...prev,
-      name: updatedArea.name,
-      size: updatedArea.size,
-      environment: updatedArea.environment,
+      ...updatedArea,
     }));
+
+    setAreas((prev) =>
+      prev.map((area_context) => {
+        return (
+          area_context.uuid === area.uuid
+          ? { ...area_context, ...updatedArea } // Merge updated values
+          : area_context
+        )
+      }
+      )
+    );
     onModify(false);
     toast({
       title: "Zone de culture modifiée avec succès 👍",

@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider, useNavigate } from "react-router-dom";
 import { ReactNode, useEffect, useState } from "react";
-import Loader from "react-spinners/PacmanLoader";
+import Loader from "react-spinners/ClipLoader";
 
 import "./index.css";
 
@@ -18,7 +18,7 @@ import Layout from "./pages/Layout";
 import Auth from "./pages/Auth";
 // import MySpace from "./pages/MySpace";
 import { Toaster } from "@/components/ui/toaster";
-import { ThemeProvider } from "./contexts/theme-provider";
+import { ThemeProvider, useTheme } from "./contexts/theme-provider";
 import { getToken } from "./utils/utils";
 import { verifyAccessToken } from "./api/api-services/auth";
 import ActivateAccount from "./pages/ActivateAccount";
@@ -31,6 +31,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const checkAuthentication = async () => {
@@ -41,7 +42,10 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
       }
       const isValid = await verifyAccessToken(token);
       setIsAuthenticated(isValid);
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
+      
 
       if (!isValid) {
         navigate("/");
@@ -53,12 +57,15 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
 
   if (loading) {
     return (
+      <div className="">
       <Loader
         loading={loading}
         size={30}
         aria-label="Loading Spinner"
         data-testid="loader"
+        color={theme === "dark" ? "white" : "slate-900"}
       />
+      </div>
     );
   }
 
