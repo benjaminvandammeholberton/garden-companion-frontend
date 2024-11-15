@@ -140,7 +140,7 @@ const AreaModal: React.FC<AreaModalProps> = ({ isOpen, onClose, area }) => {
             </li>
           </ul>
         </div>
-        <div className="w-full h-full overflow-auto px-5 mr-10 scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-slate-400 scrollbar-track-gray-100 dark:scrollbar-thumb-gray-100 dark:scrollbar-track-slate-900">
+        <div className="w-full h-full overflow-auto mr-10 scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-slate-400 scrollbar-track-gray-100 dark:scrollbar-thumb-gray-100 dark:scrollbar-track-slate-900">
           {diaryOpen ? <Diary area={area} /> : <TableProduction area={area} />}
         </div>
       </Card>

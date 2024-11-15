@@ -208,7 +208,7 @@ const Header = () => {
   };
   return (
     <div className="w-full fixed top-0 z-50 border-b">
-      <div className=" bg-white dark:bg-slate-800 opacity-95 flex items-center justify-between w-full border-b px-10 py-2">
+      <div className=" bg-white dark:bg-slate-800 flex items-center justify-between w-full border-b px-10 py-2">
         <div className="flex flex-col items-center">
           {/* <h1 className="text-xl lg:text-3xl font-thin ">
             Garden Companion <span className="text-sm lg:text-xl ">Beta</span>

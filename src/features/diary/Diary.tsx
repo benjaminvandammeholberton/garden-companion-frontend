@@ -109,8 +109,8 @@ const DiaryItemDirectSowing = ({ action }) => {
   return (
     <>
       <div className="flex gap-2 lg:gap-5">
-        <img className="w-12 h-12" src={directSowingIcon} alt="" />
-        <img className="w-12 h-12" src={vegetableAsset?.assets} alt="" />
+        <img className="w-8 h-8" src={directSowingIcon} alt="" />
+        <img className="w-8 h-8" src={vegetableAsset?.assets} alt="" />
       </div>
       <div className="cursor-pointer">
         {action.vegetable.name} ({action.vegetable.variety}) :{" "}
@@ -144,8 +144,8 @@ const DiaryItemPlanting = ({ action }) => {
   return (
     <>
       <div className="flex gap-2 lg:gap-5">
-        <img className="w-12 h-12" src={plantingIcon} alt="" />
-        <img className="w-12 h-12" src={vegetableAsset?.assets} alt="" />
+        <img className="w-8 h-8" src={plantingIcon} alt="" />
+        <img className="w-8 h-8" src={vegetableAsset?.assets} alt="" />
       </div>
       <div className="cursor-pointer">
         {action.vegetable.name} ({action.vegetable.variety}) :{" "}
@@ -182,9 +182,9 @@ const DiaryItemHarvesting = ({ action }) => {
   return (
     <>
       <div className="flex gap-2 lg:gap-5">
-        <img className="w-12 h-12" src={harvestIcon} alt="" />
+        <img className="w-8 h-8" src={harvestIcon} alt="" />
         {vegetableAsset && (
-          <img className="w-12 h-12" src={vegetableAsset?.assets} alt="" />
+          <img className="w-8 h-8" src={vegetableAsset?.assets} alt="" />
         )}
       </div>
       <div className="cursor-pointer">
@@ -224,9 +224,9 @@ const DiaryItemWatering = ({ action }) => {
   return (
     <>
       <div className="flex gap-2 lg:gap-5">
-        <img className="w-12 h-12" src={waterIcon} alt="" />
+        <img className="w-8 h-8" src={waterIcon} alt="" />
         {vegetableAsset && (
-          <img className="w-12 h-12" src={vegetableAsset?.assets} alt="" />
+          <img className="w-8 h-8" src={vegetableAsset?.assets} alt="" />
         )}
       </div>
       <div className="cursor-pointer">
@@ -266,9 +266,9 @@ const DiaryItemWeeding = ({ action }) => {
   return (
     <>
       <div className="flex gap-2 lg:gap-5">
-        <img className="w-12 h-12" src={weedIcon} alt="" />
+        <img className="w-8 h-8" src={weedIcon} alt="" />
         {vegetableAsset && (
-          <img className="w-12 h-12" src={vegetableAsset?.assets} alt="" />
+          <img className="w-8 h-8" src={vegetableAsset?.assets} alt="" />
         )}
       </div>
       <div className="cursor-pointer">
@@ -306,9 +306,9 @@ const DiaryItemFertilizing = ({ action }) => {
   return (
     <>
       <div className="flex gap-2 lg:gap-5">
-        <img className="w-12 h-12" src={fertilizeIcon} alt="" />
+        <img className="w-8 h-8" src={fertilizeIcon} alt="" />
         {vegetableAsset && (
-          <img className="w-12 h-12" src={vegetableAsset?.assets} alt="" />
+          <img className="w-8 h-8" src={vegetableAsset?.assets} alt="" />
         )}
       </div>
       <div className="cursor-pointer">
@@ -345,8 +345,8 @@ const DiaryItemRemoving = ({ action }) => {
   return (
     <>
       <div className="flex gap-2 lg:gap-5">
-        <img className="w-12 h-12" src={removeIcon} alt="" />
-        <img className="w-12 h-12" src={vegetableAsset?.assets} alt="" />
+        <img className="w-8 h-8" src={removeIcon} alt="" />
+        <img className="w-8 h-8" src={vegetableAsset?.assets} alt="" />
       </div>
       <div className="cursor-pointer">
         {action.vegetable.name} ({action.vegetable.variety})
@@ -382,9 +382,9 @@ const DiaryItemObservation = ({ action }) => {
   return (
     <>
       <div className="flex gap-2 lg:gap-5">
-        <img className="w-12 h-12" src={cameraIcon} alt="" />
+        <img className="w-8 h-8" src={cameraIcon} alt="" />
         {vegetableAsset && (
-          <img className="w-12 h-12" src={vegetableAsset?.assets} alt="" />
+          <img className="w-8 h-8" src={vegetableAsset?.assets} alt="" />
         )}
       </div>
       <div className="cursor-pointer">
@@ -422,9 +422,9 @@ const DiaryItemTreating = ({ action }) => {
   return (
     <>
       <div className="flex gap-2 lg:gap-5">
-        <img className="w-12 h-12" src={treatIcon} alt="" />
+        <img className="w-8 h-8" src={treatIcon} alt="" />
         {vegetableAsset && (
-          <img className="w-12 h-12" src={vegetableAsset?.assets} alt="" />
+          <img className="w-8 h-8" src={vegetableAsset?.assets} alt="" />
         )}
       </div>
       <div className="cursor-pointer">
@@ -454,8 +454,8 @@ const DiaryItemCreating = ({ action }) => {
   return (
     <>
       <div className="flex gap-2 lg:gap-5">
-        <img className="w-12 h-12" src={directSowingIcon} alt="" />
-        <img className="w-12 h-12" src={carrotIcon} alt="" />
+        <img className="w-8 h-8" src={directSowingIcon} alt="" />
+        <img className="w-8 h-8" src={carrotIcon} alt="" />
       </div>
       <div className="cursor-pointer">4 rangées de Carotte - Nantaise </div>
       <p className="text-justify">
@@ -551,7 +551,7 @@ const Diary: React.FC<DiarayProps> = ({ area }) => {
   ];
 
   return (
-    <div className="w-full flex flex-col gap-5 p-4 items-center">
+    <div className="w-full flex flex-col gap-5 px-1 py-4 items-center">
       <Popover>
         <PopoverTrigger asChild className="gap-2">
           <Button>
@@ -561,7 +561,7 @@ const Diary: React.FC<DiarayProps> = ({ area }) => {
         </PopoverTrigger>
         <PopoverContent
           asChild
-          className="w-80 flex flex-col items-center gap-2"
+          className="w-80 flex flex-col items-center gap-2 dark:bg-slate-900"
         >
           <div>
             <span className="p-1 hover:underline cursor-pointer" onClick={() => setActionTypes(actionType)}>Réinitialiser</span>
