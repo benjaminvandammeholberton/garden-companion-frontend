@@ -124,7 +124,7 @@ const DiaryItemDirectSowing = ({ action }) => {
       )}
       {file_path && (
         <img
-          className="w-3/4 max-h-72 object-cover rounded-sm"
+          className="w-auto max-h-96 object-cover rounded-sm"
           src={file_path}
           alt=""
         />
@@ -159,7 +159,7 @@ const DiaryItemPlanting = ({ action }) => {
       )}
       {file_path && (
         <img
-          className="w-3/4 max-h-72 object-cover rounded-sm"
+          className="w-auto max-h-96 object-cover rounded-sm"
           src={file_path}
           alt=""
         />
@@ -176,8 +176,8 @@ const DiaryItemHarvesting = ({ action }) => {
     );
   }
   let file_path;
-  if (action.photo) {
-    file_path = BASEURL + action.photo;
+  if (action.photos) {
+    file_path = action.photos[0]?.photo;
   }
   return (
     <>
@@ -200,7 +200,7 @@ const DiaryItemHarvesting = ({ action }) => {
       )}
       {file_path && (
         <img
-          className="w-3/4 max-h-72 object-contain rounded-sm"
+          className="w-auto max-h-96 object-contain rounded-sm"
           src={file_path}
           alt=""
         />
@@ -242,7 +242,7 @@ const DiaryItemWatering = ({ action }) => {
       )}
       {file_path && (
         <img
-          className="w-3/4 max-h-72 object-cover rounded-sm"
+          className="w-auto max-h-96 object-cover rounded-sm"
           src={file_path}
           alt=""
         />
@@ -259,8 +259,8 @@ const DiaryItemWeeding = ({ action }) => {
     );
   }
   let file_path;
-  if (action.photo) {
-    file_path = BASEURL + action.photo;
+  if (action.photos) {
+    file_path = action.photos[0]?.photo;
   }
   return (
     <>
@@ -282,7 +282,7 @@ const DiaryItemWeeding = ({ action }) => {
       )}
       {file_path && (
         <img
-          className="w-3/4 max-h-72 object-contain rounded-sm"
+          className="w-auto max-h-96 object-contain rounded-sm"
           src={file_path}
           alt=""
         />
@@ -324,7 +324,7 @@ const DiaryItemFertilizing = ({ action }) => {
       )}
       {file_path && (
         <img
-          className="w-3/4 max-h-72 object-contain rounded-sm"
+          className="w-auto max-h-96 object-contain rounded-sm"
           src={file_path}
           alt=""
         />
@@ -338,8 +338,8 @@ const DiaryItemRemoving = ({ action }) => {
     (asset) => asset.name.fr === action.vegetable.name.toLowerCase()
   );
   let file_path;
-  if (action.photo) {
-    file_path = BASEURL + action.photo;
+  if (action.photos) {
+    file_path = action.photos[0]?.photo;
   }
   return (
     <>
@@ -358,7 +358,7 @@ const DiaryItemRemoving = ({ action }) => {
       )}
       {file_path && (
         <img
-          className="w-3/4 max-h-72 object-cover rounded-sm"
+          className="w-auto max-h-96 object-cover rounded-sm"
           src={file_path}
           alt=""
         />
@@ -440,7 +440,7 @@ const DiaryItemTreating = ({ action }) => {
       )}
       {file_path && (
         <img
-          className="w-3/4 max-h-72 object-contain rounded-sm"
+          className="w-auto max-h-96 object-contain rounded-sm"
           src={file_path}
           alt=""
         />

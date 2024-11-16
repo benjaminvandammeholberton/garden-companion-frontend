@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
+import { resizeFile } from "@/utils/resizeFile";
 
 // assets
 import wateringIcon from "../../../assets/actions-icons/watering.png";
@@ -93,7 +94,8 @@ const WateringForm: React.FC<WateringFormInterface> = ({ onClose }) => {
       formData.append("data", jsonData)
 
       if (values.file && values.file.length > 0) {
-        formData.append("photo", values.file[0]);
+        const resizedImage = await resizeFile(values.file[0]);
+        formData.append("photo", resizedImage);  
       }
       const response = await axiosInstanceFile.post(backendRoutes.operations + "watering/", formData);
       const operation = response.data

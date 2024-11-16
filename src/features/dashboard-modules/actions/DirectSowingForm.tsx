@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { z } from "zod";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
+import { resizeFile } from "@/utils/resizeFile";
 
 import backendRoutes from "@/api/apiRoutes";
 // assets
@@ -117,7 +118,8 @@ const DirectSowingForm: React.FC<DirectSowingFormInterface> = ({onClose}) => {
       formData.append("data", jsonData)
 
       if (values.file && values.file.length > 0) {
-        formData.append("photo", values.file[0]);
+        const resizedImage = await resizeFile(values.file[0]);
+        formData.append("photo", resizedImage);      
       }
       const response = await axiosInstanceFile.post(backendRoutes.operations + "sowing/", formData);
       const operation = response.data

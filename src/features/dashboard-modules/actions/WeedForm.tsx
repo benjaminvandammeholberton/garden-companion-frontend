@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
+import { resizeFile } from "@/utils/resizeFile";
 
 // assets
 import weedingIcon from "../../../assets/actions-icons/weed.png";
@@ -82,16 +83,16 @@ const WeedForm: React.FC<WeedFormInterface> = ({ onClose }) => {
       description: rest.note,
     };
 
-    if (file && file.length > 0) {
-      const formData = new FormData();
-      formData.append("file", file[0]);
-      try {
-        const response = await axiosInstanceFile.post("/upload", formData);
-        data["photo"] = response.data;
-      } catch (error) {
-        console.error("Error submitting the file:", error);
-      }
-    }
+    // if (file && file.length > 0) {
+    //   const formData = new FormData();
+    //   formData.append("file", file[0]);
+    //   try {
+    //     const response = await axiosInstanceFile.post("/upload", formData);
+    //     data["photo"] = response.data;
+    //   } catch (error) {
+    //     console.error("Error submitting the file:", error);
+    //   }
+    // }
 
     try  {
       setIsLoading(true)
@@ -100,7 +101,10 @@ const WeedForm: React.FC<WeedFormInterface> = ({ onClose }) => {
       formData.append("data", jsonData)
 
       if (values.file && values.file.length > 0) {
-        formData.append("photo", values.file[0]);
+        if (values.file && values.file.length > 0) {
+          const resizedImage = await resizeFile(values.file[0]);
+          formData.append("photo", resizedImage);      
+        }
       }
       const response = await axiosInstanceFile.post(backendRoutes.operations + "weeding/", formData);
       const operation = response.data

@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
+import { resizeFile } from "@/utils/resizeFile";
 
 // assets
 import observationIcon from "../../../assets/actions-icons/camera.png";
@@ -12,7 +13,6 @@ import InputUserAreas from "./components/InputAreas";
 import { useToast } from "@/components/ui/use-toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Resizer from "react-image-file-resizer";
 
 // ui
 import {
@@ -71,21 +71,6 @@ const ObservationForm: React.FC<ObservationFormInterface> = ({ onClose }) => {
     },
   });
 
-  const resizeFile = (file) => {
-    return new Promise((resolve) => {
-      Resizer.imageFileResizer(
-        file, // The file to resize
-        800,  // Max width
-        800,  // Max height
-        "JPEG", // Output format
-        80,   // Quality (between 0 and 100)
-        0,    // Rotation (no rotation)
-        (uri) => resolve(uri), // Callback to return the resized file
-        "blob", // Output as Blob
-      );
-    });
-  };
-
   const fileRef = form.register("file");
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -107,7 +92,6 @@ const ObservationForm: React.FC<ObservationFormInterface> = ({ onClose }) => {
         const resizedImage = await resizeFile(values.file[0]);
         formData.append("photo", resizedImage);
       }
-      console.log(formData);
       const response = await axiosInstanceFile.post(
         backendRoutes.operations + "observing/",
         formData
