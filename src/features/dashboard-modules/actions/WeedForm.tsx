@@ -41,6 +41,7 @@ import axiosInstance, { axiosInstanceFile } from "@/api/axios";
 import FieldVegetablesInArea from "./components/FieldVegetablesInArea";
 import { useState } from "react";
 import ActionButton from "@/components/ActionButton";
+import backendRoutes from "@/api/apiRoutes";
 
 interface WeedFormInterface {
   onClose: () => void;
@@ -77,8 +78,8 @@ const WeedForm: React.FC<WeedFormInterface> = ({ onClose }) => {
 
     const data = {
       ...rest,
-      date: rest.date.toISOString().slice(0, 10),
-      type: "Désherber",
+      date: rest.date.toISOString().split("T")[0],
+      description: rest.note,
     };
 
     if (file && file.length > 0) {
@@ -92,20 +93,50 @@ const WeedForm: React.FC<WeedFormInterface> = ({ onClose }) => {
       }
     }
 
-    try {
+    try  {
       setIsLoading(true)
-      await axiosInstance.post("/api/v1/action/", data);
+      const formData = new FormData();
+      const jsonData = JSON.stringify(data)
+      formData.append("data", jsonData)
+
+      if (values.file && values.file.length > 0) {
+        formData.append("photo", values.file[0]);
+      }
+      const response = await axiosInstanceFile.post(backendRoutes.operations + "weeding/", formData);
+      const operation = response.data
       toast({
         title: "Désherbage enregistré 👍",
         description: ``,
       });
+
     } catch (error) {
-      console.error(error);
+      console.error("Error created the fertilize operation:", error);
+      // Handle this error better
+      toast({
+        title: "La fertilisation n'a pas pu être enregistré 😵",
+        description:
+          "Vérifier le format de l'image",
+      });
     } finally {
         setIsLoading(false)
         onClose();
     }
-  };
+  }
+
+  //   try {
+  //     setIsLoading(true)
+  //     await axiosInstance.post("/api/v1/action/", data);
+  //     toast({
+  //       title: "Désherbage enregistré 👍",
+  //       description: ``,
+  //     });
+  //   } catch (error) {
+  //     console.error(error);
+  //   } finally {
+  //       setIsLoading(false)
+  //       onClose();
+  //   }
+  // };
 
   return (
     <div className="flex flex-col gap-10 w-4/5">

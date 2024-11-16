@@ -102,7 +102,7 @@ const Register: React.FC<RegisterProps> = ({ toggleAuth }) => {
           },
         }
       );
-      if (response.status === 200) {
+      if (response.status === 201) {
         form.reset();
         toast({
           title: "Votre compte a été créé 👍",

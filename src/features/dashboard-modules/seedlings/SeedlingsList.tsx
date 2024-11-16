@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 // assets
 import vegetableIconsMaps from "@/maps/vegetableMaps";
 import unknowVegetable from "../../../assets/vegetables-icons/unknown-vegetable.png";
+import plantingIcon from "../../../assets/actions-icons/planting.png";
 
 // ui
 import {
@@ -34,6 +35,15 @@ import { Button } from "@/components/ui/button";
 import PlantManagerModal from "@/modal/PlantManagerModal";
 import { useToast } from "@/components/ui/use-toast";
 import { Input } from "@/components/ui/input";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import FormHeader from "../actions/components/FormHeader";
+import PlantingForm from "../actions/PlantingForm";
 
 interface SeedlingsListProps {
   sortedBy: string;
@@ -45,13 +55,18 @@ const SeedlingsList: React.FC<SeedlingsListProps> = ({ sortedBy }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [seedlingToPlant, setSeedlingToPlant] = useState({});
   const [seedlingInputQuantity, setSeedlingInputQuantity] = useState<number>(0);
+  const [isPlantingModalOpen, setIsPlantingModalOpen] = useState(false)
 
   const { toast } = useToast();
 
-  const openPlantingModal = (seedling: SeedlingInterface) => {
-    setSeedlingToPlant(seedling);
-    setIsModalOpen(true);
-  };
+  // const openPlantingModal = (seedling: SeedlingInterface) => {
+  //   setSeedlingToPlant(seedling);
+  //   // setIsModalOpen(true);
+  // };
+
+  const closePlantingModal = () => {
+    setIsPlantingModalOpen(false)
+  }
 
   const handleChangeQuantity = async (
     seedling: SeedlingInterface,
@@ -159,9 +174,37 @@ const SeedlingsList: React.FC<SeedlingsListProps> = ({ sortedBy }) => {
                   </PopoverTrigger>
                   <PopoverContent className="bg-white dark:bg-slate-900 border rounded-lg pt-2 pb-5 px-5 w-96">
                     <div className="flex justify-between items-end">
-                      <Button onClick={() => openPlantingModal(vegetable)}>
-                        Planter
-                      </Button>
+                      <Dialog
+                        modal
+                        open={isPlantingModalOpen}
+                        onOpenChange={() => setIsPlantingModalOpen(true)}
+                      >
+                        <DialogTrigger asChild>
+                          <Button>
+                            Planter
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent
+                          aria-describedby={undefined}
+                          className="h-dvh md:h-[90vh] w-full md:w-auto rounded-none md:rounded-lg overflow-y-auto overflow-x-hidden flex flex-col items-center gap-10  dark:bg-slate-900"
+                          onOpenAutoFocus={(event) => event.preventDefault()}
+                        >
+                          <DialogHeader>
+                            <DialogTitle>
+                              <FormHeader
+                                icon={plantingIcon}
+                                name={"Plantation"}
+                              />
+                            </DialogTitle>
+                          </DialogHeader>
+                          <div className="w-96 flex justify-center">
+                            <PlantingForm
+                              defaultValues={{ planting: vegetable }}
+                              onClose={closePlantingModal}
+                            />
+                          </div>
+                        </DialogContent>
+                      </Dialog>
                       <Button
                         onClick={() => handleDelete(vegetable)}
                         variant={"destructive"}
@@ -203,12 +246,12 @@ const SeedlingsList: React.FC<SeedlingsListProps> = ({ sortedBy }) => {
           );
         })}
       </ul>
-      <PlantManagerModal
+      {/* <PlantManagerModal
         isOpen={isModalOpen}
         onClose={closeModal}
         actionName={"planting"}
         defaultValues={{ planting: seedlingToPlant }}
-      />
+      /> */}
     </div>
   );
 };

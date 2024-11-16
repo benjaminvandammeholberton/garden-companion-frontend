@@ -188,15 +188,14 @@ const DiaryItemHarvesting = ({ action }) => {
         )}
       </div>
       <div className="cursor-pointer">
-        {action.harvest_quantity} {action.harvest_unit || "kg"}{" "}
-        {action.fertilizer_unit || ""}{" "}
+        {action.quantity} {action.quantity_unit || "kg"}{" "}
         {action.vegetable &&
           `de : ${action.vegetable.name} (${action.vegetable?.variety})`}
       </div>
-      {action.note && (
+      {action.description && (
         <p className="text-justify">
           <span className="font-semibold">Notes : </span>
-          {action.note}
+          {action.description}
         </p>
       )}
       {file_path && (
@@ -275,10 +274,10 @@ const DiaryItemWeeding = ({ action }) => {
         {action.vegetable &&
           `${action.vegetable.name} (${action.vegetable?.variety})`}
       </div>
-      {action.note && (
+      {action.description && (
         <p className="text-justify">
           <span className="font-semibold">Notes : </span>
-          {action.note}
+          {action.description}
         </p>
       )}
       {file_path && (
@@ -351,10 +350,10 @@ const DiaryItemRemoving = ({ action }) => {
       <div className="cursor-pointer">
         {action.vegetable.name} ({action.vegetable.variety})
       </div>
-      {action.note && (
+      {action.description && (
         <p className="text-justify">
           <span className="font-semibold">Notes : </span>
-          {action.note}
+          {action.description}
         </p>
       )}
       {file_path && (
@@ -460,7 +459,7 @@ const DiaryItemCreating = ({ action }) => {
       <div className="cursor-pointer">4 rangées de Carotte - Nantaise </div>
       <p className="text-justify">
         <span className="font-semibold">Notes : </span>
-        {action.note}
+        {action.description}
       </p>
       <img className="w-3/4 rounded-sm" src={placeHolderImage} alt="" />
     </>
@@ -551,9 +550,9 @@ const Diary: React.FC<DiarayProps> = ({ area }) => {
   ];
 
   return (
-    <div className="w-full flex flex-col gap-5 px-1 py-4 items-center">
-      <Popover>
-        <PopoverTrigger asChild className="gap-2">
+    <div className="w-full flex flex-col gap-5 px-1  pb-4 items-center">
+      {actions.length > 0 ? (<Popover>
+        <PopoverTrigger asChild className="gap-2 ml-auto mt-4 ">
           <Button>
             <Filter strokeWidth={1.5} />
             Filter
@@ -579,7 +578,8 @@ const Diary: React.FC<DiarayProps> = ({ area }) => {
           </div>
           </div>
         </PopoverContent>
-      </Popover>
+      </Popover>):(<div>Aucune donnée à afficher</div>)}
+      
       {actions
         .filter(
           (action) =>

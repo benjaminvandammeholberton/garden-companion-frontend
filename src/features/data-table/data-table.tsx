@@ -64,11 +64,11 @@ export function DataTable<TData, TValue>({
     variety: "variété",
     quantity: "quantité",
     quantity_unit: "unité",
-    sowing_date: "date de semis",
-    planting_date: "date de plantation",
-    quantity_harvested: "quantité récoltée",
-    harvest_unit: "unité de récolte",
-    remove_date: "date de fin de culture",
+    sowing_date: "semis",
+    planting_date: "plantation",
+    quantity_harvested: "récolté",
+    harvest_unit: "unité",
+    remove_date: "fin de culture",
   };
 
   return (
@@ -166,7 +166,7 @@ export function DataTable<TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className="h-24"
                 >
                   Aucun résultat.
                 </TableCell>

@@ -5,10 +5,12 @@ import { DataTable } from "@/features/data-table/data-table";
 const TableProduction = ({ area }) => {
   const data = area.vegetables
   return (
-    data && 
+    data.length > 0 ? 
     (<div>
       <DataTable columns={columns} data={data} />
-    </div>)
+    </div>) : (
+      <div className="text-center">Aucune donnée à afficher</div>
+    )
   );
 };
 
