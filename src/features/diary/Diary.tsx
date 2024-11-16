@@ -398,7 +398,7 @@ const DiaryItemObservation = ({ action }) => {
       )}
       {file_path && (
         <img
-          className="w-3/4 max-h-72 object-contain rounded-sm"
+          className="w-auto max-h-96 object-cover rounded-sm"
           src={file_path}
           alt=""
         />

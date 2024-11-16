@@ -71,18 +71,17 @@ const ObservationForm: React.FC<ObservationFormInterface> = ({ onClose }) => {
     },
   });
 
-  // Resize the image before upload
   const resizeFile = (file) => {
     return new Promise((resolve) => {
       Resizer.imageFileResizer(
-        file,
-        800, // Max width
-        800, // Max height
+        file, // The file to resize
+        800,  // Max width
+        800,  // Max height
         "JPEG", // Output format
-        80, // Quality
-        0, // Rotation
-        (uri) => resolve(uri), // Callback function
-        "blob" // Output as Blob
+        80,   // Quality (between 0 and 100)
+        0,    // Rotation (no rotation)
+        (uri) => resolve(uri), // Callback to return the resized file
+        "blob", // Output as Blob
       );
     });
   };
@@ -128,7 +127,7 @@ const ObservationForm: React.FC<ObservationFormInterface> = ({ onClose }) => {
       });
     } finally {
       setIsLoading(false);
-      // onClose();
+      onClose();
     }
   };
 
