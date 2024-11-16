@@ -12,6 +12,7 @@ import InputUserAreas from "./components/InputAreas";
 import { useToast } from "@/components/ui/use-toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Resizer from "react-image-file-resizer";
 
 // ui
 import {
@@ -36,7 +37,7 @@ import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 
 import { Textarea } from "@/components/ui/textarea";
-import axiosInstance, { axiosInstanceFile } from "@/api/axios";
+import { axiosInstanceFile } from "@/api/axios";
 
 import FieldVegetablesInArea from "./components/FieldVegetablesInArea";
 import { useState } from "react";
@@ -50,8 +51,8 @@ interface ObservationFormInterface {
 const ObservationForm: React.FC<ObservationFormInterface> = ({ onClose }) => {
   const [selectedArea, setSelectedArea] = useState("");
   const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false)
-  
+  const [isLoading, setIsLoading] = useState(false);
+
   const formSchema = z.object({
     vegetable: z.string().max(50).nullable().optional(),
     area: z.string().min(1),
@@ -70,6 +71,22 @@ const ObservationForm: React.FC<ObservationFormInterface> = ({ onClose }) => {
     },
   });
 
+  // Resize the image before upload
+  const resizeFile = (file) => {
+    return new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        800, // Max width
+        800, // Max height
+        "JPEG", // Output format
+        80, // Quality
+        0, // Rotation
+        (uri) => resolve(uri), // Callback function
+        "blob" // Output as Blob
+      );
+    });
+  };
+
   const fileRef = form.register("file");
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -81,33 +98,37 @@ const ObservationForm: React.FC<ObservationFormInterface> = ({ onClose }) => {
       date: rest.date.toISOString().split("T")[0],
     };
 
-    try  {
-      setIsLoading(true)
+    try {
+      setIsLoading(true);
       const formData = new FormData();
-      const jsonData = JSON.stringify(data)
-      formData.append("data", jsonData)
+      const jsonData = JSON.stringify(data);
+      formData.append("data", jsonData);
 
       if (values.file && values.file.length > 0) {
-        formData.append("photo", values.file[0]);
+        const resizedImage = await resizeFile(values.file[0]);
+        formData.append("photo", resizedImage);
       }
-      const response = await axiosInstanceFile.post(backendRoutes.operations + "observing/", formData);
-      const operation = response.data
+      console.log(formData);
+      const response = await axiosInstanceFile.post(
+        backendRoutes.operations + "observing/",
+        formData
+      );
+      const operation = response.data;
       toast({
         title: "Observation enregistrée 👍",
         description: ``,
       });
-
     } catch (error) {
       console.error("Error created the observation:", error);
       // Handle this error better
       toast({
         title: "L'observation n'a pas pu être enregistré 😵",
         description:
-          "Vérifier le format de l'image",
+          "Il semble y avoir un problème avec l'image ou la connexion. Réessayer sans image, si le problème persiste, contactez-vous",
       });
     } finally {
-      setIsLoading(false)
-        onClose();
+      setIsLoading(false);
+      // onClose();
     }
   };
 
@@ -207,7 +228,7 @@ const ObservationForm: React.FC<ObservationFormInterface> = ({ onClose }) => {
               );
             }}
           />
-          <ActionButton isLoading={isLoading}/>
+          <ActionButton isLoading={isLoading} />
         </form>
       </Form>
     </div>
