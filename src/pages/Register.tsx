@@ -42,7 +42,7 @@ const Register: React.FC<RegisterProps> = ({ toggleAuth }) => {
 
   const formSchema = z
     .object({
-      name: z.string().min(4, {
+      nickname: z.string().min(4, {
         message:
           "Votre nom d'utilisateur doit comporter au minimum 4 caractères",
       }),
@@ -72,7 +72,7 @@ const Register: React.FC<RegisterProps> = ({ toggleAuth }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      nickname: "",
       email: "",
       password: "",
       passwordConfirm: "",
@@ -83,7 +83,7 @@ const Register: React.FC<RegisterProps> = ({ toggleAuth }) => {
     setIsLoading(true);
     try {
       const userData = {
-        username: values.name,
+        username: values.nickname,
         email: values.email.toLowerCase(),
         password: values.password,
       };
@@ -131,7 +131,7 @@ const Register: React.FC<RegisterProps> = ({ toggleAuth }) => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input type="email" {...field} />
+                    <Input type="email" autoComplete="email" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -139,7 +139,7 @@ const Register: React.FC<RegisterProps> = ({ toggleAuth }) => {
             />
             <FormField
               control={form.control}
-              name="name"
+              name="nickname"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Nom d'utiliisateur</FormLabel>
