@@ -7,7 +7,7 @@ import {
     DialogTitle,
   } from "@/components/ui/dialog";
 
-const MainModal = ({children}) => {
+const MainModal = ({}) => {
     return (
         <Dialog>
         <DialogContent className="sm:max-w-[425px]">

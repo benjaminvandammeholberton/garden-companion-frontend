@@ -154,7 +154,7 @@ const Login: React.FC<LoginProps> = ({ toggleAuth }) => {
         </Form>
       </CardContent>
       <CardFooter className="flex flex-col items-center">
-        <a href="#">Mot de passe oublié</a>
+        {/* <a href="#">Mot de passe oublié</a> */}
         <a className="cursor-pointer" onClick={toggleAuth}>
           Pas encore inscrit ?
         </a>

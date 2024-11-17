@@ -22,6 +22,7 @@ import {
 import { Input } from "../ui/input";
 import axiosInstance from "@/api/axios";
 import { Loader2 } from "lucide-react"
+import axios from "axios";
 
 const UpdatePassword = () => {
   const { toast } = useToast();
@@ -92,7 +93,7 @@ const UpdatePassword = () => {
         new_password: values.newPassword,
         re_new_passowrd: values.passwordConfirm
       };
-      const response = await axiosInstance.post(
+      await axiosInstance.post(
         "/auth/users/set_password/",
         data
       );
@@ -104,7 +105,7 @@ const UpdatePassword = () => {
       });
       setIsWrongPassword(false);
     } catch (error) {
-      if (error.response.status === 401) {
+      if (axios.isAxiosError(error) && error.response?.status === 401) {
         form.reset();
         setIsWrongPassword(true);
       } else {

@@ -125,7 +125,7 @@ const RemoveForm: React.FC<RemoveFormInterface> = ({ onClose }) => {
       });
 
       setAreas((prev) =>
-        prev.map((area) => {
+        prev.map((area:  AreaInterface) => {
           if (area.uuid !== updatedArea.uuid) {
             return area;
           } else {
