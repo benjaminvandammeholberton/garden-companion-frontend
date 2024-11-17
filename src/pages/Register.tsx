@@ -88,7 +88,7 @@ const Register: React.FC<RegisterProps> = ({ toggleAuth }) => {
     try {
       const userData = {
         username: values.username,
-        email: values.email,
+        email: values.email.toLowerCase(),
         password: values.password,
       };
       const response = await axios.post(

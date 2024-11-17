@@ -70,7 +70,7 @@ const Login: React.FC<LoginProps> = ({ toggleAuth }) => {
       const response = await axios.post(
         backendRoutes.login,
         {
-          email: values.email,
+          email: values.email.toLowerCase(),
           password: values.password
         },
         {
