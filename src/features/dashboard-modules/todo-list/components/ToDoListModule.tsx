@@ -1,8 +1,3 @@
-// assets
-import addIcon from "../../../../assets/common/add.png";
-import backIcon from "../../../../assets/common/back.png";
-import sortIcon from "../../../../assets/common/sort.png";
-
 // components
 import ToDoListFormAdd from "./ToDoListFormAdd";
 import ToDoListList from "./ToDoListList";

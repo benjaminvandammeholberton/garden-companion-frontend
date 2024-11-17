@@ -1,6 +1,6 @@
 // assets
 import distanceIcon from "@/assets/vegetable-info-icons/distance.png";
-import frostResistanceIcon from "@/assets/vegetable-info-icons/frost-resistance.png";
+// import frostResistanceIcon from "@/assets/vegetable-info-icons/frost-resistance.png";
 import germinationIcon from "@/assets/vegetable-info-icons/germination.png";
 import indoorSowingIcon from "@/assets/vegetable-info-icons/indoor-sowing.png";
 import wateringIcon from "@/assets/vegetable-info-icons/watering.png";
@@ -20,10 +20,11 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+// import { is } from "date-fns/locale";
 
 const Recommandations = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [listVegetables, setListVegetables] = useState([]);
+  const [listVegetables, setListVegetables] = useState<{ uuid: string; name: string; category: string; description: string; spacing_on_row: number; germination: number; water_needs: number; start_indoor: string; start_outdoor: string; end: string; }[]>([]);
 
   useEffect(() => {
     const fetchVegetables = async () => {
@@ -31,7 +32,7 @@ const Recommandations = () => {
         setIsLoading(true);
         const response = await axiosInstance.get("guide/");
         const vegetables = response.data;
-        vegetables.sort((a, b) => a.name.localeCompare(b.name));
+        vegetables.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
         setListVegetables(vegetables);
       } catch (error) {
         console.error(error);
@@ -42,7 +43,7 @@ const Recommandations = () => {
     fetchVegetables();
   }, []);
 
-  const getWateringDisplay = (wateringLevel) => {
+  const getWateringDisplay = (wateringLevel: number) => {
     switch (wateringLevel) {
       case 1:
         return "léger";
@@ -55,20 +56,20 @@ const Recommandations = () => {
     }
   };
 
-  const getFrostResistanceDisplay = (frostResistance) => {
-    switch (frostResistance) {
-      case 0:
-        return "< -2°";
-      case 1:
-        return "± -2°";
-      case 2:
-        return "> 0°";
-      default:
-        break;
-    }
-  };
+  // const getFrostResistanceDisplay = (frostResistance: number) => {
+  //   switch (frostResistance) {
+  //     case 0:
+  //       return "< -2°";
+  //     case 1:
+  //       return "± -2°";
+  //     case 2:
+  //       return "> 0°";
+  //     default:
+  //       break;
+  //   }
+  // };
 
-  const getDateDisplay = (dateString) => {
+  const getDateDisplay = (dateString: string) => {
     if (dateString) {
       const date = new Date(dateString);
       return date.toLocaleDateString("fr-FR", {
@@ -78,6 +79,8 @@ const Recommandations = () => {
     }
     return "N/A";
   };
+
+  isLoading && <div>Chargement...</div>;
 
   return (
     <div className="grid grid-cols-4 px-2 h-[280px] mt-[-5px] overflow-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-slate-400 scrollbar-track-gray-100 dark:scrollbar-thumb-gray-100 dark:scrollbar-track-slate-900">

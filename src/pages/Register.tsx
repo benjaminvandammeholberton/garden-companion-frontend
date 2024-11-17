@@ -28,7 +28,6 @@ import {
 } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
 import { useNavigate } from "react-router-dom";
-import BarLoader from "react-spinners/BarLoader";
 import { Loader2 } from "lucide-react";
 
 interface RegisterProps {

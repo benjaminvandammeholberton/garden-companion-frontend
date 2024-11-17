@@ -1,14 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { z } from "zod";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { resizeFile } from "@/utils/resizeFile";
 
 // assets
-import harvestIcon from "../../../assets/actions-icons/harvest.png";
+// import harvestIcon from "../../../assets/actions-icons/harvest.png";
 
 // components
-import FormHeader from "./components/FormHeader";
+// import FormHeader from "./components/FormHeader";
 import InputUserAreas from "./components/InputAreas";
 
 // contexts
@@ -40,9 +40,9 @@ import { CalendarIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
-import { AreaInterface } from "@/interfaces/interfaces";
+// import { AreaInterface } from "@/interfaces/interfaces";
 import { Textarea } from "@/components/ui/textarea";
-import axiosInstance, { axiosInstanceFile } from "@/api/axios";
+// import axiosInstance, { axiosInstanceFile } from "@/api/axios";
 
 import FieldVegetablesInArea from "./components/FieldVegetablesInArea";
 import backendRoutes from "@/api/apiRoutes";

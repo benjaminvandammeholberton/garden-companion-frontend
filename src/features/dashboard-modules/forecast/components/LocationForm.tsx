@@ -16,13 +16,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-const LocationForm = ({ setUserLocation }) => {
-  const [cities, setCities] = useState([]);
+interface LocationFormProps {
+  setUserLocation: (location: boolean) => void;
+}
+
+const LocationForm = ({ setUserLocation }: LocationFormProps) => {
+  const [cities, setCities] = useState<{ name: string; latitude: string; longitude: string }[]>([]);
 
   const formSchema = z.object({
     country: z.string().min(2).max(50),

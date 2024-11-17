@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import backendRoutes from "@/api/apiRoutes";
@@ -17,7 +17,7 @@ const ActivateAccount = () => {
           setTimeout(() => navigate("/auth/login"), 3000);
         }
       } catch (error) {
-        if (error.response && error.response.status === 403) {
+        if (axios.isAxiosError(error) && error.response && error.response.status === 403) {
           setStatus("This account is already active.");
         } else {
           setStatus("Activation failed. Please try again.");

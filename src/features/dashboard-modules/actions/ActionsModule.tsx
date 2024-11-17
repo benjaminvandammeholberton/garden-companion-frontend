@@ -15,8 +15,8 @@ import DirectSowingForm from "./DirectSowingForm";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
+  // DialogDescription,
+  // DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -36,7 +36,7 @@ import { useToast } from "@/components/ui/use-toast";
 interface ActionsModuleProps {}
 
 const ActionsModule: React.FC<ActionsModuleProps> = () => {
-  const [openStates, setOpenStates] = useState({});
+  const [openStates, setOpenStates] = useState<{ [key: number]: boolean }>({});
   const { toast } = useToast();
   const areasContext = useContext(AreasContext);
   if (!areasContext) {
@@ -44,7 +44,7 @@ const ActionsModule: React.FC<ActionsModuleProps> = () => {
   }
   const { areas, setAreas } = areasContext;
 
-  const handleOpenChange = (index: number, isOpen) => {
+  const handleOpenChange = (index: number, isOpen: boolean) => {
     if (areas.length === 0){
       toast({
         title: "Vous n'avez pas encore d'espace de culture",

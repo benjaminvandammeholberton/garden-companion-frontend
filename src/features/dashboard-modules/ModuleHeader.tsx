@@ -1,5 +1,5 @@
 import { CardHeader, CardTitle } from "@/components/ui/card";
-import { infoIcon } from "../../assets/assets-path";
+// import { infoIcon } from "../../assets/assets-path";
 
 interface ModuleHeaderProps {
   title: string;

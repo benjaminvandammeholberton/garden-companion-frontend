@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { ForecastDailyInterface } from "./interfaces";
 
-import useAuth from "../../../hooks/useAuth";
 import { getForecast } from "./forecastApi";
 
 type useGetForecastReturnType = [

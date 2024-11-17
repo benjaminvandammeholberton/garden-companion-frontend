@@ -32,7 +32,7 @@ import {
 import capitalize from "@/utils/capitalizeStr";
 import useSortedData from "@/hooks/useSortedData";
 import { Button } from "@/components/ui/button";
-import PlantManagerModal from "@/modal/PlantManagerModal";
+// import PlantManagerModal from "@/modal/PlantManagerModal";
 import { useToast } from "@/components/ui/use-toast";
 import { Input } from "@/components/ui/input";
 import {
@@ -52,10 +52,10 @@ interface SeedlingsListProps {
 
 const SeedlingsList: React.FC<SeedlingsListProps> = ({ sortedBy }) => {
   const [seedlings, setSeedlings] = useState<SeedlingInterface[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [seedlingToPlant, setSeedlingToPlant] = useState({});
+  // const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  // const [seedlingToPlant, setSeedlingToPlant] = useState<SeedlingInterface | null>(null);
   const [seedlingInputQuantity, setSeedlingInputQuantity] = useState<number>(0);
-  const [isPlantingModalOpen, setIsPlantingModalOpen] = useState(false)
+  const [isPlantingModalOpen, setIsPlantingModalOpen] = useState(false);
 
   const { toast } = useToast();
 
@@ -65,8 +65,8 @@ const SeedlingsList: React.FC<SeedlingsListProps> = ({ sortedBy }) => {
   // };
 
   const closePlantingModal = () => {
-    setIsPlantingModalOpen(false)
-  }
+    setIsPlantingModalOpen(false);
+  };
 
   const handleChangeQuantity = async (
     seedling: SeedlingInterface,
@@ -80,7 +80,9 @@ const SeedlingsList: React.FC<SeedlingsListProps> = ({ sortedBy }) => {
           ...seedling,
           quantity: newQuantity,
         };
-        await updateSeedling(seedling.uuid, updatedSeedling);
+        if (seedling.uuid) {
+          await updateSeedling(seedling.uuid, updatedSeedling);
+        }
         const updatedSeedlings = seedlings.map((seed) => {
           if (seed.uuid !== seedling.uuid) {
             return seed;
@@ -99,7 +101,9 @@ const SeedlingsList: React.FC<SeedlingsListProps> = ({ sortedBy }) => {
 
   const handleDelete = async (seedling: SeedlingInterface) => {
     try {
-      await deleteSeedling(seedling.uuid);
+      if (seedling.uuid) {
+        await deleteSeedling(seedling.uuid);
+      }
       const newSeedlingsList = seedlings.filter((seedlingItem) => {
         return seedlingItem.uuid !== seedling.uuid;
       });
@@ -113,7 +117,7 @@ const SeedlingsList: React.FC<SeedlingsListProps> = ({ sortedBy }) => {
     }
   };
 
-  const closeModal = () => setIsModalOpen(false);
+  // const closeModal = () => setIsModalOpen(false);
 
   const sortedData = useSortedData(seedlings, sortedBy);
   useEffect(() => {
@@ -169,7 +173,8 @@ const SeedlingsList: React.FC<SeedlingsListProps> = ({ sortedBy }) => {
                   >
                     <span>
                       {capitalize(vegetable.name)} -{" "}
-                      {capitalize(vegetable.variety)} ({vegetable.quantity})
+                      {vegetable.variety ? capitalize(vegetable.variety) : ""} (
+                      {vegetable.quantity})
                     </span>
                   </PopoverTrigger>
                   <PopoverContent className="bg-white dark:bg-slate-900 border rounded-lg pt-2 pb-5 px-5 w-96">
@@ -180,9 +185,7 @@ const SeedlingsList: React.FC<SeedlingsListProps> = ({ sortedBy }) => {
                         onOpenChange={() => setIsPlantingModalOpen(true)}
                       >
                         <DialogTrigger asChild>
-                          <Button>
-                            Planter
-                          </Button>
+                          <Button>Planter</Button>
                         </DialogTrigger>
                         <DialogContent
                           aria-describedby={undefined}
@@ -230,14 +233,14 @@ const SeedlingsList: React.FC<SeedlingsListProps> = ({ sortedBy }) => {
               <TooltipProvider delayDuration={100}>
                 <Tooltip>
                   <TooltipTrigger>
-                    {timeFromSowed(vegetable.sowing_date)}
+                    {vegetable.sowing_date ? timeFromSowed(vegetable.sowing_date) : "Date inconnue"}
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>
                       Semé le{" "}
-                      {new Date(vegetable.sowing_date).toLocaleDateString(
+                      {vegetable.sowing_date ? new Date(vegetable.sowing_date).toLocaleDateString(
                         "fr-FR"
-                      )}
+                      ) : "Date inconnue"}
                     </p>
                   </TooltipContent>
                 </Tooltip>

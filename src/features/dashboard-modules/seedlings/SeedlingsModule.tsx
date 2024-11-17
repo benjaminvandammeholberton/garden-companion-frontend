@@ -6,7 +6,6 @@ import SeedlingsAdd from "./SeedlingsAdd";
 import SeedlingsList from "./SeedlingsList";
 
 // assets
-import { addIcon, sortIcon, backIcon } from "../../../assets/assets-path";
 import { ArrowDownNarrowWide, CirclePlus, Undo2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 

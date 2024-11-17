@@ -6,22 +6,22 @@ import { resizeFile } from "@/utils/resizeFile";
 
 import backendRoutes from "@/api/apiRoutes";
 // assets
-import directSowingIcon from "../../../assets/actions-icons/direct-sowing.png";
+// import directSowingIcon from "../../../assets/actions-icons/direct-sowing.png";
 
 // components
-import FormHeader from "./components/FormHeader";
+// import FormHeader from "./components/FormHeader";
 import InputAllVegetables from "./components/InputAllVegetables";
 import InputUserAreas from "./components/InputAreas";
 
 // contexts
-import VegetablesContext from "@/contexts/VegetableContext";
+// import VegetablesContext from "@/contexts/VegetableContext";
 import AreasContext from "@/contexts/AreasContext";
 
 import { useToast } from "@/components/ui/use-toast";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import CreatableSelect from "react-select/creatable"; 
+// import CreatableSelect from "react-select/creatable"; 
 
 // ui
 import {

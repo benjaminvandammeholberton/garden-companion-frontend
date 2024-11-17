@@ -15,7 +15,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { AreasProvider } from "@/contexts/AreasContext";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 
 const Dashboard = () => {
   const [areas, isLoadingAreas, errorGetAreas, setAreas] = useGetAreas();

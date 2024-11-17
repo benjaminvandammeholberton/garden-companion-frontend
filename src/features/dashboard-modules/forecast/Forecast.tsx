@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import ForecastDailyItem from "./components/ForecastdailyItem";
-import SkeletonForecast from "./components/SkeletonForecast";
-import useGetForecast from "./useGetForecast";
 import LocationForm from "./components/LocationForm";
 import { Button } from "@/components/ui/button";
-import { ArrowDownNarrowWide, Loader2, MapPinOff } from "lucide-react";
+import { Loader2, MapPinOff } from "lucide-react";
 import { getForecast } from "./forecastApi";
 import { ForecastDailyInterface } from "./interfaces";
 
@@ -12,7 +10,6 @@ const Forecast = () => {
   const [userLocation, setUserLocation] = useState<boolean>(false);
   // const [foreacastData, isLoading, error] = useGetForecast(userLocation);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
   const [foreacastData, setForecastData] = useState<ForecastDailyInterface[]>(
     []
   );
@@ -39,7 +36,6 @@ const Forecast = () => {
           setForecastData(data);
         }
       } catch (error) {
-        setError(error as string);
         console.error(error);
       } finally {
         setIsLoading(false);

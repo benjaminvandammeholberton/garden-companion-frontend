@@ -26,7 +26,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import BarLoader from "react-spinners/BarLoader";
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
@@ -89,7 +88,7 @@ const Login: React.FC<LoginProps> = ({ toggleAuth }) => {
       }
     } catch (err) {
       console.error("Login failed", err);
-      if (err.status ===  401) {
+      if (axios.isAxiosError(err) && err.response?.status === 401) {
         toast({
           title: "Connexion refusée ❌",
           description: "L'email ou le mot de passe est incorrect. Veuillez réessayer.",

@@ -13,12 +13,10 @@ import eggplantIcon from "../assets/landing/icons/eggplant.png";
 import forecastIcon from "../assets/landing/icons/forecast.png";
 import guideIcon from "../assets/landing/icons/guide.png";
 import managerIcon from "../assets/landing/icons/manager.png";
-import moveUpIcon from "../assets/landing/icons/move-up.png";
 import productionIcon from "../assets/landing/icons/production.png";
 import sowingIcon from "../assets/landing/icons/sowing.png";
 import toDoIcon from "../assets/landing/icons/todo.png";
 import tomatoIcon from "../assets/landing/icons/tomato.png";
-import useAuth from "../hooks/useAuth";
 import { useEffect } from "react";
 import { getToken } from "@/utils/utils";
 

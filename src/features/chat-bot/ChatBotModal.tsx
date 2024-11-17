@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../api/axios";
 import { AxiosError } from "axios";
 
-import { sendIcon } from "../../assets/assets-path";
 import { v4 as uuidv4 } from "uuid";
 
 import "../../index.css";

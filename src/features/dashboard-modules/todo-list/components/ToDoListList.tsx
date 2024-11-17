@@ -15,7 +15,7 @@ import {
 } from "../utils/sortFunctions";
 
 // api
-import { deleteToDoApi, toggleCompleted, updateToDoApi } from "../utils/todosApi";
+import { deleteToDoApi, toggleCompleted } from "../utils/todosApi";
 import { CircleAlert, Loader2, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -53,7 +53,7 @@ const ToDoListList: React.FC<ToDoListListProps> = ({
     }
   };
 
-  const deleteTodo = async (e: React.MouseEvent<HTMLImageElement>) => {
+  const deleteTodo = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const todo_id = e.currentTarget.dataset.todoId;
     try {
       if (todo_id) {

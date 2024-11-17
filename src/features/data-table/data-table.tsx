@@ -14,13 +14,13 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableFooter,
+  // TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
-import { Vegetable } from "./columns";
+// import { Vegetable } from "./columns";
 import { useState } from "react";
 import {
   DropdownMenu,
@@ -96,7 +96,10 @@ export function DataTable<TData, TValue>({
               .getAllColumns()
               .filter((column) => column.getCanHide())
               .map((column) => {
-                const columnName = mappingColumnName[column.id];
+                const columnName =
+                  mappingColumnName[
+                    column.id as keyof typeof mappingColumnName
+                  ];
                 if (column.id !== "name") {
                   return (
                     <DropdownMenuCheckboxItem
@@ -141,8 +144,8 @@ export function DataTable<TData, TValue>({
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => {
-                const rowData = row.original as Vegetable;
-                const isHarvestable = rowData.ready_to_harvest;
+                // const rowData = row.original as Vegetable;
+                // const isHarvestable = rowData.ready_to_harvest;
                 return (
                   <TableRow
                     key={row.id}
@@ -164,10 +167,7 @@ export function DataTable<TData, TValue>({
               })
             ) : (
               <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24"
-                >
+                <TableCell colSpan={columns.length} className="h-24">
                   Aucun résultat.
                 </TableCell>
               </TableRow>

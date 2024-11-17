@@ -14,22 +14,23 @@ export interface VegetableInterface {
 }
 
 export interface AreaInterface {
-  area_id?: string;
+  uuid?: string;
   name: string;
   surface: number;
   created_at?: string;
   updated_at?: string;
-  environnement?: string;
+  environment?: string;
   vegetables: VegetableInterface[] | [];
 }
 
 export interface SeedlingInterface {
-  seedling_id: string;
+  uuid?: string;
   name: string;
-  variety: string;
+  variety?: string;
   quantity: number;
-  created_at: string;
-  updated_at: string;
+  created_at?: string;
+  updated_at?: string;
+  sowing_date?: string;
 }
 
 export interface ActionInterface {

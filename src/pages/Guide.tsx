@@ -1,5 +1,5 @@
-const Guide = () => {
-  return <div>Guide</div>;
-};
+// const Guide = () => {
+//   return <div>Guide</div>;
+// };
 
-export default Guide;
+// export default Guide;

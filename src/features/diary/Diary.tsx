@@ -1,4 +1,3 @@
-import carrotIcon from "../../assets/vegetables-icons/carrot.png";
 import directSowingIcon from "../../assets/actions-icons/direct-sowing.png";
 import plantingIcon from "../../assets/actions-icons/planting.png";
 import harvestIcon from "../../assets/actions-icons/harvest.png";
@@ -8,9 +7,8 @@ import treatIcon from "../../assets/actions-icons/parasite.png";
 import cameraIcon from "../../assets/actions-icons/camera.png";
 import weedIcon from "../../assets/actions-icons/weed.png";
 import fertilizeIcon from "../../assets/actions-icons/fertilize.png";
-import placeHolderImage from "../../assets/placeholder-image.jpeg";
 
-import { ActionInterface, AreaInterface } from "@/interfaces/interfaces";
+import { AreaInterface } from "@/interfaces/interfaces";
 import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
@@ -22,28 +20,52 @@ import {
 } from "@/components/ui/popover";
 import axiosInstance from "@/api/axios";
 import vegetableIconsMaps from "@/maps/vegetableMaps";
-import DirectSowingForm from "../dashboard-modules/actions/DirectSowingForm";
 import { Filter } from "lucide-react";
 import backendRoutes from "@/api/apiRoutes";
 
-
-const BASEURL = import.meta.env.REACT_APP_BACKEND_URL_BASE || "https://jammin-dev.com/"
-
-const SOWING = "SOWING"
-const PLANTING = "PLANTING"
-const REMOVING = "REMOVING"
-const WATERING = "WATERING"
-const FERTILIZING = "FERTILIZING"
-const TREATING = "TREATING"
-const HARVESTING = "HARVESTING"
-const WEEDING = "WEEDING"
-const OBSERVING = "OBSERVING"
+const SOWING = "SOWING";
+const PLANTING = "PLANTING";
+const REMOVING = "REMOVING";
+const WATERING = "WATERING";
+const FERTILIZING = "FERTILIZING";
+const TREATING = "TREATING";
+const HARVESTING = "HARVESTING";
+const WEEDING = "WEEDING";
+const OBSERVING = "OBSERVING";
 
 interface DiaryItemGeneralProps {
   action: ActionInterface;
 }
 
-export const ActionFilterSelect = ({
+interface ActionFilterSelectProps {
+  icon: string;
+  text: string;
+  type: string;
+  actionTypes: string[];
+  setActionTypes: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
+export interface ActionInterface {
+  uuid: string;
+  date: string;
+  operation_type: string;
+  vegetable: {
+    name: string;
+    variety: string;
+    quantity: number;
+    quantity_unit: string;
+  };
+  description?: string;
+  photos?: { photo: string }[];
+  quantity?: number;
+  quantity_unit?: string;
+  product_name?: string;
+  area: {
+    id: string;
+  };
+}
+
+export const ActionFilterSelect: React.FC<ActionFilterSelectProps> = ({
   icon,
   text,
   type,
@@ -57,13 +79,13 @@ export const ActionFilterSelect = ({
   }, [actionTypes]);
 
   const handleClick = () => {
-    if (actionTypes.length === 9){
+    if (actionTypes.length === 9) {
       setActionTypes((prev) =>
         prev.filter((actionType) => actionType === type)
       );
-      return
+      return;
     }
-    
+
     if (actionTypes.includes(type)) {
       setActionTypes((prev) =>
         prev.filter((actionType) => actionType !== type)
@@ -98,9 +120,11 @@ export const ActionFilterSelect = ({
   );
 };
 
-const DiaryItemDirectSowing = ({ action }) => {
+const DiaryItemDirectSowing: React.FC<{ action: ActionInterface }> = ({
+  action,
+}) => {
   const vegetableAsset = vegetableIconsMaps.find(
-    (asset) => asset.name.fr === action.vegetable.name.toLowerCase()
+    (asset) => asset?.name?.fr === action.vegetable.name.toLowerCase()
   );
   let file_path;
   if (action.photos) {
@@ -133,9 +157,11 @@ const DiaryItemDirectSowing = ({ action }) => {
   );
 };
 
-const DiaryItemPlanting = ({ action }) => {
+const DiaryItemPlanting: React.FC<{ action: ActionInterface }> = ({
+  action,
+}) => {
   const vegetableAsset = vegetableIconsMaps.find(
-    (asset) => asset.name.fr === action.vegetable.name.toLowerCase()
+    (asset) => asset?.name?.fr === action.vegetable.name.toLowerCase()
   );
   let file_path;
   if (action.photos) {
@@ -168,7 +194,9 @@ const DiaryItemPlanting = ({ action }) => {
   );
 };
 
-const DiaryItemHarvesting = ({ action }) => {
+const DiaryItemHarvesting: React.FC<{ action: ActionInterface }> = ({
+  action,
+}) => {
   let vegetableAsset;
   if (action.vegetable) {
     vegetableAsset = vegetableIconsMaps.find(
@@ -209,7 +237,9 @@ const DiaryItemHarvesting = ({ action }) => {
   );
 };
 
-const DiaryItemWatering = ({ action }) => {
+const DiaryItemWatering: React.FC<{ action: ActionInterface }> = ({
+  action,
+}) => {
   let vegetableAsset;
   if (action.vegetable) {
     vegetableAsset = vegetableIconsMaps.find(
@@ -229,8 +259,11 @@ const DiaryItemWatering = ({ action }) => {
         )}
       </div>
       <div className="cursor-pointer">
-        {(action.quantity && parseFloat(action.quantity) > 0) ? action.quantity : ""} {action.quantity_unit || ""}{" "}
-        {(((action.quantity && parseFloat(action.quantity) > 0)  || action.quantity_unit) && action.vegetable) && ": "}
+        {action.quantity && action.quantity > 0 ? action.quantity : ""}{" "}
+        {action.quantity_unit || ""}{" "}
+        {((action.quantity && action.quantity > 0) || action.quantity_unit) &&
+          action.vegetable &&
+          ": "}
         {action.vegetable &&
           `${action.vegetable.name} (${action.vegetable?.variety})`}
       </div>
@@ -251,7 +284,9 @@ const DiaryItemWatering = ({ action }) => {
   );
 };
 
-const DiaryItemWeeding = ({ action }) => {
+const DiaryItemWeeding: React.FC<{ action: ActionInterface }> = ({
+  action,
+}) => {
   let vegetableAsset;
   if (action.vegetable) {
     vegetableAsset = vegetableIconsMaps.find(
@@ -291,7 +326,9 @@ const DiaryItemWeeding = ({ action }) => {
   );
 };
 
-const DiaryItemFertilizing = ({ action }) => {
+const DiaryItemFertilizing: React.FC<{ action: ActionInterface }> = ({
+  action,
+}) => {
   let vegetableAsset;
   if (action.vegetable) {
     vegetableAsset = vegetableIconsMaps.find(
@@ -333,7 +370,9 @@ const DiaryItemFertilizing = ({ action }) => {
   );
 };
 
-const DiaryItemRemoving = ({ action }) => {
+const DiaryItemRemoving: React.FC<{ action: ActionInterface }> = ({
+  action,
+}) => {
   const vegetableAsset = vegetableIconsMaps.find(
     (asset) => asset.name.fr === action.vegetable.name.toLowerCase()
   );
@@ -367,7 +406,9 @@ const DiaryItemRemoving = ({ action }) => {
   );
 };
 
-const DiaryItemObservation = ({ action }) => {
+const DiaryItemObservation: React.FC<{ action: ActionInterface }> = ({
+  action,
+}) => {
   let vegetableAsset;
   if (action.vegetable) {
     vegetableAsset = vegetableIconsMaps.find(
@@ -407,7 +448,9 @@ const DiaryItemObservation = ({ action }) => {
   );
 };
 
-const DiaryItemTreating = ({ action }) => {
+const DiaryItemTreating: React.FC<{ action: ActionInterface }> = ({
+  action,
+}) => {
   let vegetableAsset;
   if (action.vegetable) {
     vegetableAsset = vegetableIconsMaps.find(
@@ -449,29 +492,29 @@ const DiaryItemTreating = ({ action }) => {
   );
 };
 
-const DiaryItemCreating = ({ action }) => {
-  return (
-    <>
-      <div className="flex gap-2 lg:gap-5">
-        <img className="w-8 h-8" src={directSowingIcon} alt="" />
-        <img className="w-8 h-8" src={carrotIcon} alt="" />
-      </div>
-      <div className="cursor-pointer">4 rangées de Carotte - Nantaise </div>
-      <p className="text-justify">
-        <span className="font-semibold">Notes : </span>
-        {action.description}
-      </p>
-      <img className="w-3/4 rounded-sm" src={placeHolderImage} alt="" />
-    </>
-  );
-};
+// const DiaryItemCreating: React.FC<{ action: ActionInterface }> = ({ action }) => {
+//   return (
+//     <>
+//       <div className="flex gap-2 lg:gap-5">
+//         <img className="w-8 h-8" src={directSowingIcon} alt="" />
+//         <img className="w-8 h-8" src={carrotIcon} alt="" />
+//       </div>
+//       <div className="cursor-pointer">4 rangées de Carotte - Nantaise </div>
+//       <p className="text-justify">
+//         <span className="font-semibold">Notes : </span>
+//         {action.description}
+//       </p>
+//       <img className="w-3/4 rounded-sm" src={placeHolderImage} alt="" />
+//     </>
+//   );
+// };
 
 interface DiaryItemGeneralProps {
   action: ActionInterface;
 }
 
 const DiaryItemGeneral: React.FC<DiaryItemGeneralProps> = ({ action }) => {
-  const actionComponentMap = {
+  const actionComponentMap: { [key: string]: [JSX.Element, string] } = {
     SOWING: [<DiaryItemDirectSowing action={action} />, "Semis"],
     PLANTING: [<DiaryItemPlanting action={action} />, "Plantation"],
     WATERING: [<DiaryItemWatering action={action} />, "Arrosage"],
@@ -506,8 +549,6 @@ interface DiarayProps {
   area: AreaInterface | undefined;
 }
 const Diary: React.FC<DiarayProps> = ({ area }) => {
-
-
   const actionType = [
     SOWING,
     PLANTING,
@@ -519,11 +560,12 @@ const Diary: React.FC<DiarayProps> = ({ area }) => {
     WEEDING,
     OBSERVING,
   ];
-  const [actions, setActions] = useState([]);
+  const [actions, setActions] = useState<ActionInterface[]>([]);
   const [actionTypes, setActionTypes] = useState(actionType);
 
   useEffect(() => {
     const getActions = async () => {
+      if (!area) return;
       try {
         const response = await axiosInstance.get(
           backendRoutes.operations + `?area=${area.uuid}`
@@ -551,44 +593,55 @@ const Diary: React.FC<DiarayProps> = ({ area }) => {
 
   return (
     <div className="w-full flex flex-col gap-5 px-1  pb-4 items-center">
-      {actions.length > 0 ? (<Popover>
-        <PopoverTrigger asChild className="gap-2 ml-auto mt-4 ">
-          <Button>
-            <Filter strokeWidth={1.5} />
-            Filter
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent
-          asChild
-          className="w-80 flex flex-col items-center gap-2 dark:bg-slate-900"
-        >
-          <div>
-            <span className="p-1 hover:underline cursor-pointer" onClick={() => setActionTypes(actionType)}>Réinitialiser</span>
-          <div className="grid grid-cols-3 gap-8">
-            {ActionFilterList.map((action) => (
-              <ActionFilterSelect
-                key={action.type}
-                icon={action.icon}
-                text={action.text}
-                type={action.type}
-                actionTypes={actionTypes}
-                setActionTypes={setActionTypes}
-              />
-            ))}
-          </div>
-          </div>
-        </PopoverContent>
-      </Popover>):(<div>Aucune donnée à afficher</div>)}
-      
+      {actions.length > 0 ? (
+        <Popover>
+          <PopoverTrigger asChild className="gap-2 ml-auto mt-4 ">
+            <Button>
+              <Filter strokeWidth={1.5} />
+              Filter
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent
+            asChild
+            className="w-80 flex flex-col items-center gap-2 dark:bg-slate-900"
+          >
+            <div>
+              <span
+                className="p-1 hover:underline cursor-pointer"
+                onClick={() => setActionTypes(actionType)}
+              >
+                Réinitialiser
+              </span>
+              <div className="grid grid-cols-3 gap-8">
+                {ActionFilterList.map((action) => (
+                  <ActionFilterSelect
+                    key={action.type}
+                    icon={action.icon}
+                    text={action.text}
+                    type={action.type}
+                    actionTypes={actionTypes}
+                    setActionTypes={setActionTypes}
+                  />
+                ))}
+              </div>
+            </div>
+          </PopoverContent>
+        </Popover>
+      ) : (
+        <div>Aucune donnée à afficher</div>
+      )}
+
       {actions
         .filter(
           (action) =>
-            action.area.id === area.uuid && actionTypes.includes(action.operation_type)
+            area &&
+            action.area.id === area.uuid &&
+            actionTypes.includes(action.operation_type)
         )
         // .sort((a, b) => new Date(b.date) - new Date(a.date))
-        .map((action) =>
+        .map((action) => (
           <DiaryItemGeneral action={action} key={action.uuid} />
-        )}
+        ))}
     </div>
   );
 };

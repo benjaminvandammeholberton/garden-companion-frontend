@@ -1,5 +1,5 @@
 // hooks
-import { useContext, useEffect } from "react";
+import { useContext  } from "react";
 
 // assets
 import { greenhouse, outdoor, indoor } from "../../../../assets/assets-path";
@@ -12,7 +12,6 @@ import AreaListItem from "./AreaListItem";
 import AreasContext from "@/contexts/AreasContext";
 
 // ui
-import { Skeleton } from "@/components/ui/skeleton";
 import { CirclePlus, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -30,7 +29,7 @@ const AreaList: React.FC<AreaListProps> = ({ sortedBy, openModal }) => {
   const environments = ["O", "G", "I"];
 
   // function to get the right area icon based of the environnement
-  const getAreaIcon = (env: string) => {
+  const getAreaIcon = (env: string | undefined) => {
     let areaIcon: string | undefined;
     if (env === "I") areaIcon = indoor;
     if (env === "G") areaIcon = greenhouse;

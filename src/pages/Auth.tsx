@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import HeaderLogin from "../components/header/HeaderLogin";
 import Login from "./Login";
 import Register from "./Register";
-import { ACCESS_TOKEN } from "@/constants";
 
 const Auth = () => {
   const navigate = useNavigate();

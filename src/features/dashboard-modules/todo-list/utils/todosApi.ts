@@ -1,4 +1,3 @@
-import axios from "axios";
 import axiosInstance from "../../../../api/axios";
 
 import backendRoutes from "@/api/apiRoutes";

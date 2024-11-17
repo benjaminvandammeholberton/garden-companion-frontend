@@ -1,5 +1,6 @@
-const Seeds = () => {
-  return <div>Seeds</div>;
-};
+// const Seeds = () => {
+//   return <div>Seeds</div>;
+// };
 
-export default Seeds;
+// export default Seeds;
+ 

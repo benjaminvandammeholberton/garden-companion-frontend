@@ -4,10 +4,10 @@ import { fr } from "date-fns/locale";
 import { resizeFile } from "@/utils/resizeFile";
 
 // assets
-import fertilizingIcon from "../../../assets/actions-icons/fertilize.png";
+// import fertilizingIcon from "../../../assets/actions-icons/fertilize.png";
 
 // components
-import FormHeader from "./components/FormHeader";
+// import FormHeader from "./components/FormHeader";
 import InputUserAreas from "./components/InputAreas";
 
 import { useToast } from "@/components/ui/use-toast";

@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { createAreaApi } from "../api/api-services/areas";
 import useAuth from "./useAuth";
-import { AreaInterface } from "@/interfaces/interfaces";
+import { AreaInterface, VegetableInterface } from "@/interfaces/interfaces";
 
 interface dataInterface {
   name: string;
   surface: number;
   sowing_area: boolean;
+  vegetables: VegetableInterface[] | [];
 }
 
 type useAddAreaReturnType = [

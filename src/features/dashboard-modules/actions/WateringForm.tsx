@@ -4,10 +4,10 @@ import { fr } from "date-fns/locale";
 import { resizeFile } from "@/utils/resizeFile";
 
 // assets
-import wateringIcon from "../../../assets/actions-icons/watering.png";
+// import wateringIcon from "../../../assets/actions-icons/watering.png";
 
 // components
-import FormHeader from "./components/FormHeader";
+// import FormHeader from "./components/FormHeader";
 import InputUserAreas from "./components/InputAreas";
 
 import { useToast } from "@/components/ui/use-toast";
@@ -37,7 +37,7 @@ import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 
 import { Textarea } from "@/components/ui/textarea";
-import axiosInstance, { axiosInstanceFile } from "@/api/axios";
+import { axiosInstanceFile } from "@/api/axios";
 
 import FieldVegetablesInArea from "./components/FieldVegetablesInArea";
 import { useState } from "react";
@@ -97,8 +97,7 @@ const WateringForm: React.FC<WateringFormInterface> = ({ onClose }) => {
         const resizedImage = await resizeFile(values.file[0]);
         formData.append("photo", resizedImage);  
       }
-      const response = await axiosInstanceFile.post(backendRoutes.operations + "watering/", formData);
-      const operation = response.data
+      await axiosInstanceFile.post(backendRoutes.operations + "watering/", formData);
       toast({
         title: "Arrosage enregistré 👍",
         description: ``,

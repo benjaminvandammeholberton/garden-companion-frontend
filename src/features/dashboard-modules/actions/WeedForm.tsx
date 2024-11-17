@@ -4,10 +4,10 @@ import { fr } from "date-fns/locale";
 import { resizeFile } from "@/utils/resizeFile";
 
 // assets
-import weedingIcon from "../../../assets/actions-icons/weed.png";
+// import weedingIcon from "../../../assets/actions-icons/weed.png";
 
 // components
-import FormHeader from "./components/FormHeader";
+// import FormHeader from "./components/FormHeader";
 import InputUserAreas from "./components/InputAreas";
 
 import { useToast } from "@/components/ui/use-toast";
@@ -37,7 +37,7 @@ import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 
 import { Textarea } from "@/components/ui/textarea";
-import axiosInstance, { axiosInstanceFile } from "@/api/axios";
+import { axiosInstanceFile } from "@/api/axios";
 
 import FieldVegetablesInArea from "./components/FieldVegetablesInArea";
 import { useState } from "react";
@@ -107,7 +107,6 @@ const WeedForm: React.FC<WeedFormInterface> = ({ onClose }) => {
         }
       }
       const response = await axiosInstanceFile.post(backendRoutes.operations + "weeding/", formData);
-      const operation = response.data
       toast({
         title: "Désherbage enregistré 👍",
         description: ``,
