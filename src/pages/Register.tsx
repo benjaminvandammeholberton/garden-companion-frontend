@@ -46,7 +46,7 @@ const Register: React.FC<RegisterProps> = ({ toggleAuth }) => {
         message:
           "Votre nom d'utilisateur doit comporter au minimum 4 caractères",
       }),
-      email: z.string().email({
+      username: z.string().email({
         message: "Veuillez entrer un adresse email valide",
       }),
       password: z
@@ -73,7 +73,7 @@ const Register: React.FC<RegisterProps> = ({ toggleAuth }) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       nickname: "",
-      email: "",
+      username: "",
       password: "",
       passwordConfirm: "",
     },
@@ -84,7 +84,7 @@ const Register: React.FC<RegisterProps> = ({ toggleAuth }) => {
     try {
       const userData = {
         username: values.nickname,
-        email: values.email.toLowerCase(),
+        email: values.username.toLowerCase(),
         password: values.password,
       };
       const response = await axios.post(
@@ -126,12 +126,12 @@ const Register: React.FC<RegisterProps> = ({ toggleAuth }) => {
           >
             <FormField
               control={form.control}
-              name="email"
+              name="username"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input type="email" autoComplete="email" {...field} />
+                    <Input type="email" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
