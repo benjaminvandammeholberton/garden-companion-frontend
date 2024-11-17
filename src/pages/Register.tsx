@@ -131,7 +131,7 @@ const Register: React.FC<RegisterProps> = ({ toggleAuth }) => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input type="email" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -144,7 +144,7 @@ const Register: React.FC<RegisterProps> = ({ toggleAuth }) => {
                 <FormItem>
                   <FormLabel>Nom d'utiliisateur</FormLabel>
                   <FormControl>
-                    <Input type="email" {...field} />
+                    <Input {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
