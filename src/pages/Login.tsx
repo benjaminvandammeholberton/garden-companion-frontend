@@ -123,7 +123,7 @@ const Login: React.FC<LoginProps> = ({ toggleAuth }) => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input type="email" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
