@@ -56,10 +56,6 @@ const Register: React.FC<RegisterProps> = ({ toggleAuth }) => {
         })
         .regex(/[0-9]/, {
           message: "Votre mot de passe doit contenir au moins un chiffre",
-        })
-        .regex(/[!@#$%^&*(),.?":{}|<>]/, {
-          message:
-            "Votre mot de passe doit contenir au moins un caractère spécial",
         }),
       passwordConfirm: z.string(),
     })
