@@ -29,6 +29,8 @@ const Landing = () => {
     const token = getToken()
     if (token) {
       navigate("/auth/login")
+    } else {
+      navigate("/auth/register")
     }
   },[])
 

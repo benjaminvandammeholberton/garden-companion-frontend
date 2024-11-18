@@ -108,6 +108,30 @@ const Register: React.FC<RegisterProps> = ({ toggleAuth }) => {
       }
     } catch (err) {
       console.error("Login failed", err);
+      if (axios.isAxiosError(err) && err.response?.status === 400) {
+        const errorData = err.response.data;
+        if (errorData.username && errorData.username[0] === "A user with that username already exists.") {
+          toast({
+            title: "Erreur",
+            description: "Un utilisateur avec ce nom d'utilisateur existe déjà.",
+          });
+        } else if (errorData.email && errorData.email[0] === "user with this email already exists.") {
+          toast({
+            title: "Erreur",
+            description: "Un utilisateur avec cet email existe déjà.",
+          });
+        } else {
+          toast({
+            title: "Erreur",
+            description: "Une erreur est survenue lors de l'inscription.",
+          });
+        }
+      } else {
+        toast({
+          title: "Erreur",
+          description: "Une erreur est survenue lors de l'inscription.",
+        });
+      }
     } finally {
       setIsLoading(false);
     }

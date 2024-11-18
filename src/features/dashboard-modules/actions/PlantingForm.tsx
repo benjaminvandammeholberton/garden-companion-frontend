@@ -243,7 +243,7 @@ const PlantingForm: React.FC<PlantingFormInterface> = ({
                       <Button
                         variant={"outline"}
                         className={cn(
-                          "w-full pl-3 text-left font-normal",
+                          "w-full pl-3 text-left font-normal border-slate-700",
                           !field.value && "text-muted-foreground"
                         )}
                       >

@@ -36,7 +36,7 @@ const FieldVegetablesInAreas: React.FC<FieldVegetablesInAreasInterface> = ({
     if (selectedArea) {
       const vegetables = areas.filter(
         (area) => area.uuid === selectedArea
-      )[0].vegetables;
+      )[0]?.vegetables ?? [];
       setVegetableInAreast(vegetables);
     }
   }, [selectedArea, areas]);
@@ -64,6 +64,7 @@ const FieldVegetablesInAreas: React.FC<FieldVegetablesInAreasInterface> = ({
         <FormItem className="flex flex-col items-center w-full">
           <FormLabel>Sélectionner votre plante</FormLabel>
           <Select
+          disabled={vegetableInAreas.length === 0}
             onValueChange={(value) =>
               handleVegetableChange(field.onChange, value)
             }

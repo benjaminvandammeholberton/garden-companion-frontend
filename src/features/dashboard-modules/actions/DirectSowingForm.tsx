@@ -227,30 +227,6 @@ const DirectSowingForm: React.FC<DirectSowingFormInterface> = ({onClose}) => {
               />
             )}
           />
-          {/* <FormField
-            control={form.control}
-            name="area"
-            render={({ field }) => (
-              <FormItem className="flex flex-col items-center">
-                <FormLabel>Zone de culture</FormLabel>
-                <FormControl>
-                  <CreatableSelect
-                    className="w-full"
-                    isClearable
-                    options={[
-                      { value: "Fruit", label: "Fruit" },
-                      { value: "Vegetable", label: "Vegetable" },
-                      { value: "Herb", label: "Herb" },
-                    ]}
-                    value={field.value ? { value: field.value, label: field.value } : null}
-                    onChange={(option) => field.onChange(option ? option.value : "")}
-                    placeholder=""
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
           <FormField
             control={form.control}
             name="date"
