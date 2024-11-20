@@ -15,6 +15,11 @@ import { useToast } from "@/components/ui/use-toast";
 //contexts
 import AreasContext from "@/contexts/AreasContext";
 import { deleteAreaApi } from "@/api/api-services/areas";
+import {
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogFooter,
+} from "@/components/ui/alert-dialog";
 
 interface FormDataInterface {
   name: string;
@@ -60,15 +65,11 @@ const AreaFormModify = ({ area, onClose, setArea, onModify }) => {
 
     setAreas((prev) =>
       prev.map((area_context) => {
-        return (
-          area_context.uuid === area.uuid
+        return area_context.uuid === area.uuid
           ? { ...area_context, ...updatedArea } // Merge updated values
-          : area_context
-        )
-      }
-      )
+          : area_context;
+      })
     );
-    onModify(false);
     toast({
       title: "Zone de culture modifiée avec succès 👍",
       description: `${updatedArea.name}`,
@@ -76,7 +77,7 @@ const AreaFormModify = ({ area, onClose, setArea, onModify }) => {
   };
 
   const handleDelete = async (areaId: string) => {
-    onClose();
+    // onClose();
     try {
       await deleteAreaApi(areaId);
       toast({
@@ -94,7 +95,7 @@ const AreaFormModify = ({ area, onClose, setArea, onModify }) => {
   };
 
   return (
-    <form className="flex flex-col items-center gap-6" onSubmit={submitForm}>
+    <form className="flex flex-col items-center gap-6 w-full" onSubmit={submitForm}>
       <div className="flex flex-col items-center gap-5">
         <div className="flex justify-around gap-5">
           <div className="flex flex-col gap-2 ">
@@ -178,15 +179,16 @@ const AreaFormModify = ({ area, onClose, setArea, onModify }) => {
           </div>
         </div>
       </div>
-      <div className="flex gap-10">
-        <Button type="submit">Modifier</Button>
-        <Button
-          variant={"destructive"}
-          onClick={() => handleDelete(area?.uuid ?? "")}
-        >
-          Supprimer
-        </Button>
-      </div>
+      <AlertDialogFooter className="gap-5 flex-row">
+          <AlertDialogCancel className="mt-0">Annuler</AlertDialogCancel>
+          <Button type="submit">Valider</Button>
+            <Button
+              variant={"destructive"}
+              onClick={() => handleDelete(area?.uuid ?? "")}
+            >
+              Supprimer
+            </Button>
+      </AlertDialogFooter>
     </form>
   );
 };

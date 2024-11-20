@@ -3,16 +3,12 @@ import { z } from "zod";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { resizeFile } from "@/utils/resizeFile";
-// assets
-import plantingIcon from "../../../assets/actions-icons/planting.png";
 
 // components
-import FormHeader from "./components/FormHeader";
 import InputAllVegetables from "./components/InputAllVegetables";
 import InputUserAreas from "./components/InputAreas";
 
 // contexts
-import VegetablesContext from "@/contexts/VegetableContext";
 import AreasContext from "@/contexts/AreasContext";
 
 import { useToast } from "@/components/ui/use-toast";
@@ -42,7 +38,7 @@ import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import { AreaInterface } from "@/interfaces/interfaces";
 import { Textarea } from "@/components/ui/textarea";
-import axiosInstance, { axiosInstanceFile } from "@/api/axios";
+import { axiosInstanceFile } from "@/api/axios";
 import backendRoutes from "@/api/apiRoutes";
 import ActionButton from "@/components/ActionButton";
 

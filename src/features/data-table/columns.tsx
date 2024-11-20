@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
+import vegetableIconsMaps from "@/maps/vegetableMaps";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
+import unknownVegetable from "@/assets/vegetables-icons/unknown-vegetable.png"
 
 export type Vegetable = {
   vegetable_manager_id: string;
@@ -14,6 +16,13 @@ export type Vegetable = {
   quantity_harvested: number | null;
   harvest_unit: string | null;
   remove_date: Date | null;
+};
+
+const getVegetableAsset = (vegetableName: string) => {
+  let vegetableIcon = vegetableIconsMaps.find(
+    (asset) => asset.name.fr === vegetableName.toLowerCase()
+  )?.assets || unknownVegetable
+  return vegetableIcon;
 };
 
 export const columns: ColumnDef<Vegetable>[] = [
@@ -31,7 +40,16 @@ export const columns: ColumnDef<Vegetable>[] = [
       );
     },
     cell: ({ row }) => {
-      return <div className="">{row.getValue("name")}</div>;
+      return (
+        <div className="flex items-center gap-2">
+          <img
+            className="w-5 h-5"
+            src={getVegetableAsset(row.getValue("name"))}
+            alt=""
+          />
+          {row.getValue("name")}
+        </div>
+      );
     },
   },
   {

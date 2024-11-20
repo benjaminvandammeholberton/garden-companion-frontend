@@ -492,23 +492,6 @@ const DiaryItemTreating: React.FC<{ action: ActionInterface }> = ({
   );
 };
 
-// const DiaryItemCreating: React.FC<{ action: ActionInterface }> = ({ action }) => {
-//   return (
-//     <>
-//       <div className="flex gap-2 lg:gap-5">
-//         <img className="w-8 h-8" src={directSowingIcon} alt="" />
-//         <img className="w-8 h-8" src={carrotIcon} alt="" />
-//       </div>
-//       <div className="cursor-pointer">4 rangées de Carotte - Nantaise </div>
-//       <p className="text-justify">
-//         <span className="font-semibold">Notes : </span>
-//         {action.description}
-//       </p>
-//       <img className="w-3/4 rounded-sm" src={placeHolderImage} alt="" />
-//     </>
-//   );
-// };
-
 interface DiaryItemGeneralProps {
   action: ActionInterface;
 }
@@ -565,11 +548,15 @@ const Diary: React.FC<DiarayProps> = ({ area }) => {
 
   useEffect(() => {
     const getActions = async () => {
-      if (!area) return;
       try {
-        const response = await axiosInstance.get(
-          backendRoutes.operations + `?area=${area.uuid}`
-        );
+        let response;
+        if (area) {
+          response = await axiosInstance.get(
+            backendRoutes.operations + `?area=${area.uuid}`
+          );
+        } else {
+          response = await axiosInstance.get(backendRoutes.operations);
+        }
         setActions(response.data);
       } catch (error) {
         console.error(error);
@@ -592,7 +579,7 @@ const Diary: React.FC<DiarayProps> = ({ area }) => {
   ];
 
   return (
-    <div className="w-full flex flex-col gap-5 px-1  pb-4 items-center">
+    <div className="w-full flex flex-col gap-5 items-center">
       {actions.length > 0 ? (
         <Popover>
           <PopoverTrigger asChild className="gap-2 ml-auto mt-4 ">
@@ -632,13 +619,7 @@ const Diary: React.FC<DiarayProps> = ({ area }) => {
       )}
 
       {actions
-        .filter(
-          (action) =>
-            area &&
-            action.area.id === area.uuid &&
-            actionTypes.includes(action.operation_type)
-        )
-        // .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .filter((action) => actionTypes.includes(action.operation_type))
         .map((action) => (
           <DiaryItemGeneral action={action} key={action.uuid} />
         ))}

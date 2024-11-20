@@ -15,7 +15,8 @@ import DirectSowingForm from "./DirectSowingForm";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
+  // DialogDescription,
+  // DialogDescription,
   // DialogDescription,
   // DialogFooter,
   DialogHeader,
@@ -34,7 +35,9 @@ import RemoveForm from "./RemoveForm";
 import FormHeader from "./components/FormHeader";
 import AreasContext from "@/contexts/AreasContext";
 import { useToast } from "@/components/ui/use-toast";
+import DiaryAndProductionModal from "../../../components/DiaryAndProductionModal";
 import { Newspaper } from "lucide-react";
+
 interface ActionsModuleProps {}
 
 const ActionsModule: React.FC<ActionsModuleProps> = () => {
@@ -44,7 +47,7 @@ const ActionsModule: React.FC<ActionsModuleProps> = () => {
   if (!areasContext) {
     throw new Error("AreasContext must be used within an AreasProvider");
   }
-  const { areas, setAreas } = areasContext;
+  const { areas } = areasContext;
 
   const handleOpenChange = (index: number, isOpen: boolean) => {
     if (areas.length === 0) {
@@ -129,25 +132,15 @@ const ActionsModule: React.FC<ActionsModuleProps> = () => {
   );
   return (
     <div className="grid grid-cols-3 px-2 h-[280px] mt-[-5px] overflow-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-slate-400 scrollbar-track-gray-100 dark:scrollbar-thumb-gray-100 dark:scrollbar-track-slate-900">
-      {/* <Dialog modal>
-        <DialogTrigger asChild>
-          <Button
-            variant={"ghost"}
-            size={"icon"}
-            className={`absolute top-3 right-3`}
-          >
-            <Newspaper />
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="h-dvh md:h-[90vh] w-full md:w-auto rounded-none md:rounded-lg overflow-y-auto overflow-x-hidden flex flex-col items-center gap-10  dark:bg-slate-900">
-              <DialogHeader>
-                <DialogTitle className="flex flex-col gap-3">
-                </DialogTitle>
-                <DialogDescription className="text-md text-left">
-                </DialogDescription>
-              </DialogHeader>
-            </DialogContent>
-      </Dialog> */}
+      <DiaryAndProductionModal area={null}>
+        <Button
+          variant={"ghost"}
+          size={"icon"}
+          className={`absolute top-3 right-3`}
+        >
+          <Newspaper />
+        </Button>
+      </DiaryAndProductionModal>
       {sortedActions?.map((action) => (
         <div key={action.index} className="flex flex-col items-center">
           <Dialog

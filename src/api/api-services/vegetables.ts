@@ -17,7 +17,7 @@ export const createVegetableApi = async (data: VegetableInterface) => {
 
 export const getAllVegetables = async () => {
   try {
-    const response = await axiosInstance.get("/api/v1/vegetable_manager/");
+    const response = await axiosInstance.get("vegetables/");
     return response.data;
   } catch (error) {
     console.error(error);

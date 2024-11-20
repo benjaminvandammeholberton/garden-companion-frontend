@@ -182,7 +182,7 @@ const SeedlingsList: React.FC<SeedlingsListProps> = ({ sortedBy }) => {
                       <Dialog
                         modal
                         open={isPlantingModalOpen}
-                        onOpenChange={() => setIsPlantingModalOpen(true)}
+                        onOpenChange={(isOpen) => setIsPlantingModalOpen(isOpen)}
                       >
                         <DialogTrigger asChild>
                           <Button>Planter</Button>

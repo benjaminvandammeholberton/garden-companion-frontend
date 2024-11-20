@@ -79,7 +79,6 @@ const AreaList: React.FC<AreaListProps> = ({ sortedBy, openModal }) => {
                     <AreaListItem
                       key={area.uuid}
                       area={area}
-                      openModal={openModal}
                       areaIcon={getAreaIcon(area.environment)}
                     />
                   );
@@ -96,19 +95,11 @@ const AreaList: React.FC<AreaListProps> = ({ sortedBy, openModal }) => {
             .map((area: AreaInterface, index: number) => {
               if (area)
                 return (
-                  <Button
-                    className="block w-full py-0 h-8"
-                    variant="ghost"
-                    key={index}
-                    onClick={() => openModal(area)}
-                  >
                     <AreaListItem
                       key={index}
-                      openModal={openModal}
                       area={area}
                       areaIcon={getAreaIcon(area.environment)}
                     />
-                  </Button>
                 );
             })}
         </ul>
