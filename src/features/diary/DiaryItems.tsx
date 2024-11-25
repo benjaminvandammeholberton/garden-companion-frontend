@@ -237,7 +237,7 @@ export const DiaryItemGeneral: React.FC<DiaryItemGeneralProps> = ({
                 />
                 <span className="text-center">
                   {capitalize(vegetableAsset?.name.fr)}
-                  {action.vegetable.variety && ` ${action.vegetable.variety}`}
+                  {action.vegetable?.variety && ` ${action.vegetable?.variety}`}
                 </span>
               </div>
             )}
