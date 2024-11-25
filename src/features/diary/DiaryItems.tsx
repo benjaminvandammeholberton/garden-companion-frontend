@@ -163,7 +163,7 @@ export const DiaryItemGeneral: React.FC<DiaryItemGeneralProps> = ({
   action,
 }) => {
   const vegetableAsset = vegetableIconsMaps.find(
-    (asset) => asset?.name?.fr === action.vegetable.name.toLowerCase()
+    (asset) => asset?.name?.fr === action.vegetable?.name.toLowerCase()
   );
   let file_path;
   if (action.photos) {
