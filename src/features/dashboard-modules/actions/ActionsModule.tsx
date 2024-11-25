@@ -138,7 +138,7 @@ const ActionsModule: React.FC<ActionsModuleProps> = () => {
           size={"icon"}
           className={`absolute top-3 right-3`}
         >
-          <Newspaper />
+          <Newspaper strokeWidth={1.5}/>
         </Button>
       </DiaryAndProductionModal>
       {sortedActions?.map((action) => (

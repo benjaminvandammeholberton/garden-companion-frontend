@@ -29,7 +29,7 @@ const AreaListItem: React.FC<AreaListItemInterface> = ({ area, areaIcon }) => {
         >
           <div className="cursor-pointer flex  gap-3 max-w-52">
             <img className="w-5 h-5" src={areaIcon} alt="" />
-            <span className="text-lg overflow-hidden whitespace-nowrap text-ellipsis">
+            <span className="text-lg font-thin overflow-hidden whitespace-nowrap text-ellipsis">
               {area.name}
             </span>
           </div>

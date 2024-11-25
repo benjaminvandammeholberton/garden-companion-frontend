@@ -39,11 +39,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
       }
       const isValid = await verifyAccessToken(token);
       setIsAuthenticated(isValid);
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000);
-      
-
+      setLoading(false)
       if (!isValid) {
         navigate("/");
       }

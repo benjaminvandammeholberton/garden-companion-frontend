@@ -62,8 +62,8 @@ const DiaryAndProductionModal = ({
             <DialogTitle className="flex flex-col gap-3">
               <DiaryAndProductionModalHeader area={area} />
             </DialogTitle>
-            <DialogDescription className="text-md text-left">
-              <ul className="flex justify-center text-lg gap-10">
+            <DialogDescription className="text-md font-thin text-left">
+              <ul className="flex justify-center text-lg gap-20 mt-2">
                 <li
                   onClick={tableDisplay}
                   className={`cursor-pointer ${

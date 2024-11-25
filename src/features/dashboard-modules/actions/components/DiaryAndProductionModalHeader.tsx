@@ -56,7 +56,7 @@ const DiaryAndProductionModalHeader: React.FC<
               <Settings size={23} />
             </Button>
           </AlertDialogTrigger>
-          <AlertDialogContent>
+          <AlertDialogContent className="dark:bg-slate-900">
             <AlertDialogHeader>
               <AlertDialogTitle>Modifier la zone de culture</AlertDialogTitle>
             </AlertDialogHeader>
@@ -74,7 +74,7 @@ const DiaryAndProductionModalHeader: React.FC<
             src={getAreaIcon(currentArea?.environment)}
             alt=""
           />
-          <span className="text-2xl lg:text-4xl">{currentArea?.name}</span>
+          <span className="text-2xl lg:text-4xl font-light">{currentArea?.name}</span>
           <div className="flex items-center gap-2"></div>
         </div>
       </div>

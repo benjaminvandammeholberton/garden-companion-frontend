@@ -249,12 +249,6 @@ const SeedlingsList: React.FC<SeedlingsListProps> = ({ sortedBy }) => {
           );
         })}
       </ul>
-      {/* <PlantManagerModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        actionName={"planting"}
-        defaultValues={{ planting: seedlingToPlant }}
-      /> */}
     </div>
   );
 };

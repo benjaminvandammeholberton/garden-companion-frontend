@@ -56,7 +56,7 @@ const AreaList: React.FC<AreaListProps> = ({ sortedBy, openModal }) => {
           <Loader2 className="animate-spin mr-3" />
         </div>
       ) : areas.length === 0 ? (
-        <div className="text-lg w-full mx-auto text-center flex items-center mt-5 leading-8">
+        <div className="text-lg font-thin w-full mx-auto text-center flex items-center mt-5 leading-8">
           <span>
             {" "}
             Pour commencer, créez une zone de culture en cliquant sur{" "}
