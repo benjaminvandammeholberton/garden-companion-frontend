@@ -72,6 +72,8 @@ const InputUserAreas: React.FC<InputUserAreasInterface> = ({
           ${isAreaFocus ? "" : "cursor-pointer"}
           ${inputErrorMessage ? "border-red-500" : ""}
           `}
+          autoComplete="off"
+          spellCheck="false"
         />
         </FormControl>
         <FormMessage />

@@ -5,9 +5,9 @@ import indoor from "../assets/icons/area-environnements/indoor.png";
 type areaMapsType = Record<string, string>[];
 
 const areaEnvironnementsIconsMaps: areaMapsType = [
-  { indoor },
-  { outdoor },
-  { greenhouse },
+  { I: indoor },
+  { O: outdoor },
+  { G: greenhouse },
 ];
 
 export default areaEnvironnementsIconsMaps;

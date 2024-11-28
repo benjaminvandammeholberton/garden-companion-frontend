@@ -18,7 +18,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import axiosInstance from "@/api/axios";
-import { Filter } from "lucide-react";
+import { Filter, Loader2 } from "lucide-react";
 import backendRoutes from "@/api/apiRoutes";
 import { DiaryItemGeneral } from "./DiaryItems";
 
@@ -132,10 +132,12 @@ const Diary: React.FC<DiarayProps> = ({ area }) => {
   ];
   const [actions, setActions] = useState<ActionInterface[]>([]);
   const [actionTypes, setActionTypes] = useState(actionType);
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const getActions = async () => {
       try {
+        setIsLoading(true)
         let response;
         if (area) {
           response = await axiosInstance.get(
@@ -148,6 +150,8 @@ const Diary: React.FC<DiarayProps> = ({ area }) => {
       } catch (error) {
         console.error(error);
         throw new Error("Can't fetch areas from the server");
+      } finally {
+        setIsLoading(false)
       }
     };
     getActions();
@@ -164,6 +168,14 @@ const Diary: React.FC<DiarayProps> = ({ area }) => {
     { icon: weedIcon, text: "Désherbage", type: "WEEDING" },
     { icon: cameraIcon, text: "Observation", type: "OBSERVING" },
   ];
+
+  if (isLoading === true) {
+    return (
+      <div className="w-full h-full flex justify-center mt-5">
+        <Loader2 className="animate-spin mr-3" />
+      </div>
+    )
+  }
 
   return (
     <div className="w-full flex flex-col gap-5 items-center">
@@ -208,7 +220,7 @@ const Diary: React.FC<DiarayProps> = ({ area }) => {
       {actions
         .filter((action) => actionTypes.includes(action.operation_type))
         .map((action) => (
-          <DiaryItemGeneral action={action} key={action.uuid} />
+          <DiaryItemGeneral action={action} key={action.uuid} setActions={setActions} />
         ))}
     </div>
   );

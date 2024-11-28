@@ -3,10 +3,13 @@ import { getAllVegetables } from "@/api/api-services/vegetables";
 import { columns } from "@/features/data-table/columns";
 import { DataTable } from "@/features/data-table/data-table";
 import type { AreaInterface } from "@/interfaces/interfaces";
+import { fi } from "date-fns/locale";
+import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const TableProduction = ({ area }: { area: AreaInterface }) => {
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
 
 
   useEffect(() => {
@@ -15,16 +18,27 @@ const TableProduction = ({ area }: { area: AreaInterface }) => {
         setData(area.vegetables);
       } else {
         try {
+          setIsLoading(true);
           const vegetables = await getAllVegetables();
           setData(vegetables);
         } catch (error) {
           console.error(error);
+        } finally {
+          setIsLoading(false);
         }
       }
     };
 
     fetchData();
   }, [area]);
+
+  if (isLoading === true) {
+    return (
+      <div className="w-full h-full flex justify-center mt-5">
+        <Loader2 className="animate-spin mr-3" />
+      </div>
+    )
+  }
   
   return (
     data?.length > 0 ? 

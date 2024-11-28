@@ -17,22 +17,44 @@ import productionIcon from "../assets/landing/icons/production.png";
 import sowingIcon from "../assets/landing/icons/sowing.png";
 import toDoIcon from "../assets/landing/icons/todo.png";
 import tomatoIcon from "../assets/landing/icons/tomato.png";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getToken } from "@/utils/utils";
+import { verifyAccessToken } from "@/api/api-services/auth";
 
 const Landing = () => {
-  // const [, isLoading] = useAuth();
   const navigate = useNavigate();
-  // if (isLoading) return <div>Chargement</div>;
+  const [isLoading, setIsLoading] = useState(false);
   
   useEffect(() => {
+    const verifyToken = async (token) => {
+      try {
+        setIsLoading(true)
+        await verifyAccessToken(token)
+        navigate("/me/dashboard")
+      } catch (error) {
+        navigate("/auth/login")
+      }  finally {
+        setIsLoading(false)
+      }
+    }
     const token = getToken()
     if (token) {
-      navigate("/auth/login")
+      verifyToken(token)
     } else {
       navigate("/auth/register")
     }
   },[])
+  if (isLoading) {
+    return <h1>Chargement</h1>
+    // return (<div>
+    //   <Loader
+    //     loading={isLoading}
+    //     size={30}
+    //     aria-label="Loading Spinner"
+    //     data-testid="loader"
+    //   />
+    // </div>)
+  }
 
   return (
     <div className="bg-green-50 text-zinc-900 p-5 md:pt-14 mx-auto">

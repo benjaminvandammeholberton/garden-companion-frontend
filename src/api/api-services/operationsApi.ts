@@ -9,3 +9,12 @@ export const getAllOperations = async () => {
       throw new Error("Can't fetch operations from the server");
     }
   };
+
+export const deleteOperation = async (id: string) => {
+  try {
+    await axiosInstance.delete(`operations/${id}/`);
+  } catch (error) {
+    console.error(error);
+    throw new Error("Can't fetch operations from the server");
+  }
+}
