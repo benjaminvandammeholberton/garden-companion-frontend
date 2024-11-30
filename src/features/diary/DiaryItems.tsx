@@ -12,6 +12,7 @@ import fertilizeIcon from "../../assets/actions-icons/fertilize.png";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import capitalize from "@/utils/capitalizeStr";
 import DiaryItemEditDialog from "./DiaryItemEditDialog";
+import { DiaryDropddownMenu } from "./DiaryDropdownMenu";
 
 const PhotoItem: React.FC<{ file_path: string }> = ({ file_path }) => {
   return (
@@ -242,7 +243,8 @@ export const DiaryItemGeneral: React.FC<DiaryItemGeneralProps> = ({
               </div>
             )}
           </div>
-          <DiaryItemEditDialog action={action}  setActions={setActions} />
+          <DiaryDropddownMenu action={action} setActions={setActions}/>
+          {/* <DiaryItemEditDialog action={action}  setActions={setActions} /> */}
         </div>
       </CardHeader>
       <CardContent className="flex flex-col justify-center items-center gap-4">

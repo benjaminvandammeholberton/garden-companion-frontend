@@ -62,7 +62,7 @@ const DiaryAndProductionModal = ({
             <DialogTitle className="flex flex-col gap-3">
               <DiaryAndProductionModalHeader area={area} />
             </DialogTitle>
-            <DialogDescription className="text-md font-thin text-left">
+            <div className="text-md font-thin text-left">
               <ul className="flex justify-center text-lg gap-20 mt-2">
                 <li
                   onClick={tableDisplay}
@@ -85,7 +85,7 @@ const DiaryAndProductionModal = ({
                   Journal
                 </li>
               </ul>
-            </DialogDescription>
+            </div>
           </DialogHeader>
           <div
             className="

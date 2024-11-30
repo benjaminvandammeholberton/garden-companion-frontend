@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider, useNavigate } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useNavigate,
+} from "react-router-dom";
 import { ReactNode, useEffect, useState } from "react";
 import Loader from "react-spinners/ClipLoader";
 
@@ -39,7 +43,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
       }
       const isValid = await verifyAccessToken(token);
       setIsAuthenticated(isValid);
-      setLoading(false)
+      setLoading(false);
       if (!isValid) {
         navigate("/");
       }
@@ -51,13 +55,13 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
   if (loading) {
     return (
       <div className="">
-      <Loader
-        loading={loading}
-        size={30}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-        color={theme === "dark" ? "white" : "slate-900"}
-      />
+        <Loader
+          loading={loading}
+          size={30}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+          color={theme === "dark" ? "white" : "slate-900"}
+        />
       </div>
     );
   }
@@ -65,67 +69,84 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
   return isAuthenticated ? <>{element}</> : null;
 };
 
-const App  = ()  => {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Landing />,
-    },
-    {
-      path: "/auth/login",
-      element: <Auth />,
-    },
-    {
-      path: "/auth/register",
-      element: <Auth />,
-    },
-    {
-      path: "/auth/activation/:uid/:token",
-      element: <ActivateAccount />,
-    },
-    {
-      element: <Layout />,
-      children: [
-        {
-          path: "me/dashboard",
-          element: <ProtectedRoute element={<Dashboard />} />,
-        },
-        // {
-        //   path: "me/seeds",
-        //   element: <ProtectedRoute element={<Seeds />} />,
-        // },
-        // {
-        //   path: "me/myspace",
-        //   element: <ProtectedRoute element={<MySpace />} />,
-        // },
+const App = () => {
+  const router = createBrowserRouter(
+    [
+      {
+        path: "/",
+        element: <Landing />,
+      },
+      {
+        path: "/auth/login",
+        element: <Auth />,
+      },
+      {
+        path: "/auth/register",
+        element: <Auth />,
+      },
+      {
+        path: "/auth/activation/:uid/:token",
+        element: <ActivateAccount />,
+      },
+      {
+        element: <Layout />,
+        children: [
+          {
+            path: "me/dashboard",
+            element: <ProtectedRoute element={<Dashboard />} />,
+          },
+          // {
+          //   path: "me/seeds",
+          //   element: <ProtectedRoute element={<Seeds />} />,
+          // },
+          // {
+          //   path: "me/myspace",
+          //   element: <ProtectedRoute element={<MySpace />} />,
+          // },
 
-        // {
-        //   path: "me/guide",
-        //   element: <ProtectedRoute element={<Guide />} />,
-        // },
-        // {
-        //   path: "me/tools",
-        //   element: <ProtectedRoute element={<Tools />} />,
-        // },
-        // {
-        //   path: "/network",
-        //   element: <ProtectedRoute element={<Network />} />,
-        // },
-      ],
-    },
+          // {
+          //   path: "me/guide",
+          //   element: <ProtectedRoute element={<Guide />} />,
+          // },
+          // {
+          //   path: "me/tools",
+          //   element: <ProtectedRoute element={<Tools />} />,
+          // },
+          // {
+          //   path: "/network",
+          //   element: <ProtectedRoute element={<Network />} />,
+          // },
+        ],
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
+    ],
     {
-      path: "*",
-      element: <NotFound />,
-    },
-  ]);
+      future: {
+        v7_fetcherPersist: true,
+        v7_normalizeFormMethod: true,
+        v7_partialHydration: true,
+        v7_skipActionErrorRevalidation: true,
+        v7_startTransition: true,
+        v7_relativeSplatPath: true,
+      },
+    }
+  );
   return (
     <>
       <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-        <RouterProvider router={router} />
+        <RouterProvider
+          router={router}
+          future={{
+            v7_startTransition: true,
+          }}
+        />
         <Toaster />
       </ThemeProvider>
     </>
   );
-}
+};
 
 export default App;

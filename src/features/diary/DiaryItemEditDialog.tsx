@@ -12,28 +12,32 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Loader2, Trash2 } from "lucide-react";
+import { EllipsisVertical, Loader2, Trash2, X } from "lucide-react";
 import { deleteOperation } from "@/api/api-services/operationsApi";
 import { useToast } from "@/components/ui/use-toast";
 import { Action } from "@radix-ui/react-toast";
 
-interface Action {
-  label: string;
-  onClick: () => void;
-}
+// interface Action {
+//   label: string;
+//   onClick: () => void;
+// }
 
 interface DiaryItemEditDialogProps {
   action: Action;
-  setActions: () => void
+  setActions: React.Dispatch<React.SetStateAction<Action[]>>
+  openAlertDialog: boolean;
+  setOpenAlertDialog: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const DiaryItemEditDialog: React.FC<DiaryItemEditDialogProps> = ({
   action,
-  setActions
+  setActions,
+  openAlertDialog,
+  setOpenAlertDialog,
 }) => {
-  const [openAlertDialog, setOpenAlertDialog] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  
   const deleteAction = async () => {
     try {
       setIsLoading(true);
@@ -56,17 +60,7 @@ const DiaryItemEditDialog: React.FC<DiaryItemEditDialogProps> = ({
   };
   return (
     <AlertDialog open={openAlertDialog} onOpenChange={setOpenAlertDialog}>
-      <AlertDialogTrigger>
-        {" "}
-        <Button
-          variant={"ghost"}
-          size={"icon"}
-          onClick={() => {}}
-          className={`absolute top-2 right-2`}
-        >
-          <Trash2 size={"20"} strokeWidth={1.5} />
-        </Button>
-      </AlertDialogTrigger>{" "}
+
       <AlertDialogOverlay />
       <AlertDialogContent>
         <AlertDialogHeader>
