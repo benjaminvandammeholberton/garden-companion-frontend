@@ -22,14 +22,14 @@ import { Action } from "@radix-ui/react-toast";
 //   onClick: () => void;
 // }
 
-interface DiaryItemEditDialogProps {
+interface DiaryItemDeleteDialogProps {
   action: Action;
-  setActions: React.Dispatch<React.SetStateAction<Action[]>>
+  setActions: React.Dispatch<React.SetStateAction<Action[]>>;
   openAlertDialog: boolean;
   setOpenAlertDialog: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const DiaryItemEditDialog: React.FC<DiaryItemEditDialogProps> = ({
+const DiaryItemDeleteDialog: React.FC<DiaryItemDeleteDialogProps> = ({
   action,
   setActions,
   openAlertDialog,
@@ -37,7 +37,7 @@ const DiaryItemEditDialog: React.FC<DiaryItemEditDialogProps> = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-  
+
   const deleteAction = async () => {
     try {
       setIsLoading(true);
@@ -45,7 +45,7 @@ const DiaryItemEditDialog: React.FC<DiaryItemEditDialogProps> = ({
       setActions((prev) => prev.filter((item) => action.uuid !== item.uuid));
       toast({
         title: "Action supprimée 👍",
-        description: "L'action a été supprimée avec succès",
+        description: "L'action a été supprimé avec succès",
       });
     } catch (error) {
       console.error("can't delete the action", error);
@@ -60,21 +60,21 @@ const DiaryItemEditDialog: React.FC<DiaryItemEditDialogProps> = ({
   };
   return (
     <AlertDialog open={openAlertDialog} onOpenChange={setOpenAlertDialog}>
-
       <AlertDialogOverlay />
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            Êtes-vous sûr de vouloir supprimer cette action ?
+            ‼️  Attention
           </AlertDialogTitle>
           <AlertDialogDescription>
-            Cette action est irréversible. Cela supprimera définitivement cette
-            entrée de votre journal, y compris la photo associée.
+            Cela supprimera définitivement cette entrée de votre
+            journal, ainsi que la photo associée. Si une plante est liée à cette
+            entrée, elle ne sera pas affectée.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <Button variant="destructive" onClick={deleteAction}>
-            {isLoading &&  <Loader2 className="animate-spin mr-3" />}
+            {isLoading && <Loader2 className="animate-spin mr-3" />}
             Supprimer
           </Button>
           <AlertDialogCancel>Annuler</AlertDialogCancel>
@@ -84,4 +84,4 @@ const DiaryItemEditDialog: React.FC<DiaryItemEditDialogProps> = ({
   );
 };
 
-export default DiaryItemEditDialog;
+export default DiaryItemDeleteDialog;

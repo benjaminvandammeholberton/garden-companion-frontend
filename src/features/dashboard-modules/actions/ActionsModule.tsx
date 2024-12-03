@@ -1,37 +1,13 @@
 import { useContext, useState } from "react";
-
-import directSowingIcon from "../../../assets/actions-icons/direct-sowing.png";
-import harvestIcon from "../../../assets/actions-icons/harvest.png";
-import plantingIcon from "../../../assets/actions-icons/planting.png";
-import removeIcon from "../../../assets/actions-icons/remove.png";
-import cameraIcon from "../../../assets/actions-icons/camera.png";
-import wateringIcon from "../../../assets/actions-icons/watering.png";
-import fertilizeIcon from "../../../assets/actions-icons/fertilize.png";
-import weedIcon from "../../../assets/actions-icons/weed.png";
-import parasiteIcon from "../../../assets/actions-icons/parasite.png";
-
-import { action_names } from "@/constants";
-import DirectSowingForm from "./DirectSowingForm";
+import actionFormMap from "@/maps/actionFormMap";
 import {
   Dialog,
   DialogContent,
-  // DialogDescription,
-  // DialogDescription,
-  // DialogDescription,
-  // DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import PlantingForm from "./PlantingForm";
-import FertilizeForm from "./FertilizeForm";
-import TreatForm from "./TreatForm";
-import HarvestForm from "./HarvestForm";
-import WateringForm from "./WateringForm";
-import WeedForm from "./WeedForm";
-import ObservationForm from "./ObservationForm";
-import RemoveForm from "./RemoveForm";
 import FormHeader from "./components/FormHeader";
 import AreasContext from "@/contexts/AreasContext";
 import { useToast } from "@/components/ui/use-toast";
@@ -71,63 +47,7 @@ const ActionsModule: React.FC<ActionsModuleProps> = () => {
     }));
   };
 
-  const actionMap = {
-    [action_names.SOWING]: {
-      index: 0,
-      icon: directSowingIcon,
-      title: "Semer",
-      form: <DirectSowingForm onClose={() => closeDialog(0)} />,
-    },
-    [action_names.PLANTING]: {
-      index: 1,
-      icon: plantingIcon,
-      title: "Planter",
-      form: <PlantingForm onClose={() => closeDialog(1)} />,
-    },
-    [action_names.WATERING]: {
-      index: 2,
-      icon: wateringIcon,
-      title: "Arroser",
-      form: <WateringForm onClose={() => closeDialog(2)} />,
-    },
-    [action_names.FERTILIZING]: {
-      index: 3,
-      icon: fertilizeIcon,
-      title: "Fertiliser",
-      form: <FertilizeForm onClose={() => closeDialog(3)} />,
-    },
-    [action_names.TREATING]: {
-      index: 4,
-      icon: parasiteIcon,
-      title: "Traiter",
-      form: <TreatForm onClose={() => closeDialog(4)} />,
-    },
-    [action_names.HARVESTING]: {
-      index: 5,
-      icon: harvestIcon,
-      title: "Récolter",
-      form: <HarvestForm onClose={() => closeDialog(5)} />,
-    },
-    [action_names.REMOVING]: {
-      index: 6,
-      icon: removeIcon,
-      title: "Fin de culture",
-      form: <RemoveForm onClose={() => closeDialog(6)} />,
-    },
-    [action_names.WEEDING]: {
-      index: 7,
-      icon: weedIcon,
-      title: "Désherber",
-      form: <WeedForm onClose={() => closeDialog(7)} />,
-    },
-    [action_names.OBSERVING]: {
-      index: 8,
-      icon: cameraIcon,
-      title: "Observer",
-      form: <ObservationForm onClose={() => closeDialog(8)} />,
-    },
-  };
-  const sortedActions = Object.values(actionMap).sort(
+  const sortedActions = Object.values(actionFormMap).sort(
     (a, b) => a.index - b.index
   );
   return (
@@ -166,7 +86,9 @@ const ActionsModule: React.FC<ActionsModuleProps> = () => {
                   <FormHeader icon={action.icon} name={action.title} />
                 </DialogTitle>
               </DialogHeader>
-              <div className="w-96 flex justify-center">{action.form}</div>
+              <div className="w-96 flex justify-center">
+              {action.form && <action.form onClose={() => closeDialog(action.index)} />}
+              </div>
             </DialogContent>
           </Dialog>
         </div>
