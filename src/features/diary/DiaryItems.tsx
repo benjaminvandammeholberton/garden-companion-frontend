@@ -18,7 +18,7 @@ const PhotoItem: React.FC<{ file_path: string }> = ({ file_path }) => {
     <>
       {file_path && (
         <img
-          className="w-full max-h-96 object-cover rounded-sm"
+          className="w-full max-h-96 object-cover rounded-b-sm"
           src={file_path}
           alt=""
         />
@@ -34,7 +34,9 @@ export const DiaryItemDirectSowing: React.FC<{ action: ActionInterface }> = ({
   return (
     <>
       <div className="flex items-center gap-1">
-       {vegetableAsset && <img className="size-6" src={vegetableAsset} alt="" />}{" "}
+        {vegetableAsset && (
+          <img className="size-6" src={vegetableAsset} alt="" />
+        )}{" "}
         {action.vegetable.name} ({action.vegetable.variety}) :{" "}
         {action.vegetable.quantity} {action.vegetable.quantity_unit}
       </div>
@@ -43,12 +45,15 @@ export const DiaryItemDirectSowing: React.FC<{ action: ActionInterface }> = ({
 };
 
 export const DiaryItemPlanting: React.FC<{ action: ActionInterface }> = ({
-  action, vegetableAsset
+  action,
+  vegetableAsset,
 }) => {
   return (
     <>
       <div className="flex items-center gap-1">
-      {vegetableAsset && <img className="size-6" src={vegetableAsset} alt="" />}
+        {vegetableAsset && (
+          <img className="size-6" src={vegetableAsset} alt="" />
+        )}
         {action.vegetable.name} ({action.vegetable.variety}) :{" "}
         {action.vegetable.quantity} {action.vegetable.quantity_unit}
       </div>
@@ -58,11 +63,15 @@ export const DiaryItemPlanting: React.FC<{ action: ActionInterface }> = ({
 
 export const DiaryItemHarvesting: React.FC<{ action: ActionInterface }> = ({
   action,
+  vegetableAsset,
 }) => {
   return (
     <>
       <div className="">
         {action.quantity} {action.quantity_unit || "kg"}{" "}
+        {vegetableAsset && (
+          <img className="size-6" src={vegetableAsset} alt="" />
+        )}{" "}
         {action.vegetable &&
           `de : ${action.vegetable.name} (${action.vegetable?.variety})`}
       </div>
@@ -72,28 +81,37 @@ export const DiaryItemHarvesting: React.FC<{ action: ActionInterface }> = ({
 
 export const DiaryItemWatering: React.FC<{ action: ActionInterface }> = ({
   action,
+  vegetableAsset,
 }) => {
   return (
-    <>
-      <div className="">
+      <div className="text-center">
+        {action.vegetable && (
+        <div className="flex items-center gap-1">
+          <img className="size-6" src={vegetableAsset} alt="" />
+          <span>
+            {action.vegetable.name} ({action.vegetable?.variety})
+          </span>
+        </div>
+      )}
         {action.quantity && action.quantity > 0 ? action.quantity : ""}{" "}
         {action.quantity_unit || ""}{" "}
         {((action.quantity && action.quantity > 0) || action.quantity_unit) &&
           action.vegetable &&
           ": "}
-        {action.vegetable &&
-          `${action.vegetable.name} (${action.vegetable?.variety})`}
       </div>
-    </>
   );
 };
 
 export const DiaryItemWeeding: React.FC<{ action: ActionInterface }> = ({
   action,
+  vegetableAsset,
 }) => {
   return (
     <>
       <div className="">
+        {vegetableAsset && (
+          <img className="size-6" src={vegetableAsset} alt="" />
+        )}{" "}
         {action.vegetable &&
           `${action.vegetable.name} (${action.vegetable?.variety})`}
       </div>
@@ -103,25 +121,34 @@ export const DiaryItemWeeding: React.FC<{ action: ActionInterface }> = ({
 
 export const DiaryItemFertilizing: React.FC<{ action: ActionInterface }> = ({
   action,
+  vegetableAsset,
 }) => {
   return (
-    <>
-      <div className="">
-        {action.product_name} : {action.quantity || ""}{" "}
-        {action.quantity_unit || ""}{" "}
-        {action.vegetable &&
-          `pour ${action.vegetable.name} (${action.vegetable?.variety})`}
-      </div>
-    </>
+    <div className="text-center">
+      {action.vegetable && (
+        <div className="flex items-center gap-1">
+          <img className="size-6" src={vegetableAsset} alt="" />
+          <span>
+            {action.vegetable.name} ({action.vegetable?.variety})
+          </span>
+        </div>
+      )}
+      {action.product_name} : {action.quantity || ""}{" "}
+      {action.quantity_unit || ""}{" "}
+    </div>
   );
 };
 
 export const DiaryItemRemoving: React.FC<{ action: ActionInterface }> = ({
   action,
+  vegetableAsset,
 }) => {
   return (
     <>
       <div className="">
+        {vegetableAsset && (
+          <img className="size-6" src={vegetableAsset} alt="" />
+        )}{" "}
         {action.vegetable.name} ({action.vegetable.variety})
       </div>
     </>
@@ -130,40 +157,50 @@ export const DiaryItemRemoving: React.FC<{ action: ActionInterface }> = ({
 
 export const DiaryItemObservation: React.FC<{ action: ActionInterface }> = ({
   action,
+  vegetableAsset,
 }) => {
   return (
     <>
-      <div className="">
-        {action.vegetable?.name &&
-          `${action.vegetable.name} (${action.vegetable.variety})`}
-      </div>
+      {action.vegetable && (
+        <div className="flex items-center gap-1">
+          <img className="size-6" src={vegetableAsset} alt="" />
+          <span>
+            {action.vegetable.name} ({action.vegetable?.variety})
+          </span>
+        </div>
+      )}
     </>
   );
 };
 
 export const DiaryItemTreating: React.FC<{ action: ActionInterface }> = ({
   action,
+  vegetableAsset,
 }) => {
   return (
-    <>
-      <div className="">
-        {action.product_name} : {action.quantity || ""}{" "}
-        {action.quantity_unit || ""}{" "}
-        {action.vegetable &&
-          `sur ${action.vegetable.name} (${action.vegetable?.variety})`}
-      </div>
-    </>
+    <div className="text-center">
+      {action.vegetable && (
+        <div className="flex items-center gap-1">
+          <img className="size-6" src={vegetableAsset} alt="" />
+          <span>
+            {action.vegetable.name} ({action.vegetable?.variety})
+          </span>
+        </div>
+      )}
+      {action.product_name} : {action.quantity || ""}{" "}
+      {action.quantity_unit || ""}{" "}
+    </div>
   );
 };
 
 interface DiaryItemGeneralProps {
   action: ActionInterface;
-  setActions: () => void
+  setActions: () => void;
 }
 
 export const DiaryItemGeneral: React.FC<DiaryItemGeneralProps> = ({
   action,
-  setActions
+  setActions,
 }) => {
   const vegetableAsset = vegetableIconsMaps.find(
     (asset) => asset?.name?.fr === action.vegetable?.name.toLowerCase()
@@ -175,35 +212,74 @@ export const DiaryItemGeneral: React.FC<DiaryItemGeneralProps> = ({
 
   const actionComponentMap: { [key: string]: [JSX.Element, string, string] } = {
     SOWING: [
-      <DiaryItemDirectSowing action={action} vegetableAsset={vegetableAsset?.assets} />,
+      <DiaryItemDirectSowing
+        action={action}
+        vegetableAsset={vegetableAsset?.assets}
+      />,
       "Semis",
       directSowingIcon,
     ],
     PLANTING: [
-      <DiaryItemPlanting action={action} vegetableAsset={vegetableAsset?.assets}/>,
+      <DiaryItemPlanting
+        action={action}
+        vegetableAsset={vegetableAsset?.assets}
+      />,
       "Plantation",
       plantingIcon,
     ],
-    WATERING: [<DiaryItemWatering action={action} />, "Arrosage", waterIcon],
+    WATERING: [
+      <DiaryItemWatering
+        action={action}
+        vegetableAsset={vegetableAsset?.assets}
+      />,
+      "Arrosage",
+      waterIcon,
+    ],
     FERTILIZING: [
-      <DiaryItemFertilizing action={action} />,
+      <DiaryItemFertilizing
+        action={action}
+        vegetableAsset={vegetableAsset?.assets}
+      />,
       "Fertilisation",
       fertilizeIcon,
     ],
-    TREATING: [<DiaryItemTreating action={action} />, "Traitement", treatIcon],
+    TREATING: [
+      <DiaryItemTreating
+        action={action}
+        vegetableAsset={vegetableAsset?.assets}
+      />,
+      "Traitement",
+      treatIcon,
+    ],
     HARVESTING: [
-      <DiaryItemHarvesting action={action} />,
+      <DiaryItemHarvesting
+        action={action}
+        vegetableAsset={vegetableAsset?.assets}
+      />,
       "Récolte",
       harvestIcon,
     ],
-    WEEDING: [<DiaryItemWeeding action={action} />, "Désherbage", weedIcon],
+    WEEDING: [
+      <DiaryItemWeeding
+        action={action}
+        vegetableAsset={vegetableAsset?.assets}
+      />,
+      "Désherbage",
+      weedIcon,
+    ],
     OBSERVING: [
-      <DiaryItemObservation action={action} />,
+      <DiaryItemObservation
+        action={action}
+        vegetableAsset={vegetableAsset?.assets}
+      />,
       "Observation",
       cameraIcon,
     ],
     REMOVING: [
-      <DiaryItemRemoving action={action} />,
+      <DiaryItemRemoving
+        action={action}
+        vegetableAsset={vegetableAsset?.assets}
+      />,
       "Fin de culture",
       removeIcon,
     ],
@@ -211,26 +287,26 @@ export const DiaryItemGeneral: React.FC<DiaryItemGeneralProps> = ({
 
   return (
     <Card className="w-full lg:w-[800px]">
-      <CardHeader className="p-3 pb-6">
+      <CardHeader className="p-3 h-24">
         <div className="flex items-center justify-center relative">
-        <div className="flex flex-col justify-center gap-1 h-14 w-20 items-center absolute top-0 left-0">
-              <img
-                className="size-8 md:size-10"
-                src={actionComponentMap[action.operation_type][2]}
-                alt=""
-              />
-              <span className="text-xs text-center">
-                {actionComponentMap[action.operation_type][1]}
-              </span>
-            </div>
+          <div className="flex flex-col justify-center gap-1 h-14 w-20 items-center absolute top-0 left-0">
+            <img
+              className="size-8 md:size-10"
+              src={actionComponentMap[action.operation_type][2]}
+              alt=""
+            />
+            <span className="text-xs text-center">
+              {actionComponentMap[action.operation_type][1]}
+            </span>
+          </div>
 
           <div className="flex flex-col gap-6 lg:gap-6 justify-between items-center">
-          <span className="text-sm font-semibold">
-            {new Date(action.date).toLocaleDateString("fr-FR", {
-              day: "2-digit",
-              month: "long",
-            })}
-          </span>
+            <span className="text-sm font-semibold">
+              {new Date(action.date).toLocaleDateString("fr-FR", {
+                day: "2-digit",
+                month: "long",
+              })}
+            </span>
             {/* {vegetableAsset && (
               <div className="flex flex-col justify-center gap-2 items-center">
                 <img
@@ -245,10 +321,12 @@ export const DiaryItemGeneral: React.FC<DiaryItemGeneralProps> = ({
               </div>
             )} */}
           </div>
-          <DiaryDropddownMenu action={action} setActions={setActions}/>
+          <DiaryDropddownMenu action={action} setActions={setActions} />
         </div>
       </CardHeader>
-      <CardContent className="flex flex-col justify-center items-center gap-4">
+      <CardContent className="flex flex-col justify-center items-center gap-4 p-0">
+        <div className="pb-3">
+
         {actionComponentMap[action.operation_type][0]}
         {action.description && (
           <p className="text-justify">
@@ -256,6 +334,7 @@ export const DiaryItemGeneral: React.FC<DiaryItemGeneralProps> = ({
             {action.description}
           </p>
         )}
+        </div>
         {file_path && <PhotoItem file_path={file_path} />}
       </CardContent>
     </Card>
