@@ -37,13 +37,13 @@ export const DiaryDropddownMenu: React.FC<DiaryDropdownMenuProps> = ({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
-          <DropdownMenuGroup>
+          {/* <DropdownMenuGroup>
             <DropdownMenuItem className="cursor-pointer gap-1"  onClick={() => setUpdateDialog(true)}>
               <IterationCw />
               <span>Modifier</span>
             </DropdownMenuItem>
-          </DropdownMenuGroup>
-          <DropdownMenuSeparator />
+          </DropdownMenuGroup> */}
+          {/* <DropdownMenuSeparator /> */}
           <DropdownMenuGroup>
             <DropdownMenuItem
               className="cursor-pointer gap-1"

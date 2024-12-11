@@ -18,7 +18,7 @@ const PhotoItem: React.FC<{ file_path: string }> = ({ file_path }) => {
     <>
       {file_path && (
         <img
-          className="w-auto max-h-96 object-cover rounded-sm"
+          className="w-full max-h-96 object-cover rounded-sm"
           src={file_path}
           alt=""
         />
@@ -29,10 +29,12 @@ const PhotoItem: React.FC<{ file_path: string }> = ({ file_path }) => {
 
 export const DiaryItemDirectSowing: React.FC<{ action: ActionInterface }> = ({
   action,
+  vegetableAsset,
 }) => {
   return (
     <>
-      <div className="cursor-pointer">
+      <div className="flex items-center gap-1">
+       {vegetableAsset && <img className="size-6" src={vegetableAsset} alt="" />}{" "}
         {action.vegetable.name} ({action.vegetable.variety}) :{" "}
         {action.vegetable.quantity} {action.vegetable.quantity_unit}
       </div>
@@ -41,11 +43,12 @@ export const DiaryItemDirectSowing: React.FC<{ action: ActionInterface }> = ({
 };
 
 export const DiaryItemPlanting: React.FC<{ action: ActionInterface }> = ({
-  action,
+  action, vegetableAsset
 }) => {
   return (
     <>
-      <div className="cursor-pointer">
+      <div className="flex items-center gap-1">
+      {vegetableAsset && <img className="size-6" src={vegetableAsset} alt="" />}
         {action.vegetable.name} ({action.vegetable.variety}) :{" "}
         {action.vegetable.quantity} {action.vegetable.quantity_unit}
       </div>
@@ -58,7 +61,7 @@ export const DiaryItemHarvesting: React.FC<{ action: ActionInterface }> = ({
 }) => {
   return (
     <>
-      <div className="cursor-pointer">
+      <div className="">
         {action.quantity} {action.quantity_unit || "kg"}{" "}
         {action.vegetable &&
           `de : ${action.vegetable.name} (${action.vegetable?.variety})`}
@@ -72,7 +75,7 @@ export const DiaryItemWatering: React.FC<{ action: ActionInterface }> = ({
 }) => {
   return (
     <>
-      <div className="cursor-pointer">
+      <div className="">
         {action.quantity && action.quantity > 0 ? action.quantity : ""}{" "}
         {action.quantity_unit || ""}{" "}
         {((action.quantity && action.quantity > 0) || action.quantity_unit) &&
@@ -90,7 +93,7 @@ export const DiaryItemWeeding: React.FC<{ action: ActionInterface }> = ({
 }) => {
   return (
     <>
-      <div className="cursor-pointer">
+      <div className="">
         {action.vegetable &&
           `${action.vegetable.name} (${action.vegetable?.variety})`}
       </div>
@@ -103,7 +106,7 @@ export const DiaryItemFertilizing: React.FC<{ action: ActionInterface }> = ({
 }) => {
   return (
     <>
-      <div className="cursor-pointer">
+      <div className="">
         {action.product_name} : {action.quantity || ""}{" "}
         {action.quantity_unit || ""}{" "}
         {action.vegetable &&
@@ -118,7 +121,7 @@ export const DiaryItemRemoving: React.FC<{ action: ActionInterface }> = ({
 }) => {
   return (
     <>
-      <div className="cursor-pointer">
+      <div className="">
         {action.vegetable.name} ({action.vegetable.variety})
       </div>
     </>
@@ -130,7 +133,7 @@ export const DiaryItemObservation: React.FC<{ action: ActionInterface }> = ({
 }) => {
   return (
     <>
-      <div className="cursor-pointer">
+      <div className="">
         {action.vegetable?.name &&
           `${action.vegetable.name} (${action.vegetable.variety})`}
       </div>
@@ -143,7 +146,7 @@ export const DiaryItemTreating: React.FC<{ action: ActionInterface }> = ({
 }) => {
   return (
     <>
-      <div className="cursor-pointer">
+      <div className="">
         {action.product_name} : {action.quantity || ""}{" "}
         {action.quantity_unit || ""}{" "}
         {action.vegetable &&
@@ -172,12 +175,12 @@ export const DiaryItemGeneral: React.FC<DiaryItemGeneralProps> = ({
 
   const actionComponentMap: { [key: string]: [JSX.Element, string, string] } = {
     SOWING: [
-      <DiaryItemDirectSowing action={action} />,
+      <DiaryItemDirectSowing action={action} vegetableAsset={vegetableAsset?.assets} />,
       "Semis",
       directSowingIcon,
     ],
     PLANTING: [
-      <DiaryItemPlanting action={action} />,
+      <DiaryItemPlanting action={action} vegetableAsset={vegetableAsset?.assets}/>,
       "Plantation",
       plantingIcon,
     ],
@@ -210,13 +213,13 @@ export const DiaryItemGeneral: React.FC<DiaryItemGeneralProps> = ({
     <Card className="w-full lg:w-[800px]">
       <CardHeader className="p-3 pb-6">
         <div className="flex items-center justify-center relative">
-        <div className="flex flex-col justify-between h-14 w-20 items-center absolute top-0 left-0">
+        <div className="flex flex-col justify-center gap-1 h-14 w-20 items-center absolute top-0 left-0">
               <img
-                className="size-10"
+                className="size-8 md:size-10"
                 src={actionComponentMap[action.operation_type][2]}
                 alt=""
               />
-              <span className="text-xs  text-center">
+              <span className="text-xs text-center">
                 {actionComponentMap[action.operation_type][1]}
               </span>
             </div>
@@ -228,7 +231,7 @@ export const DiaryItemGeneral: React.FC<DiaryItemGeneralProps> = ({
               month: "long",
             })}
           </span>
-            {vegetableAsset && (
+            {/* {vegetableAsset && (
               <div className="flex flex-col justify-center gap-2 items-center">
                 <img
                   className="size-9"
@@ -240,7 +243,7 @@ export const DiaryItemGeneral: React.FC<DiaryItemGeneralProps> = ({
                   {action.vegetable?.variety && ` ${action.vegetable?.variety}`}
                 </span>
               </div>
-            )}
+            )} */}
           </div>
           <DiaryDropddownMenu action={action} setActions={setActions}/>
         </div>

@@ -230,7 +230,7 @@ const SeedlingsList: React.FC<SeedlingsListProps> = ({ sortedBy }) => {
                   </PopoverContent>
                 </Popover>
               </div>
-              <TooltipProvider delayDuration={100}>
+              {/* <TooltipProvider delayDuration={100}>
                 <Tooltip>
                   <TooltipTrigger>
                     {vegetable.sowing_date ? timeFromSowed(vegetable.sowing_date) : "Date inconnue"}
@@ -244,7 +244,7 @@ const SeedlingsList: React.FC<SeedlingsListProps> = ({ sortedBy }) => {
                     </p>
                   </TooltipContent>
                 </Tooltip>
-              </TooltipProvider>
+              </TooltipProvider> */}
             </li>
           );
         })}
