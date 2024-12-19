@@ -57,8 +57,8 @@ const Landing = () => {
   }
 
   return (
-    <div className="bg-green-50 p-5 md:pt-14 mx-auto font-ligh">
-      <div className="container mx-auto flex flex-col gap-20">
+    <div className="bg-green-50 md:p-5 md:pt-14 mx-auto font-ligh">
+      <div className="container mx-auto p-2 flex flex-col gap-20">
         <div className="flex flex-col gap-5 xl:gap-10 pb-20 border-b border-black">
           <div className="flex flex-col gap-5 ">
             <div className="flex flex-col gap-2">
@@ -70,29 +70,17 @@ const Landing = () => {
               </h1>
             </div>
             <div className="h-0 border-t border-zinc-900 w-1/3 mx-auto"></div>
-            <div className="flex justify-center gap-10 md:gap-10 lg:gap-20">
-              <button
-                className="
-                  border-b-2 border-transparent
-                  hover:border-black
-                  md:whitespace-nowrap
-                  text-lg lg:text-xl
-                "
+            <div className="flex flex-col md:flex-row justify-center gap-2 md:gap-10 lg:gap-20">
+              <Button
                 role="button"
               >
                 <Link to="/auth/login">Se connecter</Link>
-              </button>
-              <button
-                className="
-                  border-b-2 border-transparent
-                  hover:border-black
-                  md:whitespace-nowrap
-                  text-lg lg:text-xl
-                "
+              </Button>
+              <Button
                 role="button"
               >
                 <Link to="/auth/register">Démarrer gratuitement</Link>
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -102,20 +90,20 @@ const Landing = () => {
               src={dashboardScreenshot}
               alt="dashboard screenshot"
             />
-            <div className="w-4/5 md:w-3/5 flex flex-col gap-5">
+            <div className="md:w-3/5 flex flex-col gap-5">
               <div className="flex justify-center gap-5">
                 <img
-                  className="w-9 md:w-10"
+                  className="w-7 md:w-10"
                   src={tomatoIcon}
                   alt="tomato icon"
                 />
                 <img
-                  className="w-9 md:w-10"
+                  className="w-7 md:w-10"
                   src={eggplantIcon}
                   alt="tomato icon"
                 />
                 <img
-                  className="w-9 md:w-10"
+                  className="w-7 md:w-10"
                   src={carrotIcon}
                   alt="tomato icon"
                 />
@@ -130,7 +118,7 @@ const Landing = () => {
           </div>
         </div>
 
-        <main className="flex flex-col px-5 md:px-20 text-lg md:text-xl gap-24">
+        <main className="flex flex-col md:px-20 text-lg md:text-xl gap-24">
           <div className="flex flex-col gap-24">
             <h2
               className="text-center text-4xl md:text-5xl"
@@ -180,10 +168,6 @@ const Landing = () => {
                 <p className="text-justify">
                   Optimisez la gestion de votre jardin en ayant une constante
                   vue d'ensemble de chaque espace de culture de votre potager.
-                  Lorsque vous enregistrez la première récolte d'un légume, la
-                  timeline change de couleur, améliorant ainsi la visualisation.
-                </p>
-                <p className="text-justify">
                   À mesure que plusieurs saisons s'écoulent, vous développerez
                   une meilleure vision du temps nécessaire à chaque légume selon
                   la période de l'année. Cela contribuera à accroître
