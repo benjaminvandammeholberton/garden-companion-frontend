@@ -68,29 +68,6 @@ const Landing = () => {
               >
                 Garden Companion
               </h1>
-            </div>
-            <div className="h-0 border-t border-zinc-900 w-1/3 mx-auto"></div>
-            <div className="flex flex-col md:flex-row justify-center gap-2 md:gap-10 lg:gap-20">
-              <Button
-                role="button"
-              >
-                <Link to="/auth/login">Se connecter</Link>
-              </Button>
-              <Button
-                role="button"
-              >
-                <Link to="/auth/register">Démarrer gratuitement</Link>
-              </Button>
-            </div>
-          </div>
-
-          <div className="flex flex-col 2xl:flex-row justify-between items-center gap-5 md:gap-10">
-            <img
-              className="2xl:w-3/4"
-              src={dashboardScreenshot}
-              alt="dashboard screenshot"
-            />
-            <div className="md:w-3/5 flex flex-col gap-5">
               <div className="flex justify-center gap-5">
                 <img
                   className="w-7 md:w-10"
@@ -108,6 +85,31 @@ const Landing = () => {
                   alt="tomato icon"
                 />
               </div>
+            </div>
+            <div className="h-0 border-t border-zinc-900 w-1/3 mx-auto"></div>
+            <div className="flex justify-center gap-2 md:gap-10 lg:gap-20">
+              <Button
+              className="w-1/2 md:w-1/3"
+                role="button"
+              >
+                <Link to="/auth/login">Se connecter</Link>
+              </Button>
+              <Button
+              className="w-1/2 md:w-1/3"
+                role="button"
+              >
+                <Link to="/auth/register">Démarrer gratuitement</Link>
+              </Button>
+            </div>
+          </div>
+
+          <div className="flex flex-col 2xl:flex-row justify-between items-center gap-5 md:gap-10">
+            <img
+              className="2xl:w-3/4"
+              src={dashboardScreenshot}
+              alt="dashboard screenshot"
+            />
+            <div className="md:w-3/5 flex flex-col gap-5">
               <p className="text-justify text-xl md:text-2xl">
                 Garden Companion est un tableau de bord complet qui donne aux
                 amateurs de jardin potager, les outils et les informations
