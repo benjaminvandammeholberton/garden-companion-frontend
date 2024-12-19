@@ -84,8 +84,8 @@ export const DiaryItemWatering: React.FC<{ action: ActionInterface }> = ({
   vegetableAsset,
 }) => {
   return (
-      <div className="text-center">
-        {action.vegetable && (
+    <div className="text-center">
+      {action.vegetable && (
         <div className="flex items-center gap-1">
           <img className="size-6" src={vegetableAsset} alt="" />
           <span>
@@ -93,12 +93,12 @@ export const DiaryItemWatering: React.FC<{ action: ActionInterface }> = ({
           </span>
         </div>
       )}
-        {action.quantity && action.quantity > 0 ? action.quantity : ""}{" "}
-        {action.quantity_unit || ""}{" "}
-        {((action.quantity && action.quantity > 0) || action.quantity_unit) &&
-          action.vegetable &&
-          ": "}
-      </div>
+      {action.quantity && action.quantity > 0 ? action.quantity : ""}{" "}
+      {action.quantity_unit || ""}{" "}
+      {((action.quantity && action.quantity > 0) || action.quantity_unit) &&
+        action.vegetable &&
+        ": "}
+    </div>
   );
 };
 
@@ -287,9 +287,9 @@ export const DiaryItemGeneral: React.FC<DiaryItemGeneralProps> = ({
 
   return (
     <Card className="w-full lg:w-[800px]">
-      <CardHeader className="p-3 h-24">
-        <div className="flex items-center justify-center relative">
-          <div className="flex flex-col justify-center gap-1 h-14 w-20 items-center absolute top-0 left-0">
+      <CardHeader className="p-3">
+        <div className="flex items-center justify-between relative">
+          <div className="flex flex-col justify-center gap-1 h-14 w-20 items-center">
             <img
               className="size-8 md:size-10"
               src={actionComponentMap[action.operation_type][2]}
@@ -300,7 +300,7 @@ export const DiaryItemGeneral: React.FC<DiaryItemGeneralProps> = ({
             </span>
           </div>
 
-          <div className="flex flex-col gap-6 lg:gap-6 justify-between items-center">
+          <div className="flex flex-col lg:gap-6 justify-between items-center">
             <span className="text-sm font-semibold">
               {new Date(action.date).toLocaleDateString("fr-FR", {
                 day: "2-digit",
@@ -324,16 +324,12 @@ export const DiaryItemGeneral: React.FC<DiaryItemGeneralProps> = ({
           <DiaryDropddownMenu action={action} setActions={setActions} />
         </div>
       </CardHeader>
-      <CardContent className="flex flex-col justify-center items-center gap-4 p-0">
-        <div className="pb-3">
-
-        {actionComponentMap[action.operation_type][0]}
-        {action.description && (
-          <p className="text-justify">
-            <span className="font-semibold">Notes : </span>
-            {action.description}
-          </p>
-        )}
+      <CardContent className="flex flex-col justify-center items-center p-0">
+        <div className="px-3 mb-3 flex flex-col gap-3 items-center">
+          {actionComponentMap[action.operation_type][0]}
+          {action.description && (
+            <p className="text-justify italic">{action.description}</p>
+          )}
         </div>
         {file_path && <PhotoItem file_path={file_path} />}
       </CardContent>

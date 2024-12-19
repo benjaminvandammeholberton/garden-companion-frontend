@@ -31,7 +31,7 @@ export const DiaryDropddownMenu: React.FC<DiaryDropdownMenuProps> = ({
           <Button
             variant="ghost"
             size={"icon"}
-            className={`absolute top-0 right-0`}
+            className={``}
           >
             <EllipsisVertical />
           </Button>

@@ -56,7 +56,7 @@ const DiaryAndProductionModalHeader: React.FC<
               <Settings size={23} />
             </Button>
           </AlertDialogTrigger>
-          <AlertDialogContent className="dark:bg-slate-900">
+          <AlertDialogContent className="dark:bg-slate-900" aria-describedby={undefined}>
             <AlertDialogHeader>
               <AlertDialogTitle>Modifier la zone de culture</AlertDialogTitle>
             </AlertDialogHeader>

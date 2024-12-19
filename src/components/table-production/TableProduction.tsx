@@ -3,13 +3,13 @@ import { getAllVegetables } from "@/api/api-services/vegetables";
 import { columns } from "@/features/data-table/columns";
 import { DataTable } from "@/features/data-table/data-table";
 import type { AreaInterface } from "@/interfaces/interfaces";
-import { fi } from "date-fns/locale";
 import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const TableProduction = ({ area }: { area: AreaInterface }) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false)
+  const [reload, setReload] = useState(false);
 
 
   useEffect(() => {
@@ -25,12 +25,13 @@ const TableProduction = ({ area }: { area: AreaInterface }) => {
           console.error(error);
         } finally {
           setIsLoading(false);
+          setReload(false);
         }
       }
     };
 
     fetchData();
-  }, [area]);
+  }, [area, reload]);
 
   if (isLoading === true) {
     return (
@@ -43,7 +44,7 @@ const TableProduction = ({ area }: { area: AreaInterface }) => {
   return (
     data?.length > 0 ? 
     (<div>
-      <DataTable columns={columns} data={data} />
+      <DataTable columns={columns} data={data} setReload={setReload} />
     </div>) : (
       <div className="text-center">Aucune donnée à afficher</div>
     )

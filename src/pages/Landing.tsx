@@ -2,8 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import dashboardScreenshot from "../assets/landing/screenshots/dashboard.png";
 import forecastScreenshot from "../assets/landing/screenshots/forecast.png";
-import managerLeftScreenshot from "../assets/landing/screenshots/manager-left.png";
-import managerRightScreenshot from "../assets/landing/screenshots/manager-right.png";
+import managerScreenshot from "../assets/landing/screenshots/manager.png";
 import guideScreenshot from "../assets/landing/screenshots/guide.png";
 import productionScreenshot from "../assets/landing/screenshots/production.png";
 
@@ -20,32 +19,33 @@ import tomatoIcon from "../assets/landing/icons/tomato.png";
 import { useEffect, useState } from "react";
 import { getToken } from "@/utils/utils";
 import { verifyAccessToken } from "@/api/api-services/auth";
+import { Button } from "@/components/ui/button";
 
 const Landing = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  
+
   useEffect(() => {
     const verifyToken = async (token) => {
       try {
-        setIsLoading(true)
-        await verifyAccessToken(token)
-        navigate("/me/dashboard")
+        setIsLoading(true);
+        await verifyAccessToken(token);
+        navigate("/me/dashboard");
       } catch (error) {
-        navigate("/auth/login")
-      }  finally {
-        setIsLoading(false)
+        navigate("/auth/login");
+      } finally {
+        setIsLoading(false);
       }
-    }
-    const token = getToken()
+    };
+
+    const token = getToken();
     if (token) {
-      verifyToken(token)
-    } else {
-      navigate("/auth/register")
+      verifyToken(token);
     }
-  },[])
+  }, []);
+
   if (isLoading) {
-    return <h1>Chargement</h1>
+    return <h1>Chargement</h1>;
     // return (<div>
     //   <Loader
     //     loading={isLoading}
@@ -57,13 +57,13 @@ const Landing = () => {
   }
 
   return (
-    <div className="bg-green-50 text-zinc-900 p-5 md:pt-14 mx-auto">
-      <div className="container mx-auto flex flex-col gap-32">
-        <div className="flex flex-col gap-5 xl:gap-10">
+    <div className="bg-green-50 p-5 md:pt-14 mx-auto font-ligh">
+      <div className="container mx-auto flex flex-col gap-20">
+        <div className="flex flex-col gap-5 xl:gap-10 pb-20 border-b border-black">
           <div className="flex flex-col gap-5 ">
             <div className="flex flex-col gap-2">
               <h1
-                className="text-6xl md:text-7xl text-right md:text-center font-bold"
+                className="text-5xl md:text-6xl text-right md:text-center font-thin"
                 id="home"
               >
                 Garden Companion
@@ -72,13 +72,23 @@ const Landing = () => {
             <div className="h-0 border-t border-zinc-900 w-1/3 mx-auto"></div>
             <div className="flex justify-center gap-10 md:gap-10 lg:gap-20">
               <button
-                className=" font-bold border-b-2 border-transparent hover:border-black text-zinc-900 md:whitespace-nowrap text-lg lg:text-xl"
+                className="
+                  border-b-2 border-transparent
+                  hover:border-black
+                  md:whitespace-nowrap
+                  text-lg lg:text-xl
+                "
                 role="button"
               >
                 <Link to="/auth/login">Se connecter</Link>
               </button>
               <button
-                className=" font-bold border-b-2 border-transparent hover:border-black text-zinc-900 md:whitespace-nowrap text-lg lg:text-xl"
+                className="
+                  border-b-2 border-transparent
+                  hover:border-black
+                  md:whitespace-nowrap
+                  text-lg lg:text-xl
+                "
                 role="button"
               >
                 <Link to="/auth/register">Démarrer gratuitement</Link>
@@ -95,17 +105,17 @@ const Landing = () => {
             <div className="w-4/5 md:w-3/5 flex flex-col gap-5">
               <div className="flex justify-center gap-5">
                 <img
-                  className="w-9 md:w-12"
+                  className="w-9 md:w-10"
                   src={tomatoIcon}
                   alt="tomato icon"
                 />
                 <img
-                  className="w-9 md:w-12"
+                  className="w-9 md:w-10"
                   src={eggplantIcon}
                   alt="tomato icon"
                 />
                 <img
-                  className="w-9 md:w-12"
+                  className="w-9 md:w-10"
                   src={carrotIcon}
                   alt="tomato icon"
                 />
@@ -123,7 +133,7 @@ const Landing = () => {
         <main className="flex flex-col px-5 md:px-20 text-lg md:text-xl gap-24">
           <div className="flex flex-col gap-24">
             <h2
-              className="text-center text-4xl md:text-5xl font-bold"
+              className="text-center text-4xl md:text-5xl"
               id="features"
             >
               Fonctionnalités
@@ -131,8 +141,8 @@ const Landing = () => {
 
             <div className="flex flex-col 2xl:flex-row justify-center items-center gap-10 xl:gap-20">
               <div className="lg:w-3/5 flex flex-col gap-5 items-center">
-                <h3 className="text-center text-2xl md:text-3xl font-bold">
-                  Gestionnaire de Plantes et <br /> d'Éspaces de Culture
+                <h3 className="text-center text-2xl md:text-3xl">
+                  Gestionnaire de Plantes et <br /> d'Espaces de Culture
                 </h3>
                 <img src={managerIcon} alt="manager icon" className="w-12" />
                 <p className="text-justify">
@@ -148,18 +158,18 @@ const Landing = () => {
                 </p>
               </div>
               <div className="flex 2xl:w-4/5">
-                <img src={managerLeftScreenshot} alt="screenshot manager" />
-                <img
+                <img className="rounded-lg" src={managerScreenshot} alt="screenshot manager" />
+                {/* <img
                   className="hidden lg:block"
                   src={managerRightScreenshot}
                   alt="screenshot manager"
-                />
+                /> */}
               </div>
             </div>
 
             <div className="flex flex-col justify-center items-center gap-10 xl:gap-10">
               <div className="lg:w-3/5 flex flex-col gap-5 items-center">
-                <h3 className="text-center text-2xl md:text-3xl font-bold">
+                <h3 className="text-center text-2xl md:text-3xl">
                   Visualisation de la Production
                 </h3>
                 <img
@@ -181,7 +191,7 @@ const Landing = () => {
                 </p>
               </div>
               <img
-                className=""
+                className="rounded-lg"
                 src={productionScreenshot}
                 alt="screenshot production"
               />
@@ -194,7 +204,7 @@ const Landing = () => {
                 alt=""
               />
               <div className="lg:w-1/2 2xl:w-1/3 flex flex-col gap-5 items-center">
-                <h3 className="text-center text-2xl md:text-3xl font-bold ">
+                <h3 className="text-center text-2xl md:text-3xl ">
                   Prévisions Météo
                 </h3>
                 <img src={forecastIcon} alt="forecast icon" className="w-12" />
@@ -205,7 +215,7 @@ const Landing = () => {
                 </p>
               </div>
               <img
-                className="2xl:hidden sm:w-4/5 md:w-2/3 lg:w-1/2"
+                className="2xl:hidden sm:w-4/5 md:w-[400px] "
                 src={forecastScreenshot}
                 alt=""
               />
@@ -213,7 +223,7 @@ const Landing = () => {
 
             <div className="flex flex-col justify-center items-center gap-10">
               <div className="lg:w-3/5 flex flex-col gap-5 items-center">
-                <h3 className="text-center text-2xl md:text-3xl font-bold">
+                <h3 className="text-center text-2xl md:text-3xl">
                   Guide de Culture
                 </h3>
                 <img src={guideIcon} alt="guide icon" className="w-12" />
@@ -226,12 +236,12 @@ const Landing = () => {
                   accessible pour une consultation rapide.
                 </p>
               </div>
-              <img className="" src={guideScreenshot} alt="" />
+              <img className="rounded-lg" src={guideScreenshot} alt="" />
             </div>
 
             <div className="flex flex-col lg:flex-row justify-center items-center lg:items-start gap-20">
               <div className="md:w-4/5 lg:w-2/5 flex flex-col gap-5 items-center">
-                <h3 className="text-center text-xl md:text-2xl font-bold">
+                <h3 className="text-center text-xl md:text-2xl">
                   To-Do List
                 </h3>
                 <img src={toDoIcon} alt="todo icon" className="w-12" />
@@ -241,8 +251,8 @@ const Landing = () => {
                 </p>
               </div>
 
-              <div className="md:w-4/5 lg:w-2/5 flex flex-col gap-5 items-center">
-                <h3 className="text-center text-xl md:text-2xl font-bold">
+              {/* <div className="md:w-4/5 lg:w-2/5 flex flex-col gap-5 items-center">
+                <h3 className="text-center text-xl md:text-2xl">
                   Assistant Spécialisé
                 </h3>
                 <img src={chatBotIcon} alt="chatbot icon" className="w-12" />
@@ -254,7 +264,7 @@ const Landing = () => {
               </div>
 
               <div className="md:w-4/5 lg:w-2/5 flex flex-col gap-5 items-center">
-                <h3 className="text-center text-xl md:text-2xl font-bold">
+                <h3 className="text-center text-xl md:text-2xl">
                   Semis du moment
                 </h3>
                 <img src={sowingIcon} alt="sowing icon" className="w-12" />
@@ -262,19 +272,19 @@ const Landing = () => {
                   Identifiez rapidement les semis recommandés en fonction de la
                   date actuelle.
                 </p>
-              </div>
+              </div> */}
             </div>
 
             <div className="flex flex-col justify-center items-center gap-5">
-              <h3 className="text-center text-xl md:text-2xl font-bold">
+              <h3 className="text-center text-xl md:text-2xl">
                 Rejoignez la communauté !
               </h3>
-              <button
-                className=" bg-stone-700 hover:bg-stone-900 text-white text-lg lg:text-xl font-bold py-3 px-7 rounded-full"
+              <Button
+                onClick={() => navigate("/auth/register")}
                 role="button"
               >
                 Créez votre compte dès maintenant
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -282,7 +292,7 @@ const Landing = () => {
 
           <div className="flex flex-col gap-10">
             <h2
-              className="text-center text-4xl md:text-5xl font-bold"
+              className="text-center text-4xl md:text-5xl"
               id="about"
             >
               À propos
@@ -297,7 +307,7 @@ const Landing = () => {
                 grandit.
               </p>
               <p className="text-justify">
-                <span className="font-bold">Garden Companion</span> est né de ma
+                <span className=">Garden Companion</span> est né de ma
                 volonté de simplifier cette expérience, la rendre accessible au
                 plus grand nombre. Les fonctionnalités implémentées visent à
                 résoudre ces deux problématiques : offrir une assistance tant
@@ -314,13 +324,13 @@ const Landing = () => {
               </p>
               <p className="text-justify">
                 Vos retours sont l'un des éléments essentiels dans l'évolution
-                de <span className="font-bold">Garden Companion</span>. La
+                de <span className=">Garden Companion</span>. La
                 démarche est guidée par la passion partagée pour le jardinage et
                 le désir constant de rendre cette expérience agréable et
                 enrichissante pour chacun.
               </p>
               <p>
-                <span className="font-bold">Happy Gardening 😉🥕</span>
+                <span className=">Happy Gardening 😉🥕</span>
               </p>
               <p>Benjamin, créateur de l'application</p>
             </div>

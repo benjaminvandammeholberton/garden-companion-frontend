@@ -24,3 +24,13 @@ export const getAllVegetables = async () => {
     throw new Error("Can't fetch vegetables from the server");
   }
 };
+
+export  const deleteVegetableApi = async (id: number) => {
+  try {
+    const response = await axiosInstance.delete(`vegetables/${id}/`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Can't delete vegetable");
+  }
+}

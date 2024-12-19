@@ -2,10 +2,6 @@ import TableProduction from "@/components/table-production/TableProduction";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  // DialogDescription,
-  // DialogDescription,
-  // DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -46,6 +42,7 @@ const DiaryAndProductionModal = ({
       <Dialog modal>
         <DialogTrigger asChild>{children}</DialogTrigger>
         <DialogContent
+        aria-describedby={undefined}
           onOpenAutoFocus={(event) => event.preventDefault()}
           className="
             p-0 pt-2

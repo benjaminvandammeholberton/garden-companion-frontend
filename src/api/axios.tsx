@@ -1,14 +1,15 @@
 import axios from "axios";
 import { ROOTURL } from "./apiRoutes";
+import { getToken } from "@/utils/utils";
 
-const getToken = () => {
-  const token = localStorage.getItem("JWTGP")
-  if  (!token) {
-    // window.location.href = "/auth/login";
-    console.log("pas de token")
-  }
-  return token;
-};
+// const getToken = () => {
+//   const token = localStorage.getItem("JWTGP")
+//   if  (!token) {
+//     // window.location.href = "/auth/login";
+//     console.log("pas de token")
+//   }
+//   return token;
+// };
 
 const axiosInstance = axios.create({
   baseURL: ROOTURL,
