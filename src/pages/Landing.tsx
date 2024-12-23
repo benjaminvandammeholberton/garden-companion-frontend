@@ -20,6 +20,9 @@ import { useEffect, useState } from "react";
 import { getToken } from "@/utils/utils";
 import { verifyAccessToken } from "@/api/api-services/auth";
 import { Button } from "@/components/ui/button";
+import axiosInstance from "@/api/axios";
+import axios from "axios";
+import backendRoutes from "@/api/apiRoutes";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -37,6 +40,16 @@ const Landing = () => {
         setIsLoading(false);
       }
     };
+
+    const sendEmailVisitor = async () => {
+      try  {
+        await axios.get(backendRoutes.emailVisit);
+      } catch (error) {
+        console.error("Error when sending email to visitor", error);
+      }
+    }
+    
+    sendEmailVisitor();
 
     const token = getToken();
     if (token) {

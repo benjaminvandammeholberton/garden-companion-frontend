@@ -10,6 +10,7 @@ export const ROOTURL = getBaseUrl();
 
 
 const backendRoutes = {
+    emailVisit: ROOTURL + "email-visit/",
     register: ROOTURL + "auth/users/",
     login: ROOTURL + "auth/jwt/create/",
     activate: ROOTURL + "auth/users/activation/",
